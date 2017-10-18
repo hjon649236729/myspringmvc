@@ -27,11 +27,11 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
-	<!-- <listener> <listener-class>hjon.company.common.listener.contextListener</listener-class> 
+	<!--  <listener> <listener-class>com.hjon.common.listener.contextListener</listener-class> 
 		</listener> -->
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>Upload</servlet-name>
 		<servlet-class>hjon.company.common.file.Upload</servlet-class>
 	</servlet>
@@ -54,8 +54,8 @@
 	<servlet-mapping>
 		<servlet-name>TemplateDownload</servlet-name>
 		<url-pattern>/res/TemplateDownload.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
+	</servlet-mapping> -->
+	<!-- <servlet>
 		<servlet-name>ConnectorServlet</servlet-name>
 		<servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
 		<init-param>
@@ -77,8 +77,8 @@
 		<url-pattern>
 			/Scripts/ckfinder/core/connector/java/connector.java
 		</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.action</welcome-file>
 	</welcome-file-list>
 </web-app>

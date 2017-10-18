@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -20,14 +20,12 @@
 <meta http-equiv="description" content="This is my page">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	--><%-- 
-<%@include file="../include/indexinclude.jsp"%> --%>
+	-->
+
 </head>
 
-<frameset cols="20%,80%">
-  <frame src="left.action" id="menu" name="menu"/>
-  <frame src="" id="content" name="content"/>
-</frameset>
-<noframes><body>浏览器不支持框架，请更新浏览器，或换其它浏览器再打开</body></noframes>
-
+<body>
+	This is my JSP page.
+	<br>
+</body>
 </html>
