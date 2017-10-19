@@ -1,8 +1,5 @@
 package com.hjon.common.file;
 
-import com.hjon.common.utils.LogHelper;
-import com.hjon.config.Constant;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hjon.config.Constant;
+
 public class TemplateDownload extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -25,11 +24,11 @@ public class TemplateDownload extends HttpServlet {
 		String ctxPath = request.getSession().getServletContext()
 				.getRealPath("/");
 		filePath = (ctxPath + "/templates/" + filePath);
-		LogHelper.Debug(filePath);
+		//LogHelper.Debug(filePath);
 		File obj = new File(filePath);
 		if (!obj.exists()) {
 			response.setContentType("text/html;charset=utf-8");
-			LogHelper.Error("指定文件不存在:" + filePath);
+			//LogHelper.Error("指定文件不存在:" + filePath);
 			return;
 		}
 

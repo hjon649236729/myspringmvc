@@ -17,10 +17,21 @@
 			$("#submit").click();
 		}
 	}
+	function del(id) {
+		$.post("userdelete.action", {
+			"id" : id,
+		}, function(data) {
+			if (data == "200") {
+				$("#submit").click();
+			}else{
+				alert("参数错误");
+			}
+		});
+	}
 </script>
 
-<form class="navbar-form navbar-left" id="pagerForm"
-	method="post" action="userlist.action">
+<form class="navbar-form navbar-left" id="pagerForm" method="post"
+	action="userlist.action">
 
 	<input type="hidden" name="pageNum" id="pageNum"
 		value="${data.currentPageIndex}" /> <input type="hidden"
@@ -31,10 +42,12 @@
 
 	<div class="form-group">
 		<input type="text" class="form-control" name="userName"
-			value="${userName }"  placeholder="用户名">
+			value="${userName }" placeholder="用户名">
 	</div>
 	<button type="submit" id="submit" class="btn btn-primary btn-mx">查询</button>
+	<a class="btn btn-default" href="useredit.action" role="button">添加</a>
 </form>
+
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary btn-mx">添加</button> -->
 <table class="table table-striped">
@@ -51,6 +64,9 @@
 				<td>${userinfo.id }</td>
 				<td>${userinfo.userName }</td>
 				<td>${userinfo.empName }</td>
+				<td>${userinfo.empName }</td>
+				<td><a class="btn btn-default" href="javascript:del(${userinfo.id })"
+					role="button">删除</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -70,7 +86,6 @@
 			<li class="disabled"><a href="#">下一页</a>
 			</li>
 		</c:if>
-
 		<c:if test="${data.currentPageIndex<data.totalPageCount}">
 			<li><a href="javascript:Next();">下一页</a>
 			</li>

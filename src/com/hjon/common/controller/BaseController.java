@@ -1,22 +1,5 @@
 package com.hjon.common.controller;
 
-import com.hjon.common.listener.contextListener;
-import com.hjon.common.utils.LogHelper;
-import com.hjon.common.utils.SiteKeyUtil;
-import com.hjon.common.utils.StringUtils;
-import com.hjon.config.CommonBannerUtils;
-import com.hjon.config.CommonEnumUtils;
-import com.hjon.config.CommonSettingUtils;
-import com.hjon.config.Constant;
-import com.hjon.modules.auth.entity.UserInfo;
-import com.hjon.modules.common.entity.CommonAttachment;
-import com.hjon.modules.common.entity.CommonEnum;
-import com.hjon.modules.common.entity.CommonSetting;
-import com.hjon.modules.common.service.CommonAttachmentService;
-import com.hjon.modules.common.service.CommonBannerService;
-import com.hjon.modules.common.service.CommonEnumService;
-import com.hjon.modules.common.service.CommonSettingService;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -45,6 +28,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.hjon.common.listener.contextListener;
+import com.hjon.common.utils.SiteKeyUtil;
+import com.hjon.common.utils.StringUtils;
+import com.hjon.config.CommonBannerUtils;
+import com.hjon.config.CommonEnumUtils;
+import com.hjon.config.CommonSettingUtils;
+import com.hjon.config.Constant;
+import com.hjon.modules.auth.entity.UserInfo;
+import com.hjon.modules.common.entity.CommonAttachment;
+import com.hjon.modules.common.entity.CommonEnum;
+import com.hjon.modules.common.entity.CommonSetting;
+import com.hjon.modules.common.service.CommonAttachmentService;
+import com.hjon.modules.common.service.CommonBannerService;
+import com.hjon.modules.common.service.CommonEnumService;
+import com.hjon.modules.common.service.CommonSettingService;
 
 @Controller
 public class BaseController {
@@ -139,7 +138,7 @@ public class BaseController {
 			Constant.FileType = prop.getProperty("FileType").trim();
 
 		} catch (Exception e) {
-			LogHelper.Error(e);
+//			LogHelper.Error(e);
 			throw new RuntimeException(e.getMessage());
 		}
 	}

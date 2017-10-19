@@ -5,30 +5,31 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Auth_UserInfo")
 public class UserInfo {
-	private String id;
+	private Integer id;
 	private String userName;
 	private String passWord;
 	private String empName;
 	private Date createTime;
-	//private String createUser;
+	private Date updateTime;
 
-	//@GenericGenerator(name = "generator", strategy = "uuid")
+	// private String createUser;
+
+	// @GenericGenerator(name = "generator", strategy = "uuid")
 	@Id
-	//@GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -49,6 +50,7 @@ public class UserInfo {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
+
 	@Column(name = "EmpName", length = 50)
 	public String getEmpName() {
 		return empName;
@@ -57,6 +59,7 @@ public class UserInfo {
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
+
 	@Column(name = "CreateTime", length = 50)
 	public Date getCreateTime() {
 		return createTime;
@@ -66,13 +69,20 @@ public class UserInfo {
 		this.createTime = createTime;
 	}
 
-	/*@Column(name = "CreateUser", length = 50)
-	public String getCreateUser() {
-		return createUser;
+	@Column(name = "UpdateTime", length = 50)
+	public Date getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
-*/
+
+	/*
+	 * @Column(name = "CreateUser", length = 50) public String getCreateUser() {
+	 * return createUser; }
+	 * 
+	 * public void setCreateUser(String createUser) { this.createUser =
+	 * createUser; }
+	 */
 }

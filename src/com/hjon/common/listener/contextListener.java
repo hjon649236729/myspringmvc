@@ -1,18 +1,6 @@
 package com.hjon.common.listener;
 
-import com.hjon.common.utils.LogHelper;
-import com.hjon.config.CommonBannerUtils;
-import com.hjon.config.CommonEnumUtils;
-import com.hjon.config.CommonSettingUtils;
-import com.hjon.config.Constant;
-import com.hjon.modules.common.entity.CommonEnum;
-import com.hjon.modules.common.entity.CommonSetting;
-import com.hjon.modules.common.service.CommonBannerService;
-import com.hjon.modules.common.service.CommonEnumService;
-import com.hjon.modules.common.service.CommonSettingService;
-
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +12,13 @@ import javax.servlet.ServletContext;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.ServletContextAware;
+
+import com.hjon.config.CommonSettingUtils;
+import com.hjon.config.Constant;
+import com.hjon.modules.common.entity.CommonSetting;
+import com.hjon.modules.common.service.CommonBannerService;
+import com.hjon.modules.common.service.CommonEnumService;
+import com.hjon.modules.common.service.CommonSettingService;
 
 public class contextListener implements InitializingBean, ServletContextAware {
 	@Resource(name = "commonSettingService")
@@ -44,7 +39,7 @@ public class contextListener implements InitializingBean, ServletContextAware {
 		// TODO Auto-generated method stub
 
 		try {
-			Properties prop = new Properties();
+			/*Properties prop = new Properties();
 			InputStream in = contextListener.class
 					.getResourceAsStream("/file.properties");
 			prop.load(in);
@@ -52,7 +47,7 @@ public class contextListener implements InitializingBean, ServletContextAware {
 			Constant.UploadFileRootPath = prop.getProperty("ResourcePath")
 					.trim();
 			Constant.LogPath = prop.getProperty("LogPath").trim();
-			Constant.FileType = prop.getProperty("FileType").trim();
+			Constant.FileType = prop.getProperty("FileType").trim();*/
 			// 全局变量加入缓存设置
 			List<CommonSetting> settings = commonSettingService.getAll(Order
 					.asc("module"));
@@ -81,7 +76,7 @@ public class contextListener implements InitializingBean, ServletContextAware {
 			// Banner加入缓存
 			CommonBannerUtils.commonBanner = commonBannerService.findCommonBanner();*/
 		} catch (Exception e) {
-			LogHelper.Error(e);
+		
 			throw new RuntimeException(e.getMessage());
 		}
 

@@ -1,18 +1,22 @@
 package com.hjon.modules.auth.controller;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hjon.common.bean.Page;
 import com.hjon.common.controller.BaseController;
 import com.hjon.common.dao.CriterionCollection;
 import com.hjon.common.utils.NumberUtils;
-import com.hjon.common.utils.StringUtils;
+import com.hjon.modules.auth.entity.UserInfo;
 import com.hjon.modules.auth.service.UserInfoService;
 
 @Controller
@@ -21,7 +25,7 @@ public class UserInfoController extends BaseController {
 
 	@Resource(name = "userInfoService")
 	private UserInfoService userInfoService;
-
+	Logger logger=Logger.getLogger(UserInfoController.class);
 	@RequestMapping("auth/userlist")
 	public String userlist() {
 
@@ -63,14 +67,33 @@ public class UserInfoController extends BaseController {
 	}
 
 	@RequestMapping("auth/usersave")
+	@ResponseBody
 	public String save() {
-
-		return "";
+		int id = NumberUtils.safeToInteger(this.getParameter("id"), -1);
+		UserInfo u = new UserInfo();
+		if (id != -1) {
+			u = userInfoService.get(id);
+			u.setUpdateTime(new Date());
+		} else {
+			u.setPassWord("111");
+			u.setCreateTime(new Date());
+			u.setUpdateTime(new Date());
+		}
+		this.setEntityValueFromPage(u);
+		userInfoService.saveOrUpdate(u);
+		return "ok";
 	}
 
+	@ResponseBody
 	@RequestMapping("auth/userdelete")
 	public String delete() {
-
-		return "";
+		int id = NumberUtils.safeToInteger(this.getParameter("id"), -1);
+		if (id != -1) {
+			userInfoService.delete(id);
+			return "200";
+		} else {
+			logger.warn("删除失败,可能是参数有误");
+			return "-1";
+		}
 	}
 }

@@ -1,9 +1,5 @@
 package com.hjon.common.file;
 
-import com.hjon.common.utils.DateTimeUtils;
-import com.hjon.common.utils.LogHelper;
-import com.hjon.config.Constant;
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -24,6 +20,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.hjon.common.utils.DateTimeUtils;
+import com.hjon.config.Constant;
 
 public class Upload extends HttpServlet {
 	/**
@@ -170,7 +169,7 @@ public class Upload extends HttpServlet {
 			}
 			response.getWriter().print(html.toString());
 		} catch (IOException ex) {
-			LogHelper.Error(ex);
+			//LogHelper.Error(ex);
 			throw ex;
 		}
 
