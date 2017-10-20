@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-<%@include file="../include/indexinclude.jsp"%>
+<%@include file="../../include/indexinclude.jsp"%>
 <script type="text/javascript">
 	function del(id) {
 		$.post("userdelete.action", {

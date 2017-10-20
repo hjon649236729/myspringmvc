@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context path="/">
+
+    <Resource name="hjon" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/springmvc?useUnicode=true&amp;characterEncoding=UTF-8"
+              username="root"
+              password="admin"
+              maxActive="20"
+              maxIdle="10"
+              maxWait="-1"
+              testOnBorrow="true"
+              validationQuery="select 1 from dual"/>
+              
+   <!--  <Resource name="wind" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@localhost:1521:orcl"
+              username="tpyzqsirm"
+              password="tpyzqsirm"
+              maxActive="20"
+              maxIdle="10"
+              maxWait="-1"
+              testOnBorrow="true"
+              validationQuery="select 1 from dual"/>
+    <Resource name="exbasedata" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@localhost:1521:orcl"
+              username="tpyzqsirm"
+              password="tpyzqsirm"
+              maxActive="20"
+              maxIdle="10"
+              maxWait="-1"
+              testOnBorrow="true"
+              validationQuery="select 1 from dual"/> -->
+</Context>

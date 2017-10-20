@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	--><%-- 
 <%@include file="../include/indexinclude.jsp"%> --%>
+<link rel="icon" href="${contextPath}/favicon.ico">
 </head>
 
 <frameset cols="20%,80%">
