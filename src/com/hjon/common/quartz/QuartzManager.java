@@ -1,4 +1,4 @@
-package com.hjon.modules.quartz.controller;
+package com.hjon.common.quartz;
 
 import java.util.Date;
 import java.util.List;

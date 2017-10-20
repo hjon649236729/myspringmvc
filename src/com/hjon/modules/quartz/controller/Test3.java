@@ -1,10 +1,10 @@
 package com.hjon.modules.quartz.controller;
 
-public class Test {
-	public static String JOB_NAME = "动态任务调度1";
-	public static String TRIGGER_NAME = "动态任务触发器1";
-	public static String JOB_GROUP_NAME = "动态任务_JOB_GROUP1";
-	public static String TRIGGER_GROUP_NAME = "动态任务_trigger_GROUP1";
+public class Test3 {
+	public static String JOB_NAME = "动态任务调度3";
+	public static String TRIGGER_NAME = "动态任务触发器3";
+	public static String JOB_GROUP_NAME = "动态任务_JOB_GROUP3";
+	public static String TRIGGER_GROUP_NAME = "动态任务_trigger_GROUP3";
 
 	public static void main(String[] args) {
 		try {

@@ -34,7 +34,7 @@ public class QuartzController extends BaseController {
 		String oldtypefunc = maps.get("oldtypefunc");
 		// 原调度名称（带编号）
 		String triggerName = maps.get("triggername");*/
-		String planname=this.getParameter("planName");
+		/*String planname=this.getParameter("planName");
 		String cronExpression=this.getParameter("time");
 		String jobClass=this.getParameter("jobClass");
 		String jobtype = "DEFAULT";
@@ -49,15 +49,15 @@ public class QuartzController extends BaseController {
 		try {
 			Class obj = Class.forName(jobClass);
 			 JobDetail job = JobBuilder.newJob().withIdentity("job1", "group1").build();
-			/*
+			
 			jobDetail = new JobDetail(planname, jobtype, obj);
 			jobDetail.setDescription(memo + "########$$%%:" + jobClass
-					+ "########$$%%:" + cronExpression);*/
+					+ "########$$%%:" + cronExpression);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "找不到执行的代码";
-		}
+		}*/
 		/*if (CommonServiceFactory.getSchedulerService().validatejobName(
 				triggerName, planname, jobtype)) {
 			return "计划调度名称重复";
