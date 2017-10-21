@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -20,15 +21,9 @@ import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
 
+import com.hjon.modules.quartz.entity.JobInfo;
+
 public class QuartzManager {
-	/*
-	 * private static SchedulerFactory schedulerFactory = new
-	 * StdSchedulerFactory(); private static Scheduler scheduler = null;
-	 * 
-	 * static { try { scheduler = schedulerFactory.getScheduler(); } catch
-	 * (SchedulerException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } }
-	 */
 	private static Scheduler scheduler = getScheduler();
 
 	/**
@@ -59,10 +54,10 @@ public class QuartzManager {
 	 *            任务名
 	 * @param jobGroupName
 	 *            任务组名
+	 * @param jobDescription
+	 *            任务描述
 	 * @param triggerName
 	 *            触发器名
-	 * @param triggerGroupName
-	 *            触发器组名
 	 * @param jobClass
 	 *            任务
 	 * @param cron
@@ -70,22 +65,81 @@ public class QuartzManager {
 	 */
 
 	public static void addJob(String jobName, String jobGroupName,
-			String triggerName, String triggerGroupName, Class jobClass,
-			String cron) {
+			String jobDescription, String triggerName, String triggerGroupName,
+			String triggerDescription, Class jobClass, String cron) {
 		try {
-
+			JobBuilder jobBuilder = JobBuilder.newJob(jobClass);
 			// 任务名，任务组，任务执行类
-			JobDetail jobDetail = JobBuilder.newJob(jobClass)
-					.withIdentity(jobName, jobGroupName).build();
+			jobBuilder.withIdentity(jobName, jobGroupName);
+			jobBuilder.withDescription(jobDescription);
+			JobDetail jobDetail = jobBuilder.build();
 
 			// 触发器
 			TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder
 					.newTrigger();
 			// 触发器名,触发器组
 			triggerBuilder.withIdentity(triggerName, triggerGroupName);
+
+			triggerBuilder.withDescription(triggerDescription);
 			triggerBuilder.startNow();
 			// 触发器时间设定
 			triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(cron));
+			// 创建Trigger对象
+			CronTrigger trigger = (CronTrigger) triggerBuilder.build();
+
+			// 调度容器设置JobDetail和Trigger
+			scheduler.scheduleJob(jobDetail, trigger);
+
+			// 启动
+			if (!scheduler.isShutdown()) {
+				scheduler.start();
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * @Description: 添加一个定时任务
+	 * 
+	 * @param jobName
+	 *            任务名
+	 * @param jobGroupName
+	 *            任务组名
+	 * @param jobDescription
+	 *            任务描述
+	 * @param triggerName
+	 *            触发器名
+	 * @param triggerGroupName
+	 *            触发器组名
+	 * @param triggerDescription
+	 *            触发器描述
+	 * @param jobClass
+	 *            任务
+	 * @param cron
+	 *            时间设置，参考quartz说明文档
+	 */
+
+	public static void addJob(JobInfo info) {
+		try {
+			JobBuilder jobBuilder = JobBuilder.newJob(info.getJobClass());
+			// 任务名，任务组，任务执行类
+			jobBuilder.withIdentity(info.getJobName(), info.getJobGroupName());
+			jobBuilder.withDescription(info.getJobDescription());
+			JobDetail jobDetail = jobBuilder.build();
+
+			// 触发器
+			TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder
+					.newTrigger();
+			// 触发器名,触发器组
+			triggerBuilder.withIdentity(info.getTriggerName(),
+					info.getTriggerGroupName());
+
+			triggerBuilder.withDescription(info.getTriggerDescription());
+			triggerBuilder.startNow();
+			// 触发器时间设定
+			triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(info
+					.getCron()));
 			// 创建Trigger对象
 			CronTrigger trigger = (CronTrigger) triggerBuilder.build();
 
@@ -114,7 +168,8 @@ public class QuartzManager {
 	 *            时间设置，参考quartz说明文档
 	 */
 	public static void modifyJobTime(String jobName, String jobGroupName,
-			String triggerName, String triggerGroupName, String cron) {
+			String jobDescription, String triggerName, String triggerGroupName,
+			String triggerDescription, Class jobClass, String cron) {
 		try {
 
 			TriggerKey triggerKey = TriggerKey.triggerKey(triggerName,
@@ -157,6 +212,82 @@ public class QuartzManager {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * @Description: 修改任务
+	 * 
+	 * @param oldjobName
+	 * @param oldJobGroupName
+	 * @param triggerName
+	 *            触发器名
+	 * @param triggerGroupName
+	 *            触发器组名
+	 * @param cron
+	 *            时间设置，参考quartz说明文档
+	 */
+	public static void modifyJob(String oldjobName, String oldJobGroupName,
+			String oldTriggerName, String oldTriggerGroupName, JobInfo job) {
+
+		JobDetail jobDetail;
+		try {
+			jobDetail = scheduler.getJobDetail(JobKey.jobKey(oldjobName,
+					oldJobGroupName));
+			Class<? extends Job> jobClass1 = jobDetail.getJobClass();
+			removeJob(oldjobName, oldJobGroupName, oldTriggerName,
+					oldTriggerGroupName);
+			addJob(job);
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		/*
+		 * try {
+		 * 
+		 * }
+		 */
+
+		// TriggerKey triggerKey = TriggerKey.triggerKey(triggerName,
+		// triggerGroupName);
+		// CronTrigger trigger = (CronTrigger) scheduler
+		// .getTrigger(triggerKey);
+		// if (trigger == null) {
+		// return;
+		// }
+		//
+		// String oldTime = trigger.getCronExpression();
+		// if (!oldTime.equalsIgnoreCase(cron)) {
+		/** 方式一 ：调用 rescheduleJob 开始 */
+		// // 触发器
+		// TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder
+		// .newTrigger();
+		// // 触发器名,触发器组
+		// triggerBuilder.withIdentity(triggerName, triggerGroupName);
+		// triggerBuilder.startNow();
+		// // 触发器时间设定
+		// triggerBuilder.withSchedule(CronScheduleBuilder
+		// .cronSchedule(cron));
+		//
+		// // 创建Trigger对象
+		// trigger = (CronTrigger) triggerBuilder.build();
+		// // 方式一 ：修改一个任务的触发时间
+		// scheduler.rescheduleJob(triggerKey, trigger);
+		/** 方式一 ：调用 rescheduleJob 结束 */
+
+		/** 方式二：先删除，然后在创建一个新的Job */
+		// JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(
+		// jobName, jobGroupName));
+		// Class<? extends Job> jobClass1 = jobDetail.getJobClass();
+		// removeJob(jobName, jobGroupName, triggerName,
+		// triggerGroupName);
+		// addJob(jobName, jobGroupName, triggerName, triggerGroupName,
+		// jobClass, cron);
+		/** 方式二 ：先删除，然后在创建一个新的Job */
+		// }
+		// } catch (Exception e) {
+		// throw new RuntimeException(e);
+		// }
 	}
 
 	/**
