@@ -1,17 +1,16 @@
 package com.hjon.common.dao;
 
-import com.hjon.common.bean.Page;
-import com.hjon.common.utils.BeanUtils;
-import com.hjon.common.utils.GenericUtils;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -22,9 +21,15 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.internal.CriteriaImpl.OrderEntry;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+
+import com.hjon.common.bean.Page;
+import com.hjon.common.utils.BeanUtils;
+import com.hjon.common.utils.GenericUtils;
+import com.hjon.common.utils.NumberUtils;
 
 @Repository
 public class BaseDao<T> extends HibernateDaoSupport {
@@ -89,13 +94,30 @@ public class BaseDao<T> extends HibernateDaoSupport {
 			Object... values) {
 		String countQueryString = "select count(*) "
 				+ removeSelect(removeOrders(hql));
-		Query query = createQuery(countQueryString, values);
+		Query query = createQuery(countQueryString, null);
 		long totalCount = Long.parseLong(query.uniqueResult().toString());
 		if (totalCount < 1) {
 			return new Page();
 		}
 		int startIndex = (pageNo - 1) * pageSize;
 		query = createQuery(hql, values);
+		List list = query.setFirstResult(startIndex).setMaxResults(pageSize)
+				.list();
+		return new Page(pageNo, totalCount, pageSize, list);
+	}
+
+	public Page pagedQuery(String sql, int pageNo, int pageSize,
+			Map<String, Object> params) {
+		String countQueryString = "select count(*) "
+				+ removeSelect(removeOrders(sql));
+		SQLQuery query = createSqlQuery(countQueryString, null);
+		long totalCount = Long.parseLong(query.uniqueResult().toString());
+		if (totalCount < 1) {
+			return new Page();
+		}
+		int startIndex = (pageNo - 1) * pageSize;
+		query = createSqlQuery(sql, params);
+		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		List list = query.setFirstResult(startIndex).setMaxResults(pageSize)
 				.list();
 		return new Page(pageNo, totalCount, pageSize, list);
@@ -184,6 +206,35 @@ public class BaseDao<T> extends HibernateDaoSupport {
 			for (int i = 0; i < values.length; i++) {
 				query.setParameter(i, values[i]);
 			}
+		}
+		return query;
+	}
+
+	public SQLQuery createSqlQuery(String sql, Map<String, Object> params) {
+		SQLQuery query = getCurrentSession().createSQLQuery(sql);
+		if (params != null) {
+			for (String key : params.keySet()) {
+				Object o = params.get(key);
+				if (o != null) {
+					if (o instanceof Integer) {
+						query.setInteger(key, NumberUtils.safeToInteger(o, -1));
+					} else if (o instanceof String) {
+						query.setString(key, o.toString());
+					} else if (o instanceof Double) {
+						query.setDouble(key, NumberUtils.safeToDouble(o, 0.0d));
+					} else if (o instanceof Float) {
+						query.setFloat(key, NumberUtils.safeToFloat(o, 0.0f));
+					} else if (o instanceof Long) {
+						query.setLong(key, NumberUtils.safeToLong(o, 0l));
+					} else if (o instanceof Boolean) {
+						query.setBoolean(key, Boolean.valueOf(o.toString()));
+					} else if (o instanceof Date) {
+						// query.setDate(key, new Date())
+					}
+				}
+
+			}
+
 		}
 		return query;
 	}

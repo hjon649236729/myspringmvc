@@ -8,7 +8,7 @@
 			$form.bootstrapValidator().on('success.form.bv', function(e) {
 				//console.log("test");
 				// 阻止默认事件提交
-				
+
 				$.ajax({
 					cache : true,
 					type : "POST",
@@ -21,7 +21,7 @@
 					success : function(data) {
 						//$("#commonLayout_appcreshi").parent().html(data);
 						alert(data);
-						window.location.href="userlist.action"; 
+						window.location.href = "userlist.action";
 					}
 				});
 				e.preventDefault();
@@ -29,8 +29,8 @@
 		});
 	});
 </script>
-<form class="form-horizontal required-validate" method="post"
-	action="usersave.action" id="userform" action="usersave.action">
+<form class="form-horizontal required-validate"  id="userform" method="post"
+	action="usersave.action">
 	<div class="form-group">
 		<label for="userName" class="col-sm-2 control-label">用户名</label>
 		<div class="col-sm-5">

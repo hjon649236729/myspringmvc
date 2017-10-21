@@ -2,21 +2,40 @@
 
 <%@include file="../../include/indexinclude.jsp"%>
 <script type="text/javascript">
-	function del(id) {
-		$.post("userdelete.action", {
-			"id" : id,
-		}, function(data) {
-			if (data == "200") {
-				$("#submit").click();
-			} else {
-				alert("参数错误");
-			}
+	$(function() {
+		$("form.required-validate").each(function() {
+			var $form = $(this);
+			$form.bootstrapValidator().on('success.form.bv', function(e) {
+				//console.log("test");
+				// 阻止默认事件提交
+
+				$.ajax({
+					cache : true,
+					type : "POST",
+					url : "quartzsave.action",
+					data : $('#quartzform').serialize(),// 你的formid
+					async : false,
+					error : function(request) {
+						alert("Connection error");
+					},
+					success : function(data) {
+						//$("#commonLayout_appcreshi").parent().html(data);
+						//alert(data);
+						//window.location.href = "userlist.action";
+						$("#submit").click();
+					}
+				});
+				e.preventDefault();
+			});
 		});
+	});
+	function modify(data) {
+		console.log(data);
 	}
 </script>
 
 <form class="navbar-form navbar-left" id="pagerForm" method="post"
-	action="userlist.action">
+	action="quartzlist.action">
 	<input type="hidden" name="pageNum" id="pageNum"
 		value="${data.currentPageIndex}" /> <input type="hidden"
 		name="pageCount" id="pageCount" value="${data.totalPageCount}" /> <input
@@ -25,35 +44,41 @@
 		type="hidden" name="orderDirection" value="desc" />
 
 	<div class="form-group">
-		<input type="text" class="form-control" name="userName"
-			value="${userName }" placeholder="用户名">
+		<%-- <input type="text" class="form-control" name="userName"
+			value="${userName }" placeholder="用户名"> --%>
 	</div>
 	<button type="submit" id="submit" class="btn btn-primary btn-mx">查询</button>
 	<!-- <a class="btn btn-default" href="" role="button">添加</a> -->
 	<button type="button" class="btn btn-primary btn-mx"
 		data-toggle="modal" data-target="#addCrontriggerModal">添加</button>
 </form>
-
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary btn-mx">添加</button> -->
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>用户名</th>
-			<th>姓名</th>
+
+			<th>任务名称</th>
+			<th>任务类</th>
+			<th>上次执行时间</th>
+			<th>下次执行时间</th>
+			<th>状态</th>
+			<th>操作</th>
 		</tr>
 	</thead>
+
 	<tbody>
-		<c:forEach var="userinfo" items="${data.result }">
+		<c:forEach var="quartz" items="${data.result }">
 			<tr>
-				<td>${userinfo.id }</td>
-				<td>${userinfo.userName }</td>
-				<td>${userinfo.empName }</td>
-				<td>${userinfo.empName }</td>
-				<td><a class="btn btn-default"
-					href="javascript:del(${userinfo.id })" role="button">删除</a></td>
-			</tr>
+				<td>${quartz.JOB_NAME }</td>
+				<td>${quartz.JOB_CLASS_NAME }</td>
+				<td>${quartz.PREV_FIRE_TIME }</td>
+				<td>${quartz.NEXT_FIRE_TIME }</td>
+				<td>${quartz.TRIGGER_STATE }</td>
+				<td><a
+					href="javascript:modify($(this))">修改</a>|<a
+					href="">手动执行</a></td>
+			</tr>	
 		</c:forEach>
 	</tbody>
 </table>
@@ -61,20 +86,16 @@
 	<ul class="pager">
 		<li>共${data.totalPageCount }页</li>
 		<c:if test="${data.currentPageIndex<=1}">
-			<li class="disabled"><a href="#">上一页</a>
-			</li>
+			<li class="disabled"><a href="#">上一页</a></li>
 		</c:if>
 		<c:if test="${data.currentPageIndex>1}">
-			<li><a href="javascript:Previous();">上一页</a>
-			</li>
+			<li><a href="javascript:Previous();">上一页</a></li>
 		</c:if>
 		<c:if test="${data.currentPageIndex>=data.totalPageCount}">
-			<li class="disabled"><a href="#">下一页</a>
-			</li>
+			<li class="disabled"><a href="#">下一页</a></li>
 		</c:if>
 		<c:if test="${data.currentPageIndex<data.totalPageCount}">
-			<li><a href="javascript:Next();">下一页</a>
-			</li>
+			<li><a href="javascript:Next();">下一页</a></li>
 		</c:if>
 		<li>第${data.currentPageIndex }页</li>
 	</ul>
@@ -93,8 +114,14 @@
 				<h4 class="modal-title" id="addCrontriggerModalLabel">添加定时任务</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal required-validate" method="post"
-					action="usersave.action" id="userform" action="usersave.action">
+				<form class="form-horizontal required-validate" id="quartzform"
+					method="post" action="quartzsave.action">
+					<input type="hidden" id="reqtype" name="reqtype" value=0> <input
+						type="hidden" id="oldJobName" name="oldJobName" value="">
+					<input type="hidden" id="oldJobGroupName" name="oldJobGroupName"
+						value=""> <input type="hidden" id="oldTriggerName"
+						name="oldTriggerName" value=""> <input type="hidden"
+						id="oldTriggerGroupName" name="oldTriggerGroupName" value="">
 					<div class="form-group">
 						<label for="planName" class="col-sm-3 control-label">定时任务名称</label>
 						<div class="col-sm-6">
@@ -125,15 +152,17 @@
 							<!-- <input type="text" class="form-control" id="time"
 								name="time" data-bv-notempty
 								data-bv-notempty-message="执行时间不能为空"> -->
-							<textarea class="form-control" rows="3" id="memo"></textarea>
+							<textarea class="form-control" rows="3" id="memo" name="memo"></textarea>
 						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save
+							changes</button>
 					</div>
 				</form>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+
 		</div>
 	</div>
 </div>

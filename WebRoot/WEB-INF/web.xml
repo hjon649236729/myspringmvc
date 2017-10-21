@@ -30,21 +30,16 @@
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 
-
 	<context-param>
 		<param-name>webAppRootKey</param-name>
 		<param-value>myspringmvc.root</param-value>
 	</context-param>
-	
-    <context-param>
+	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>/WEB-INF/classes/log4j.properties</param-value>
 	</context-param>
-	
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-
+	<!-- <listener> <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> 
+		</listener> -->
 	<!-- <listener> <listener-class>com.hjon.common.listener.contextListener</listener-class> 
 		</listener> -->
 	<!-- <servlet> <servlet-name>Upload</servlet-name> <servlet-class>hjon.company.common.file.Upload</servlet-class> 
@@ -54,8 +49,8 @@
 		</servlet-mapping> <servlet> <servlet-name>TemplateDownload</servlet-name> 
 		<servlet-class>hjon.company.common.file.TemplateDownload</servlet-class> 
 		</servlet> <servlet-mapping> <servlet-name>TemplateDownload</servlet-name> 
-		<url-pattern>/res/TemplateDownload.do</url-pattern> </servlet-mapping> -->
-	<!-- <servlet> <servlet-name>ConnectorServlet</servlet-name> <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class> 
+		<url-pattern>/res/TemplateDownload.do</url-pattern> </servlet-mapping> <servlet> 
+		<servlet-name>ConnectorServlet</servlet-name> <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class> 
 		<init-param> <param-name>XMLConfig</param-name> <param-value>/WEB-INF/config.xml</param-value> 
 		</init-param> <init-param> <param-name>debug</param-name> <param-value>false</param-value> 
 		</init-param> <init-param> <param-name>configuration</param-name> <param-value>hjon.company.common.ckfinder.MyConfiguration</param-value> 

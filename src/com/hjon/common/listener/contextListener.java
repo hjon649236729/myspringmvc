@@ -1,20 +1,18 @@
 package com.hjon.common.listener;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.ServletContextAware;
 
 import com.hjon.config.CommonSettingUtils;
-import com.hjon.config.Constant;
 import com.hjon.modules.common.entity.CommonSetting;
 import com.hjon.modules.common.service.CommonBannerService;
 import com.hjon.modules.common.service.CommonEnumService;
@@ -39,15 +37,14 @@ public class contextListener implements InitializingBean, ServletContextAware {
 		// TODO Auto-generated method stub
 
 		try {
-			/*Properties prop = new Properties();
-			InputStream in = contextListener.class
-					.getResourceAsStream("/file.properties");
-			prop.load(in);
-			Constant.SitePath = context.getRealPath("/");
-			Constant.UploadFileRootPath = prop.getProperty("ResourcePath")
-					.trim();
-			Constant.LogPath = prop.getProperty("LogPath").trim();
-			Constant.FileType = prop.getProperty("FileType").trim();*/
+			/*
+			 * Properties prop = new Properties(); InputStream in =
+			 * contextListener.class .getResourceAsStream("/file.properties");
+			 * prop.load(in); Constant.SitePath = context.getRealPath("/");
+			 * Constant.UploadFileRootPath = prop.getProperty("ResourcePath")
+			 * .trim(); Constant.LogPath = prop.getProperty("LogPath").trim();
+			 * Constant.FileType = prop.getProperty("FileType").trim();
+			 */
 			// 全局变量加入缓存设置
 			List<CommonSetting> settings = commonSettingService.getAll(Order
 					.asc("module"));
@@ -57,26 +54,23 @@ public class contextListener implements InitializingBean, ServletContextAware {
 				CommonSettingUtils.commonSetting.put(map, setting);
 			}
 			// 枚举值加入缓存
-			/*List<CommonEnum> commonEnums = commonEnumService.getAll(Order
-					.asc("module"));
-			for (CommonEnum commonEnum : commonEnums) {
-				Map<String, String> param = new HashMap<String, String>();
-				param.put(commonEnum.getModule(), commonEnum.getType());
-				List<CommonEnum> commonEnumTemps = CommonEnumUtils.commonEnum
-						.get(param);
-				if (commonEnumTemps != null) {
-					commonEnumTemps.add(commonEnum);
-					CommonEnumUtils.commonEnum.put(param, commonEnumTemps);
-				} else {
-					commonEnumTemps = new ArrayList<CommonEnum>();
-					commonEnumTemps.add(commonEnum);
-					CommonEnumUtils.commonEnum.put(param, commonEnumTemps);
-				}
-			}
-			// Banner加入缓存
-			CommonBannerUtils.commonBanner = commonBannerService.findCommonBanner();*/
+			/*
+			 * List<CommonEnum> commonEnums = commonEnumService.getAll(Order
+			 * .asc("module")); for (CommonEnum commonEnum : commonEnums) {
+			 * Map<String, String> param = new HashMap<String, String>();
+			 * param.put(commonEnum.getModule(), commonEnum.getType());
+			 * List<CommonEnum> commonEnumTemps = CommonEnumUtils.commonEnum
+			 * .get(param); if (commonEnumTemps != null) {
+			 * commonEnumTemps.add(commonEnum);
+			 * CommonEnumUtils.commonEnum.put(param, commonEnumTemps); } else {
+			 * commonEnumTemps = new ArrayList<CommonEnum>();
+			 * commonEnumTemps.add(commonEnum);
+			 * CommonEnumUtils.commonEnum.put(param, commonEnumTemps); } } //
+			 * Banner加入缓存 CommonBannerUtils.commonBanner =
+			 * commonBannerService.findCommonBanner();
+			 */
 		} catch (Exception e) {
-		
+
 			throw new RuntimeException(e.getMessage());
 		}
 

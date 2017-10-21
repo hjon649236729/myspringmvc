@@ -1,79 +1,122 @@
 package com.hjon.modules.quartz.controller;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.impl.JobDetailImpl;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hjon.common.bean.Page;
 import com.hjon.common.controller.BaseController;
+import com.hjon.common.quartz.QuartzManager;
+import com.hjon.common.utils.NumberUtils;
+import com.hjon.modules.quartz.entity.JobInfo;
+import com.hjon.modules.quartz.service.QuartzService;
 
 @Controller
 @Scope("prototype")
 public class QuartzController extends BaseController {
 
-	@RequestMapping("quartz/list")
+	@Resource(name = "quartzService")
+	private QuartzService quartzService;
+	Logger logger = Logger.getLogger(QuartzController.class);
+
+	@RequestMapping("quartz/quartzlist")
 	public String list() {
 
-		return "common/quartz/managercrontrigger";
+		int pageNum = NumberUtils
+				.safeToInteger(this.getParameter("pageNum"), 1);
+		int numPerPage = NumberUtils.safeToInteger(
+				this.getParameter("numPerPage"), 10);
+		Map<String, Object> params = new HashMap<String, Object>();
+		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
+		this.setAttribute("data", data);
+
+		return "common/quartz/quartzlist";
 
 	}
 
-	public String saveCronTrigger() {
-		// 获取触发器名称
-		// String planname = maps.get("planname");
-		/*
-		 * String cronExpression = maps.get("time"); String jobClass =
-		 * maps.get("classcode"); String jobtype = "DEFAULT"; String memo =
-		 * maps.get("memo"); String status = maps.get("status"); String
-		 * oldtypefunc = maps.get("oldtypefunc"); // 原调度名称（带编号） String
-		 * triggerName = maps.get("triggername");
-		 */
-		String planname = this.getParameter("planName");
-		String cronExpression = this.getParameter("time");
-		String jobClass = this.getParameter("jobClass");
-		String jobtype = "DEFAULT";
-		String memo = this.getParameter("memo");
-		String status = this.getParameter("status");
-		String oldtypefunc = this.getParameter("oldtypefunc");
-		// 原调度名称（带编号）
-		String triggerName = this.getParameter("triggername");
+	@RequestMapping("quartz/quartzsave")
+	@ResponseBody
+	public String quartzsave() {
+		String planName = this.getParameter("planName");
+		try {
+			String planname = this.getParameter("planName");
+			String cronExpression = this.getParameter("time");
+			String jobClass = this.getParameter("jobClass");
+			// String jobtype = "DEFAULT";
+			String memo = this.getParameter("memo");
+			// String status = this.getParameter("status");
+			// String oldtypefunc = this.getParameter("oldtypefunc");
+			// 原调度名称（带编号）
+			String triggerName = this.getParameter("triggername");
+			JobInfo job = new JobInfo();
+			job.setJobName(planname);
+			job.setJobGroupName(planname);
+			job.setJobDescription(memo + "########$$%%:" + jobClass
+					+ "########$$%%:" + cronExpression);
 
-		/*
-		 * JobDetail jobDetail = null; try { Class obj =
-		 * Class.forName(jobClass); JobDetail job =
-		 * JobBuilder.newJob().withIdentity("job1", "group1").build();
-		 * 
-		 * jobDetail = new JobDetail(planname, jobtype, obj);
-		 * jobDetail.setDescription(memo + "########$$%%:" + jobClass +
-		 * "########$$%%:" + cronExpression);
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); return "找不到执行的代码"; }
-		 */
-		/*
-		 * if (CommonServiceFactory.getSchedulerService().validatejobName(
-		 * triggerName, planname, jobtype)) { return "计划调度名称重复"; }
-		 */
-		// String reqtype = maps.get("reqtype");
-		// if (reqtype.equals("0")) {
-		// 增加触发器
-		// CommonServiceFactory.getSchedulerService().schedule(planname,
-		// cronExpression, jobDetail);
-		// } else {
-		// 修改触发器
-		// CommonServiceFactory.getSchedulerService().modifyTrigger(
-		// triggerName, oldtypefunc, cronExpression, jobDetail);
-		// if (status.equals("1")) {
-		// //
-		// CommonServiceFactory.getSchedulerService().resumeTrigger(planname,
-		// jobtype);
-		// }
-		// }
-		// if (status.equals("0")) {
-		// CommonServiceFactory.getSchedulerService().pauseTrigger(planname,
-		// jobtype);
-		// }
-		return "";
+			job.setJobClass(Class.forName(jobClass));
+
+			job.setTriggerName(planname);
+			job.setTriggerGroupName(planname);
+			job.setTriggerDescription(memo + "########$$%%:" + jobClass
+					+ "########$$%%:" + cronExpression);
+
+			job.setCron(cronExpression);
+			if (quartzService.validatejobName(planname, planname)) {
+				return "调度名称已存在";
+			}
+			int reqtype = NumberUtils.safeToInteger(
+					this.getParameter("reqtype"), 0);
+			if (reqtype == 0) {
+				QuartzManager.addJob(job);
+			} else {
+				String oldJobName = this.getParameter("oldJobName");
+				String oldJobGroupName = this.getParameter("oldJobGroupName");
+				String oldTriggerName = this.getParameter("oldTriggerName");
+				String oldTriggerGroupName = this
+						.getParameter("oldTriggerGroupName");
+				QuartzManager.modifyJob(oldJobName, oldJobGroupName,
+						oldTriggerName, oldTriggerGroupName, job);
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			logger.error(e);
+			return "系统错误，请联系管理员";
+		}
+
+		return "success";
+	}
+
+	@RequestMapping("quartz/quartzdelete")
+	@ResponseBody
+	public String quartzdelete() {
+
+		return "success";
+
+	}
+
+	@RequestMapping("quartz/quartzpause")
+	@ResponseBody
+	public String quartzpause() {
+
+		return "success";
+
+	}
+
+	@RequestMapping("quartz/quartzstart")
+	@ResponseBody
+	public String quartzstart() {
+
+		return "success";
+
 	}
 }

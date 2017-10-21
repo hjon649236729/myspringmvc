@@ -32,6 +32,15 @@ public class NumberUtils {
 		return r;
 	}
 
+	public static Long safeToLong(Object o, Long dv) {
+		// TODO Auto-generated method stub
+		Long r = dv;
+		if (o != null) {
+			r = new Long(String.valueOf(o));
+		}
+		return r;
+	}
+
 	public static Double safeToDouble(Object o, Double dv) {
 		Double r = dv;
 		if (o != null) {
@@ -245,7 +254,7 @@ public class NumberUtils {
 			return decimalFormat.format(number);
 		}
 	}
-	
+
 	public static String formatNumber(String number, String pattern) {
 		if (StringUtils.isBlank(number)) {
 			return "";
@@ -255,4 +264,5 @@ public class NumberUtils {
 					Double.valueOf(0.0D)));
 		}
 	}
+
 }

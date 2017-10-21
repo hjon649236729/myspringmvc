@@ -40,40 +40,34 @@
 				<value>com.hjon.modules.*.entity</value>
 			</list>
 		</property>
-		 <property name="hibernateProperties">
+		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
-		</property> 
-		<!--  <property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property> -->
+		</property>
+		<!--以下是oracle的配置 <property name="hibernateProperties"> <props> <prop key="hibernate.hbm2ddl.auto">none</prop> 
+			<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop> 
+			<prop key="hibernate.show_sql">true</prop> </props> </property> -->
 	</bean>
 
-	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/springmvc?useUnicode=true&amp;characterEncoding=UTF-8" />
-		<property name="username" value="root" />
-		<property name="password" value="admin" /> -->
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
+			<property name="url" value="jdbc:mysql://localhost:3306/springmvc?useUnicode=true&amp;characterEncoding=UTF-8" 
+			/> <property name="username" value="root" /> <property name="password" value="admin" 
+			/> -->
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-	</bean> 
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-		<property name="username" value="hjon" />
-		<property name="password" value="hjon" />
-	</bean> -->
+	</bean>
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="oracle.jdbc.OracleDriver" 
+		/> <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
+		<property name="username" value="hjon" /> <property name="password" value="hjon" 
+		/> </bean> -->
 	<!-- 配置Hibernate事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -101,6 +95,5 @@
 		<!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
 	</aop:config>
-	<bean class="com.hjon.common.listener.contextListener">
-	</bean>
+	
 </beans>
