@@ -95,5 +95,8 @@
 		<!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
 	</aop:config>
+	<!-- <bean class="com.hjon.common.quartz.LocalTriggerListener"> </bean> -->
+	<bean class="com.hjon.common.listener.contextListener">
+	</bean>
 	
 </beans>

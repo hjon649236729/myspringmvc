@@ -1,30 +1,23 @@
 package com.hjon.common.listener;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.ServletContextAware;
 
-import com.hjon.config.CommonSettingUtils;
-import com.hjon.modules.common.entity.CommonSetting;
-import com.hjon.modules.common.service.CommonBannerService;
-import com.hjon.modules.common.service.CommonEnumService;
-import com.hjon.modules.common.service.CommonSettingService;
+import com.hjon.common.quartz.LocalQuartzManager;
 
 public class contextListener implements InitializingBean, ServletContextAware {
-	@Resource(name = "commonSettingService")
-	private CommonSettingService commonSettingService;
-	@Resource(name = "commonEnumService")
-	private CommonEnumService commonEnumService;
-	@Resource(name = "commonBannerService")
-	private CommonBannerService commonBannerService;
+	Logger logger = Logger.getLogger(contextListener.class);
+
+	// @Resource(name = "commonSettingService")
+	// private CommonSettingService commonSettingService;
+
+	// @Resource(name = "commonEnumService")
+	// private CommonEnumService commonEnumService;
+	// @Resource(name = "commonBannerService")
+	// private CommonBannerService commonBannerService;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -35,8 +28,21 @@ public class contextListener implements InitializingBean, ServletContextAware {
 	@Override
 	public void setServletContext(ServletContext context) {
 		// TODO Auto-generated method stub
-
+		// logger.info("contextListener.jaba----setServiceletContext");
 		try {
+			LocalQuartzManager.start();
+			// System.out.println(userInfoService.get(1);
+			// JobExecuteLog job = jobExecuteLogService.get(1);
+			// if (job != null) {
+			// System.out.println(job.getName());
+			// }
+			// try {
+			// LocalQuartzManager.start();// 启动定时任务
+			// } catch (SchedulerException e) {
+			// // TODO Auto-generated catch block
+			// logger.error("定时任务启动失败");
+			// e.printStackTrace();
+			// }
 			/*
 			 * Properties prop = new Properties(); InputStream in =
 			 * contextListener.class .getResourceAsStream("/file.properties");
@@ -46,13 +52,13 @@ public class contextListener implements InitializingBean, ServletContextAware {
 			 * Constant.FileType = prop.getProperty("FileType").trim();
 			 */
 			// 全局变量加入缓存设置
-			List<CommonSetting> settings = commonSettingService.getAll(Order
-					.asc("module"));
-			for (CommonSetting setting : settings) {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put(setting.getModule(), setting.getName());
-				CommonSettingUtils.commonSetting.put(map, setting);
-			}
+			// List<CommonSetting> settings = commonSettingService.getAll(Order
+			// .asc("module"));
+			// for (CommonSetting setting : settings) {
+			// Map<String, String> map = new HashMap<String, String>();
+			// map.put(setting.getModule(), setting.getName());
+			// CommonSettingUtils.commonSetting.put(map, setting);
+			// }
 			// 枚举值加入缓存
 			/*
 			 * List<CommonEnum> commonEnums = commonEnumService.getAll(Order

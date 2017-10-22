@@ -23,7 +23,7 @@ import org.quartz.impl.matchers.GroupMatcher;
 
 import com.hjon.modules.quartz.entity.JobInfo;
 
-public class QuartzManager {
+public class LocalQuartzManager {
 	private static Scheduler scheduler = getScheduler();
 
 	/**
@@ -92,7 +92,8 @@ public class QuartzManager {
 
 			// 启动
 			if (!scheduler.isShutdown()) {
-				scheduler.start();
+				// scheduler.start();
+				start();
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -148,7 +149,8 @@ public class QuartzManager {
 
 			// 启动
 			if (!scheduler.isShutdown()) {
-				scheduler.start();
+				// scheduler.start();
+				start();
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -340,7 +342,8 @@ public class QuartzManager {
 	public static void startJobs() {
 		try {
 
-			scheduler.start();
+			// scheduler.start();
+			start();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -376,6 +379,10 @@ public class QuartzManager {
 	 * @throws SchedulerException
 	 */
 	public static void start() throws SchedulerException {
+
+		LocalTriggerListener listener = new LocalTriggerListener();
+		scheduler.getListenerManager().addJobListener(listener);
+		scheduler.getListenerManager().addTriggerListener(listener);
 		scheduler.start();
 	}
 

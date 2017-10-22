@@ -1,6 +1,6 @@
 package com.hjon.modules.quartz.controller;
 
-import com.hjon.common.quartz.QuartzManager;
+import com.hjon.common.quartz.LocalQuartzManager;
 import com.hjon.modules.quartz.entity.JobInfo;
 import com.hjon.modules.quartz.job.TestJob1;
 
@@ -24,7 +24,7 @@ public class TestStart {
 			info.setTriggerGroupName(TRIGGER_GROUP_NAME);
 			info.setTriggerDescription(TRIGGER_DISCRIPTION);
 			info.setCron(CRON);
-			QuartzManager.addJob(info);
+			LocalQuartzManager.addJob(info);
 			// QuartzManager.add
 
 			/*

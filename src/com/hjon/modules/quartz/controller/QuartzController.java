@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hjon.common.bean.Page;
 import com.hjon.common.controller.BaseController;
-import com.hjon.common.quartz.QuartzManager;
+import com.hjon.common.quartz.LocalQuartzManager;
 import com.hjon.common.utils.NumberUtils;
 import com.hjon.modules.quartz.entity.JobInfo;
+import com.hjon.modules.quartz.service.JobExecuteLogService;
 import com.hjon.modules.quartz.service.QuartzService;
 
 @Controller
@@ -24,6 +25,9 @@ public class QuartzController extends BaseController {
 
 	@Resource(name = "quartzService")
 	private QuartzService quartzService;
+
+	@Resource(name = "jobExecuteLogService")
+	private JobExecuteLogService jobExecuteLogService;
 	Logger logger = Logger.getLogger(QuartzController.class);
 
 	@RequestMapping("quartz/quartzlist")
@@ -36,7 +40,7 @@ public class QuartzController extends BaseController {
 		Map<String, Object> params = new HashMap<String, Object>();
 		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
 		this.setAttribute("data", data);
-
+		
 		return "common/quartz/quartzlist";
 
 	}
@@ -75,14 +79,14 @@ public class QuartzController extends BaseController {
 			int reqtype = NumberUtils.safeToInteger(
 					this.getParameter("reqtype"), 0);
 			if (reqtype == 0) {
-				QuartzManager.addJob(job);
+				LocalQuartzManager.addJob(job);
 			} else {
 				String oldJobName = this.getParameter("oldJobName");
 				String oldJobGroupName = this.getParameter("oldJobGroupName");
 				String oldTriggerName = this.getParameter("oldTriggerName");
 				String oldTriggerGroupName = this
 						.getParameter("oldTriggerGroupName");
-				QuartzManager.modifyJob(oldJobName, oldJobGroupName,
+				LocalQuartzManager.modifyJob(oldJobName, oldJobGroupName,
 						oldTriggerName, oldTriggerGroupName, job);
 			}
 
