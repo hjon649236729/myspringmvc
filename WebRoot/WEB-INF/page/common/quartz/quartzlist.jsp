@@ -29,8 +29,19 @@
 			});
 		});
 	});
-	function modify(data) {
-		console.log(data);
+	function modify(jobname, jobclass, cron, description) {
+		$("#planName").val(jobname);
+		$("#time").val(cron);
+		$("#jobClass").val(jobclass);
+		var desc = description != null ? description.split("########$$%%:")
+				: '';
+		$("#memo").val(desc[0] == 'null' ? '' : desc[0]);
+		$("#reqtype").val(1);
+		$("#oldJobName").val(jobname);
+		$("#addCrontriggerModal").modal("show");
+	}
+	function showExecuteLog(jobname) {
+		window.location = "jobexecuteloglist.action?jobName=" + jobname;
 	}
 </script>
 
@@ -45,7 +56,7 @@
 
 	<div class="form-group">
 		<%-- <input type="text" class="form-control" name="userName"
-			value="${userName }" placeholder="用户名"> --%>
+                        value="${userName }" placeholder="用户名"> --%>
 	</div>
 	<button type="submit" id="submit" class="btn btn-primary btn-mx">查询</button>
 	<!-- <a class="btn btn-default" href="" role="button">添加</a> -->
@@ -70,15 +81,18 @@
 	<tbody>
 		<c:forEach var="quartz" items="${data.result }">
 			<tr>
-				<td>${quartz.JOB_NAME }</td>
+				<td><a href="javascript:showExecuteLog('${quartz.JOB_NAME }')">${quartz.JOB_NAME
+						}</a>
+				</td>
 				<td>${quartz.JOB_CLASS_NAME }</td>
 				<td>${quartz.PREV_FIRE_TIME }</td>
 				<td>${quartz.NEXT_FIRE_TIME }</td>
 				<td>${quartz.TRIGGER_STATE }</td>
 				<td><a
-					href="javascript:modify($(this))">修改</a>|<a
-					href="">手动执行</a></td>
-			</tr>	
+					href="javascript:modify('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME }','${quartz.CRON_EXPRESSION }','${quartz.DESCRIPTION }')">修改</a>|<a
+					href="">手动执行</a>
+				</td>
+			</tr>
 		</c:forEach>
 	</tbody>
 </table>
@@ -118,10 +132,6 @@
 					method="post" action="quartzsave.action">
 					<input type="hidden" id="reqtype" name="reqtype" value=0> <input
 						type="hidden" id="oldJobName" name="oldJobName" value="">
-					<input type="hidden" id="oldJobGroupName" name="oldJobGroupName"
-						value=""> <input type="hidden" id="oldTriggerName"
-						name="oldTriggerName" value=""> <input type="hidden"
-						id="oldTriggerGroupName" name="oldTriggerGroupName" value="">
 					<div class="form-group">
 						<label for="planName" class="col-sm-3 control-label">定时任务名称</label>
 						<div class="col-sm-6">
@@ -150,8 +160,8 @@
 						<label for="time" class="col-sm-3 control-label">说明</label>
 						<div class="col-sm-6">
 							<!-- <input type="text" class="form-control" id="time"
-								name="time" data-bv-notempty
-								data-bv-notempty-message="执行时间不能为空"> -->
+                                                                name="time" data-bv-notempty
+                                                                data-bv-notempty-message="执行时间不能为空"> -->
 							<textarea class="form-control" rows="3" id="memo" name="memo"></textarea>
 						</div>
 					</div>

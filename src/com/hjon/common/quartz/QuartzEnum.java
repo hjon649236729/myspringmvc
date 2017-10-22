@@ -1,7 +1,7 @@
 package com.hjon.common.quartz;
 
 public enum QuartzEnum {
-	NORMAL, GREEN, BLANK, YELLOW;
+	NORMAL, PAUSED, COMPLETE, YELLOW;
 	// public static int JobExecuteLogStatus_NORMAL = 0;
 	// final static int JobExecuteLogStatus_PAUSED = 1;
 	// final static int JobExecuteLogStatus_COMPLETE = 2;

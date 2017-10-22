@@ -28,7 +28,7 @@ public class QuartzService extends BaseService<JobInfo> {
 				.createSQLQuery(sql.toString());
 		query.setString("jobName", jobName);
 		query.setString("jobGroupName", jobGroupName);
-		
+
 		List<Map> list = query.list();
 		if (list != null && list.size() > 0) {
 			return false;

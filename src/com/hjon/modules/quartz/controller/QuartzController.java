@@ -82,12 +82,8 @@ public class QuartzController extends BaseController {
 				LocalQuartzManager.addJob(job);
 			} else {
 				String oldJobName = this.getParameter("oldJobName");
-				String oldJobGroupName = this.getParameter("oldJobGroupName");
-				String oldTriggerName = this.getParameter("oldTriggerName");
-				String oldTriggerGroupName = this
-						.getParameter("oldTriggerGroupName");
-				LocalQuartzManager.modifyJob(oldJobName, oldJobGroupName,
-						oldTriggerName, oldTriggerGroupName, job);
+				LocalQuartzManager.modifyJob(oldJobName, oldJobName,
+						oldJobName, oldJobName, job);
 			}
 
 		} catch (ClassNotFoundException e) {

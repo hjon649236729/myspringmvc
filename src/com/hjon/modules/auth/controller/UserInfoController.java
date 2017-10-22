@@ -28,7 +28,6 @@ public class UserInfoController extends BaseController {
 	Logger logger=Logger.getLogger(UserInfoController.class);
 	@RequestMapping("auth/userlist")
 	public String userlist() {
-
 		String orgId = this.getParameter("orgId");
 		this.setAttribute("orgId", orgId);
 		int pageNum = NumberUtils
