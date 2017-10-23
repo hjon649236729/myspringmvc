@@ -50,8 +50,8 @@
 								<li>
 									<!-- start message --> <a href="#">
 										<div class="pull-left">
-											<img src="Scripts/AdminLte/dist/img/user2-160x160.jpg" class="img-circle"
-												alt="User Image">
+											<img src="Scripts/AdminLte/dist/img/user2-160x160.jpg"
+												class="img-circle" alt="User Image">
 										</div>
 										<h4>
 											Support Team <small><i class="fa fa-clock-o"></i> 5
@@ -62,8 +62,8 @@
 								<!-- end message -->
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="Scripts/AdminLte/dist/img/user3-128x128.jpg" class="img-circle"
-												alt="User Image">
+											<img src="Scripts/AdminLte/dist/img/user3-128x128.jpg"
+												class="img-circle" alt="User Image">
 										</div>
 										<h4>
 											AdminLTE Design Team <small><i class="fa fa-clock-o"></i>
@@ -73,8 +73,8 @@
 								</li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="Scripts/AdminLte/dist/img/user4-128x128.jpg" class="img-circle"
-												alt="User Image">
+											<img src="Scripts/AdminLte/dist/img/user4-128x128.jpg"
+												class="img-circle" alt="User Image">
 										</div>
 										<h4>
 											Developers <small><i class="fa fa-clock-o"></i> Today</small>
@@ -83,8 +83,8 @@
 								</li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="Scripts/AdminLte/dist/img/user3-128x128.jpg" class="img-circle"
-												alt="User Image">
+											<img src="Scripts/AdminLte/dist/img/user3-128x128.jpg"
+												class="img-circle" alt="User Image">
 										</div>
 										<h4>
 											Sales Department <small><i class="fa fa-clock-o"></i>
@@ -94,8 +94,8 @@
 								</li>
 								<li><a href="#">
 										<div class="pull-left">
-											<img src="Scripts/AdminLte/dist/img/user4-128x128.jpg" class="img-circle"
-												alt="User Image">
+											<img src="Scripts/AdminLte/dist/img/user4-128x128.jpg"
+												class="img-circle" alt="User Image">
 										</div>
 										<h4>
 											Reviewers <small><i class="fa fa-clock-o"></i> 2 days</small>
@@ -213,12 +213,13 @@
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
-						src="Scripts/AdminLte/dist/img/user2-160x160.jpg" class="user-image"
-						alt="User Image"> <span class="hidden-xs">Alexander
+						src="Scripts/AdminLte/dist/img/user2-160x160.jpg"
+						class="user-image" alt="User Image"> <span class="hidden-xs">Alexander
 							Pierce</span> </a>
 					<ul class="dropdown-menu">
 						<!-- User image -->
-						<li class="user-header"><img src="Scripts/AdminLte/dist/img/user2-160x160.jpg"
+						<li class="user-header"><img
+							src="Scripts/AdminLte/dist/img/user2-160x160.jpg"
 							class="img-circle" alt="User Image">
 
 							<p>
@@ -263,8 +264,8 @@
 		<section class="sidebar"> <!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="Scripts/AdminLte/dist/img/user2-160x160.jpg" class="img-circle"
-					alt="User Image">
+				<img src="Scripts/AdminLte/dist/img/user2-160x160.jpg"
+					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
 				<p>Alexander Pierce</p>
@@ -274,8 +275,8 @@
 		<!-- search form -->
 		<form action="#" method="get" class="sidebar-form">
 			<div class="input-group">
-				<input type="text" name="q" class="form-control"
-					placeholder="查询"> <span class="input-group-btn">
+				<input type="text" name="q" class="form-control" placeholder="查询">
+				<span class="input-group-btn">
 					<button type="submit" name="search" id="search-btn"
 						class="btn btn-flat">
 						<i class="fa fa-search"></i>
@@ -284,16 +285,16 @@
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
-			
+
 			<li class="active treeview"><a href="#"> <i
 					class="fa fa-dashboard"></i> <span>用户管理</span> <span
 					class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i> </span> </a>
 				<ul class="treeview-menu">
-					<li class="active"><a href="index.html"><i
-							class="fa fa-circle-o"></i>用户</a></li>
-					<li><a href="index2.html"><i class="fa fa-circle-o"></i>
-							Dashboard v2</a></li>
+					<li class="active"><a href="auth/userlist.action"
+						target="contentFrame"><i class="fa fa-circle-o"></i>用户信息</a></li>
+					<li><a href="quartz/quartzlist.action" target="contentFrame"><i
+							class="fa fa-circle-o"></i>定时任务管理</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -302,9 +303,10 @@
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<iframe id="menuFrame" name="menuFrame" src="main.htm" style="overflow:visible;" scrolling="yes" frameborder="no" height="80%" width="100%"></iframe>
-			 </section>
+			<section class="content-header"> <iframe id="contentFrame"
+				name="contentFrame" src="main.htm" style="overflow:visible;"
+				scrolling="yes" frameborder="no" height="80%" width="100%"></iframe>
+			</section>
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
