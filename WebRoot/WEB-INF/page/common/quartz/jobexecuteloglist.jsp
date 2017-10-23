@@ -2,12 +2,12 @@
 
 <%@include file="../../include/indexinclude.jsp"%>
 <form class="navbar-form navbar-left" id="pagerForm" method="post"
-	action="quartzlist.action">
+	action="jobexecuteloglist.action">
 	<input type="hidden" name="pageNum" id="pageNum"
 		value="${data.currentPageIndex}" /> <input type="hidden"
 		name="pageCount" id="pageCount" value="${data.totalPageCount}" /> <input
 		type="hidden" name="numPerPage" value="${data.pageSize}" /> <input
-		type="hidden" name="orderField" value="createTime" /> <input
+		type="hidden" name="orderField" value="startTime" /> <input
 		type="hidden" name="orderDirection" value="desc" />
 
 	<div class="form-group">
@@ -16,12 +16,7 @@
 
 	</div>
 	<button type="submit" id="submit" class="btn btn-primary btn-mx">查询</button>
-	<!-- <a class="btn btn-default" href="" role="button">添加</a> -->
-	<!-- <button type="button" class="btn btn-primary btn-mx"
-		data-toggle="modal" data-target="#addCrontriggerModal">添加</button> -->
 </form>
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-mx">添加</button> -->
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -36,13 +31,10 @@
 	<tbody>
 		<c:forEach var="jobExecuteLog" items="${data.result }">
 			<tr>
-				<td><a
-					href="javascript:showExecuteLog('${jobExecuteLog.name }')">${quartz.JOB_NAME
-						}</a>
-				</td>
+				<td>${jobExecuteLog.name }</td>
 				<td>${jobExecuteLog.status }</td>
 				<td>${jobExecuteLog.empid }</td>
-				<td>${jobExecuteLog.sartTime }</td>
+				<td>${jobExecuteLog.startTime }</td>
 				<td>${jobExecuteLog.endTime }</td>
 				<td>${jobExecuteLog.type }</td>
 			</tr>
@@ -53,16 +45,20 @@
 	<ul class="pager">
 		<li>共${data.totalPageCount }页</li>
 		<c:if test="${data.currentPageIndex<=1}">
-			<li class="disabled"><a href="#">上一页</a></li>
+			<li class="disabled"><a href="#">上一页</a>
+			</li>
 		</c:if>
 		<c:if test="${data.currentPageIndex>1}">
-			<li><a href="javascript:Previous();">上一页</a></li>
+			<li><a href="javascript:Previous();">上一页</a>
+			</li>
 		</c:if>
 		<c:if test="${data.currentPageIndex>=data.totalPageCount}">
-			<li class="disabled"><a href="#">下一页</a></li>
+			<li class="disabled"><a href="#">下一页</a>
+			</li>
 		</c:if>
 		<c:if test="${data.currentPageIndex<data.totalPageCount}">
-			<li><a href="javascript:Next();">下一页</a></li>
+			<li><a href="javascript:Next();">下一页</a>
+			</li>
 		</c:if>
 		<li>第${data.currentPageIndex }页</li>
 	</ul>

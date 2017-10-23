@@ -1,9 +1,11 @@
 package com.hjon.modules.quartz.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +27,7 @@ public class JobExecuteLogController extends BaseController {
 	Logger logger = Logger.getLogger(QuartzController.class);
 
 	@RequestMapping("quartz/jobexecuteloglist")
-	public String list() {
+	public String list() throws UnsupportedEncodingException {
 		int pageNum = NumberUtils
 				.safeToInteger(this.getParameter("pageNum"), 1);
 		int numPerPage = NumberUtils.safeToInteger(
@@ -46,14 +48,16 @@ public class JobExecuteLogController extends BaseController {
 		}
 		Page data = new Page();
 		String jobName = this.getParameter("jobName");
+
 		if (jobName != null && !"".equals(jobName)) {
 			search.Add(Expression.eq("name", jobName));
 			this.setAttribute("jobName", jobName);
 			data = jobExecuteLogService.pagedQuery(pageNum, numPerPage, search,
 					order);
+
 		}
 		this.setAttribute("data", data);
-		return "quartz/jobexecuteloglist";
+		return "common/quartz/jobexecuteloglist";
 	}
 
 }

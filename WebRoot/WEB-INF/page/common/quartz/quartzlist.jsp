@@ -40,8 +40,43 @@
 		$("#oldJobName").val(jobname);
 		$("#addCrontriggerModal").modal("show");
 	}
+
+	/* $.extend({
+		StandardPost : function(url, args) {
+			var form = $("<form method='post'></form>"), input;
+			form.attr({
+				"action" : url
+			});
+			$.each(args, function(key, value) {
+				input = $("<input type='hidden'>");
+				input.attr({
+					"name" : key
+				});
+				input.val(value);
+				form.append(input);
+			});
+			console.log(form);
+			form.submit();
+		}
+	}); */
+	function StandardPost (url,args) 
+    {
+        var form = $("<form method='post'></form>");
+        form.attr({"action":url});
+        for (arg in args)
+        {
+            var input = $("<input type='hidden'>");
+            input.attr({"name":arg});
+            input.val(args[arg]);
+            form.append(input);
+        }
+        $(document.body).append(form);
+        form.submit();
+    }
 	function showExecuteLog(jobname) {
-		window.location = "jobexecuteloglist.action?jobName=" + jobname;
+		StandardPost("jobexecuteloglist.action", {
+			jobName : jobname
+		});
 	}
 </script>
 
