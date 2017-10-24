@@ -110,7 +110,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
 			Map<String, Object> params) {
 		String countQueryString = "select count(*) "
 				+ removeSelect(removeOrders(sql));
-		SQLQuery query = createSqlQuery(countQueryString, params);
+		SQLQuery query = createSqlQuery(countQueryString, null);
 		long totalCount = Long.parseLong(query.uniqueResult().toString());
 		if (totalCount < 1) {
 			return new Page();
