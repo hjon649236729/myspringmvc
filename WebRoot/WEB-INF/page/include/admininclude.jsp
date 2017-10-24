@@ -76,7 +76,7 @@
 	src="${contextPath }/Scripts/AdminLte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script
 	src="${contextPath }/Scripts/AdminLte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	
+
 <!-- jQuery Knob Chart -->
 <script
 	src="${contextPath }/Scripts/AdminLte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
@@ -88,7 +88,7 @@
 <!-- datepicker -->
 <script
 	src="${contextPath }/Scripts/AdminLte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	<!-- Bootstrap WYSIHTML5 -->
+<!-- Bootstrap WYSIHTML5 -->
 <script
 	src="${contextPath }/Scripts/AdminLte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
@@ -97,5 +97,6 @@
 <!-- FastClick -->
 <script
 	src="${contextPath }/Scripts/AdminLte/bower_components/fastclick/lib/fastclick.js"></script>
-	<!-- AdminLTE App -->
+<!-- AdminLTE App -->
 <script src="${contextPath }/Scripts/AdminLte/dist/js/adminlte.min.js"></script>
+<script src="${contextPath}/Scripts/js/page.js"></script>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,11 @@ public class QuartzController extends BaseController {
 		int numPerPage = NumberUtils.safeToInteger(
 				this.getParameter("numPerPage"), 10);
 		Map<String, Object> params = new HashMap<String, Object>();
+		String jobName=this.getParameter("jobName");
+		if(StringUtils.isNotBlank(jobName)){
+			params.put("JOB_NAME", jobName);
+			this.setAttribute("jobName", jobName);
+		}
 		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
 		this.setAttribute("data", data);
 		

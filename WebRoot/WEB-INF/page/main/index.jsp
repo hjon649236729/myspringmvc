@@ -18,15 +18,12 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 <%@include file="../include/admininclude.jsp"%>
+<link rel="shortcut icon " type="images/x-icon"
+	href="${contextPath }/favicon.ico">
 </head>
-
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
-
 		<header class="main-header"> <!-- Logo --> <a
 			href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
@@ -295,6 +292,9 @@
 						target="contentFrame"><i class="fa fa-circle-o"></i>用户信息</a></li>
 					<li><a href="quartz/quartzlist.action" target="contentFrame"><i
 							class="fa fa-circle-o"></i>定时任务管理</a></li>
+					<li><a href="quartz/jobexecuteloglist.action"
+						target="contentFrame"><i class="fa fa-circle-o"></i>定时任务运行日志管理</a>
+					</li>
 				</ul>
 			</li>
 		</ul>
@@ -304,9 +304,8 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header"> <iframe id="contentFrame"
-				name="contentFrame" src="main.htm" style="overflow:visible;"
-				scrolling="yes" frameborder="no" height="80%" width="100%"></iframe>
-			</section>
+				frameborder="no" name="contentFrame" src="" scrolling="no"
+				height="520px" width="100%"></iframe> </section>
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
@@ -317,18 +316,20 @@
 		<strong>Copyright &copy; 2014-2016 <a
 			href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
 		</footer>
-
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark"> <!-- Create the tabs -->
+		<!-- 
+		Control Sidebar
+		<aside class="control-sidebar control-sidebar-dark"> Create the tabs
 		<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
 			<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i
-					class="fa fa-home"></i> </a></li>
+					class="fa fa-home"></i> </a>
+			</li>
 			<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
-					class="fa fa-gears"></i> </a></li>
+					class="fa fa-gears"></i> </a>
+			</li>
 		</ul>
-		<!-- Tab panes -->
+		Tab panes
 		<div class="tab-content">
-			<!-- Home tab content -->
+			Home tab content
 			<div class="tab-pane" id="control-sidebar-home-tab">
 				<h3 class="control-sidebar-heading">Recent Activity</h3>
 				<ul class="control-sidebar-menu">
@@ -339,8 +340,7 @@
 								<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
 								<p>Will be 23 on April 24th</p>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)"> <i
 							class="menu-icon fa fa-user bg-yellow"></i>
 
@@ -349,8 +349,7 @@
 									Profile</h4>
 
 								<p>New phone +1(800)555-1234</p>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)"> <i
 							class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
@@ -359,8 +358,7 @@
 									List</h4>
 
 								<p>nora@example.com</p>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)"> <i
 							class="menu-icon fa fa-file-code-o bg-green"></i>
 
@@ -369,10 +367,9 @@
 									Executed</h4>
 
 								<p>Execution time 5 seconds</p>
-							</div> </a>
-					</li>
+							</div> </a></li>
 				</ul>
-				<!-- /.control-sidebar-menu -->
+				/.control-sidebar-menu
 
 				<h3 class="control-sidebar-heading">Tasks Progress</h3>
 				<ul class="control-sidebar-menu">
@@ -384,8 +381,7 @@
 
 							<div class="progress progress-xxs">
 								<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)">
 							<h4 class="control-sidebar-subheading">
 								Update Resume <span class="label label-success pull-right">95%</span>
@@ -394,8 +390,7 @@
 							<div class="progress progress-xxs">
 								<div class="progress-bar progress-bar-success"
 									style="width: 95%"></div>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)">
 							<h4 class="control-sidebar-subheading">
 								Laravel Integration <span class="label label-warning pull-right">50%</span>
@@ -404,8 +399,7 @@
 							<div class="progress progress-xxs">
 								<div class="progress-bar progress-bar-warning"
 									style="width: 50%"></div>
-							</div> </a>
-					</li>
+							</div> </a></li>
 					<li><a href="javascript:void(0)">
 							<h4 class="control-sidebar-subheading">
 								Back End Framework <span class="label label-primary pull-right">68%</span>
@@ -414,18 +408,17 @@
 							<div class="progress progress-xxs">
 								<div class="progress-bar progress-bar-primary"
 									style="width: 68%"></div>
-							</div> </a>
-					</li>
+							</div> </a></li>
 				</ul>
-				<!-- /.control-sidebar-menu -->
+				/.control-sidebar-menu
 
 			</div>
-			<!-- /.tab-pane -->
-			<!-- Stats tab content -->
+			/.tab-pane
+			Stats tab content
 			<div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab
 				Content</div>
-			<!-- /.tab-pane -->
-			<!-- Settings tab content -->
+			/.tab-pane
+			Settings tab content
 			<div class="tab-pane" id="control-sidebar-settings-tab">
 				<form method="post">
 					<h3 class="control-sidebar-heading">General Settings</h3>
@@ -437,7 +430,7 @@
 
 						<p>Some information about this general settings option</p>
 					</div>
-					<!-- /.form-group -->
+					/.form-group
 
 					<div class="form-group">
 						<label class="control-sidebar-subheading"> Allow mail
@@ -446,7 +439,7 @@
 
 						<p>Other sets of options are available</p>
 					</div>
-					<!-- /.form-group -->
+					/.form-group`
 
 					<div class="form-group">
 						<label class="control-sidebar-subheading"> Expose author
@@ -455,7 +448,7 @@
 
 						<p>Allow the user to show his name in blog posts</p>
 					</div>
-					<!-- /.form-group -->
+					/.form-group
 
 					<h3 class="control-sidebar-heading">Chat Settings</h3>
 
@@ -464,26 +457,26 @@
 							online <input type="checkbox" class="pull-right" checked>
 						</label>
 					</div>
-					<!-- /.form-group -->
+					/.form-group
 
 					<div class="form-group">
 						<label class="control-sidebar-subheading"> Turn off
 							notifications <input type="checkbox" class="pull-right">
 						</label>
 					</div>
-					<!-- /.form-group -->
+					/.form-group
 
 					<div class="form-group">
 						<label class="control-sidebar-subheading"> Delete chat
 							history <a href="javascript:void(0)" class="text-red pull-right"><i
 								class="fa fa-trash-o"></i> </a> </label>
 					</div>
-					<!-- /.form-group -->
+					/.form-group
 				</form>
 			</div>
-			<!-- /.tab-pane -->
+			/.tab-pane
 		</div>
-		</aside>
+		</aside> -->
 		<!-- /.control-sidebar -->
 		<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
