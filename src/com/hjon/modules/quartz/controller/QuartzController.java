@@ -7,6 +7,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,14 +43,14 @@ public class QuartzController extends BaseController {
 		int numPerPage = NumberUtils.safeToInteger(
 				this.getParameter("numPerPage"), 10);
 		Map<String, Object> params = new HashMap<String, Object>();
-		String jobName=this.getParameter("jobName");
-		if(StringUtils.isNotBlank(jobName)){
+		String jobName = this.getParameter("jobName");
+		if (StringUtils.isNotBlank(jobName)) {
 			params.put("JOB_NAME", jobName);
 			this.setAttribute("jobName", jobName);
 		}
 		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
 		this.setAttribute("data", data);
-		
+
 		return "common/quartz/quartzlist";
 
 	}
@@ -104,25 +108,42 @@ public class QuartzController extends BaseController {
 
 	@RequestMapping("quartz/quartzdelete")
 	@ResponseBody
-	public String quartzdelete() {
-
+	public String quartzdelete() throws SchedulerException {
+		String jobName = this.getParameter("jobName");
+		LocalQuartzManager.removeJob(jobName, jobName, jobName, jobName);
 		return "success";
-
 	}
 
 	@RequestMapping("quartz/quartzpause")
 	@ResponseBody
 	public String quartzpause() {
-
-		return "success";
+		String jobName = this.getParameter("jobName");
+		try {
+			LocalQuartzManager.pauseJob(new JobKey(jobName, jobName));
+			return "success";
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			logger.error(e);
+			return "停止失败";
+		}
 
 	}
 
 	@RequestMapping("quartz/quartzstart")
 	@ResponseBody
 	public String quartzstart() {
-
-		return "success";
+		String jobName = this.getParameter("jobName");
+		try {
+			LocalQuartzManager.resumeTrigger(TriggerKey.triggerKey(jobName,
+					jobName));
+			return "success";
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			logger.error(e);
+			return "重启失败";
+		}
 
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <%@include file="../../include/tableinclude.jsp"%>
+
 <div class="box">
 	<div class="box-header">
 		<form id="pagerForm" method="post" action="jobexecuteloglist.action">
@@ -56,8 +57,10 @@
 		<span>共${data.totalPageCount}页， 第${data.currentPageIndex}页，
 			每页显示${data.pageSize}条</span>
 		<ul class="pagination pagination-sm no-margin  pull-right">
-			<li><a href="javascript:Previous();">上一页</a></li>
-			<li><a href="javascript:Next();">下一页</a></li>
+			<li><a href="javascript:Previous();">上一页</a>
+			</li>
+			<li><a href="javascript:Next();">下一页</a>
+			</li>
 		</ul>
 	</div>
 </div>

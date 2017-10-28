@@ -1,6 +1,38 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <%@include file="../../include/tableinclude.jsp"%>
+<script type="text/javascript">
+	function stop(jobName){
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : "quartzpause.action",
+			data : {'jobName':jobName},// 你的formid
+			async : false,
+			error : function(request) {
+				return false;
+			},
+			success : function(data) {
+				return true;
+			}
+		});	
+	}
+	function start(jobName){
+		$.ajax({
+			cache : true,
+			type : "POST",
+			url : "quartzstart.action",
+			data : {'jobName':jobName},// 你的formid
+			async : false,
+			error : function(request) {
+				return false;
+			},
+			success : function(data) {
+				return true;
+			}
+		});	
+	}
+</script>
 <div class="box">
 	<div class="box-header">
 		<form id="pagerForm" method="post" action="quartzlist.action">
@@ -44,16 +76,13 @@
 					<tr>
 						<td><a
 							href="javascript:showExecuteLog('${quartz.JOB_NAME }')">${quartz.JOB_NAME
-								}</a>
-						</td>
+								}</a></td>
 						<td>${quartz.JOB_CLASS_NAME }</td>
 						<td>${quartz.PREV_FIRE_TIME }</td>
 						<td>${quartz.NEXT_FIRE_TIME }</td>
 						<td>${quartz.TRIGGER_STATE }</td>
-						<td><a
-							href="javascript:modify('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME }','${quartz.CRON_EXPRESSION }','${quartz.DESCRIPTION }')">修改</a>|<a
-							href="">手动执行</a>
-						</td>
+						<td><a href="javascript:modify('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME }','${quartz.CRON_EXPRESSION }','${quartz.DESCRIPTION }')">修改</a>|
+						<a href="javascript:stop('${quartz.JOB_NAME}')">停止</a>|<a href="javascript:start('${quartz.JOB_NAME}')">重启</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -64,8 +93,10 @@
 		<span>共${data.totalPageCount}页， 第${data.currentPageIndex}页，
 			每页显示${data.pageSize}条</span>
 		<ul class="pagination pagination-sm no-margin  pull-right">
-			<li><a href="javascript:Previous();">上一页</a></li>
-			<li><a href="javascript:Next();">下一页</a></li>
+			<li><a href="javascript:Previous();">上一页</a>
+			</li>
+			<li><a href="javascript:Next();">下一页</a>
+			</li>
 		</ul>
 	</div>
 </div>
