@@ -1,10 +1,12 @@
 package com.hjon.common.quartz;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -21,10 +23,21 @@ import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
 
+import com.hjon.common.utils.SpringContextUtil;
 import com.hjon.modules.quartz.entity.JobInfo;
+import com.hjon.modules.quartz.service.JobExecuteLogService;
 
 public class LocalQuartzManager {
 	private static Scheduler scheduler = getScheduler();
+	Logger logger = Logger.getLogger(LocalTriggerListener.class);
+	private Map threadMap = new HashMap();
+	// @Resource
+	private JobExecuteLogService jobExecuteLogService;
+
+	public LocalQuartzManager() {
+		jobExecuteLogService = SpringContextUtil
+				.getBean("jobExecuteLogService");
+	}
 
 	/**
 	 * 创建一个调度对象
@@ -299,7 +312,10 @@ public class LocalQuartzManager {
 	 * @throws SchedulerException
 	 */
 	public static void pauseJob(JobKey jobkey) throws SchedulerException {
+		
 		scheduler.pauseJob(jobkey);
+		
+
 	}
 
 	/**
@@ -543,6 +559,7 @@ public class LocalQuartzManager {
 	 */
 	public void pauseTriggers(GroupMatcher<TriggerKey> groupmatcher)
 			throws SchedulerException {
+
 		scheduler.pauseTriggers(groupmatcher);
 	}
 
@@ -607,4 +624,12 @@ public class LocalQuartzManager {
 		scheduler.resumeAll();
 	}
 
+	 public void updateStatus(String name, Integer status) {
+		 //jobExecuteLogService.getJobExecuteLog(name, status);
+		/*
+		 * for (Map map : queryQuartzMap) { if
+		 * (map.get("name").toString().equals(name)) { map.put("status",
+		 * status); break; } }
+		 */
+	}
 }

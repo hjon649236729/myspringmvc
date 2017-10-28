@@ -1,41 +1,50 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <%@include file="../../include/tableinclude.jsp"%>
+<%@ taglib uri="/basedata" prefix="basedata"%>
 <script type="text/javascript">
-	function stop(jobName){
-		$.ajax({
-			cache : true,
-			type : "POST",
-			url : "quartzpause.action",
-			data : {'jobName':jobName},// 你的formid
-			async : false,
-			error : function(request) {
-				return false;
-			},
-			success : function(data) {
-				return true;
+	function pause(jobName) {
+		$.post("quartzpause.action", {
+			"jobName" : jobName
+		}, function(result) {
+			console.log(result);
+			if (result == "success") {
+				window.location.reload();
+			} else {
+				alert(result);
 			}
-		});	
+		});
 	}
-	function start(jobName){
-		$.ajax({
-			cache : true,
-			type : "POST",
-			url : "quartzstart.action",
-			data : {'jobName':jobName},// 你的formid
-			async : false,
-			error : function(request) {
-				return false;
-			},
-			success : function(data) {
-				return true;
+	function resume(jobName) {
+		$.post("quartzresume.action", {
+			"jobName" : jobName
+		}, function(result) {
+			if (result == "success") {
+				window.location.reload();
+			} else {
+				alert(result);
 			}
-		});	
+		});
+	
 	}
+	function executeFunction(jobName, jobClass) {
+		$.post("quartzexecuteFunction.action", {
+			"jobName" : jobName,
+			"jobClass" : jobClass
+		}, function(result) {
+			if (result == "success") {
+				window.location.reload();
+			} else {
+				alert(result);
+			}
+		});
+		
+	}
+
 </script>
 <div class="box">
 	<div class="box-header">
-		<form id="pagerForm" method="post" action="quartzlist.action">
+		<form id="pageForm" method="post" action="quartzlist.action">
 			<input type="hidden" name="pageNum" id="pageNum"
 				value="${data.currentPageIndex}" /> <input type="hidden"
 				name="pageCount" id="pageCount" value="${data.totalPageCount}" /> <input
@@ -78,11 +87,23 @@
 							href="javascript:showExecuteLog('${quartz.JOB_NAME }')">${quartz.JOB_NAME
 								}</a></td>
 						<td>${quartz.JOB_CLASS_NAME }</td>
-						<td>${quartz.PREV_FIRE_TIME }</td>
-						<td>${quartz.NEXT_FIRE_TIME }</td>
+						<td><basedata:formatDate value="${quartz.PREV_FIRE_TIME }"
+								format="yyyy-MM-dd HH:mm:ss" />
+						</td>
+						<td><basedata:formatDate value="${quartz.NEXT_FIRE_TIME }"
+								format="yyyy-MM-dd HH:mm:ss" />
+						</td>
 						<td>${quartz.TRIGGER_STATE }</td>
-						<td><a href="javascript:modify('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME }','${quartz.CRON_EXPRESSION }','${quartz.DESCRIPTION }')">修改</a>|
-						<a href="javascript:stop('${quartz.JOB_NAME}')">停止</a>|<a href="javascript:start('${quartz.JOB_NAME}')">重启</a></td>
+						<td><a
+							href="javascript:modify('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME }','${quartz.CRON_EXPRESSION }','${quartz.DESCRIPTION }')">修改</a>&nbsp
+							<c:if test="${quartz.TRIGGER_STATE!='PAUSED'}">
+								<a href="javascript:pause('${quartz.JOB_NAME}')">暂停</a>
+							</c:if> <c:if test="${quartz.TRIGGER_STATE=='PAUSED'}">
+								<a href="javascript:resume('${quartz.JOB_NAME}')">重启</a>
+							</c:if> <a
+							href="javascript:executeFunction('${quartz.JOB_NAME}','${quartz.JOB_CLASS_NAME}')">手动执行</a>
+						</td>
+
 					</tr>
 				</c:forEach>
 			</tbody>

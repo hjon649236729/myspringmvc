@@ -21,6 +21,67 @@
 <%@include file="../include/admininclude.jsp"%>
 <link rel="shortcut icon " type="images/x-icon"
 	href="${contextPath }/favicon.ico">
+	<script type="text/javascript">
+	$(function(){
+		menuInit();
+	});
+		  var menuJson=[{
+      "name": "用户管理",
+      "controller":"#",
+      "child": [{
+          "name": "用户概览",
+          "controller":"user/home.do",
+      },{
+          "name": "添加用户",
+          "controller":"user/add.do",
+      }]
+  },{
+      "name": "文章管理",
+      "controller":"#",
+      "child": [{
+          "name": "文章概览",
+          "controller":"post/home.do",
+      },{
+          "name": "添加文章",
+          "controller":"post/add.do",
+      }]
+  }];
+  function menuInit() {
+      var menu = null;
+      var html = null;
+      var chidLen = null;
+      var child = null;
+      for (var i = 0; i < menuJson.length; i++) {
+          menu = menuJson[i];
+          if(i==0){
+              html = $(' <li menu-id="' + i + '" class="active treeview "><li>');
+          }else{
+              html = $(' <li menu-id="' + i + '" class="treeview "><li>');
+          }
+ 
+          $(".sidebar .sidebar-menu").append(html);
+ 
+          html = $(' <a href="'+menu.controller+'"> <i class="fa fa-dashboard"></i> <span>'+menu.name+'</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a> <ul menuUl-id="'+i+'" class="treeview-menu"> </ul>');
+          $('[menu-id="'+i+'"]').append(html);
+ 
+          chidLen = menu.child.length;
+          for (var j=0;j<chidLen;j++){
+              child = menu.child[j];
+              if(i==0&&j==0){
+                  html = $('<li class="active"><a href="javascript:void(0);" menu-controller="'+child.controller+'"><i class="fa fa-circle-o"></i> '+child.name+'</a></li>');
+              }else{
+                  html = $('<li class=""><a href="javascript:void(0);" menu-controller="'+child.controller+'"><i class="fa fa-circle-o"></i> '+child.name+'</a></li>');
+              }
+ 
+              $('[menuUl-id="'+i+'"]').append(html);
+          }
+      }
+      $(Selector.data).each(function () {
+          Plugin.call($(this))
+      });
+      $(".sidebar-menu li:first ul li:first a").click();
+  }
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">

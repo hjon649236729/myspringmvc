@@ -44,28 +44,26 @@ public class LocalTriggerListener implements TriggerListener, JobListener {
 	@Override
 	public void jobWasExecuted(JobExecutionContext jobExecutionContext,
 			JobExecutionException e) {
+		
 		if (threadMap != null && threadMap.get(Thread.currentThread()) != null) {
 			if (e != null) {
 				JobExecuteLog jobExecuteLog = (JobExecuteLog) threadMap
 						.get(Thread.currentThread());
 				try {
 					jobExecuteLog.setEndTime(new Date());
-					jobExecuteLog.setStatus(3);
+					jobExecuteLog.setStatus(QuartzEnum.STATUS_ERROR.toInt());
 					jobExecuteLogService.saveOrUpdate(jobExecuteLog);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				/*
-				 * LocalQuartzManager.updateStatus(jobExecutionContext
-				 * .getJobDetail().getName(), 2);
-				 */
+				//LocalQuartzManager.updateStatus(jobExecutionContext.getJobDetail().getName(), 2);
 
 			} else {
 				JobExecuteLog jobExecuteLog = (JobExecuteLog) threadMap
 						.get(Thread.currentThread());
 				try {
 					jobExecuteLog.setEndTime(new Date());
-					jobExecuteLog.setStatus(2);
+					jobExecuteLog.setStatus(QuartzEnum.STATUS_COMPLETE.toInt());
 					jobExecuteLogService.saveOrUpdate(jobExecuteLog);
 				} catch (Exception ex) {
 					logger.error("jobWasExecuted failed.["
@@ -107,11 +105,11 @@ public class LocalTriggerListener implements TriggerListener, JobListener {
 		if (jobDataMap != null && jobDataMap.get("executeType") != null
 				&& jobDataMap.get("executeType").equals("hand")
 				&& jobDataMap.get("empid") != null) {
-			sirmJobExecuteLog.setType(2);
+			sirmJobExecuteLog.setType(QuartzEnum.TYPE_HAND.toInt());
 			sirmJobExecuteLog.setEmpid(Integer.parseInt(jobDataMap.get("empid")
 					.toString()));
 		} else {
-			sirmJobExecuteLog.setType(1);
+			sirmJobExecuteLog.setType(QuartzEnum.TYPE_AUTO.toInt());
 			sirmJobExecuteLog.setEmpid(0);
 		}
 		sirmJobExecuteLog.setStatus(1);

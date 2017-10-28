@@ -8,7 +8,7 @@
 	<uri>/basedata</uri>
 	<tag>
 		<name>settingText</name>
-		<tag-class>hjon.company.common.tag.SettingTextTag</tag-class>
+		<tag-class>com.hjon.common.tag.SettingTextTag</tag-class>
 		<body-content>none</body-content>
 		<description>Label</description>
 		<attribute>
@@ -27,7 +27,7 @@
 	</tag>
 	<tag>
 		<name>autoComplete</name>
-		<tag-class>hjon.company.common.tag.AutoComplateTag</tag-class>
+		<tag-class>com.hjon.common.tag.AutoComplateTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Label</description>
 		<attribute>
@@ -124,7 +124,7 @@
 	</tag>
 	<tag>
 		<name>enumAutoComplate</name>
-		<tag-class>hjon.company.common.tag.EnumAutoComplateTag</tag-class>
+		<tag-class>com.hjon.common.tag.EnumAutoComplateTag</tag-class>
 		<body-content>JSP</body-content>
 		<description>Label</description>
 		<attribute>
@@ -226,7 +226,7 @@
 	</tag>
 	<tag>
 		<name>enumText</name>
-		<tag-class>hjon.company.common.tag.EnumTextTag</tag-class>
+		<tag-class>com.hjon.common.tag.EnumTextTag</tag-class>
 		<body-content>none</body-content>
 		<description>module,type,value能确定唯一一个枚举名称</description>
 		<attribute>
@@ -246,6 +246,25 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>值</description>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>formatDate</name>
+		<tag-class>com.hjon.common.tag.FormatDateTag</tag-class>
+		<body-content>none</body-content>
+		<description>module,type,value能确定唯一一个枚举名称</description>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>要转换的内容</description>
+		</attribute>
+		<attribute>
+			<name>format</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>转换的格式</description>
 		</attribute>
 	</tag>
 </taglib>

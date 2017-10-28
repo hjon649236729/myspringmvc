@@ -1,12 +1,31 @@
 package com.hjon.common.quartz;
 
 public enum QuartzEnum {
-	NORMAL, PAUSED, COMPLETE, YELLOW;
-	// public static int JobExecuteLogStatus_NORMAL = 0;
-	// final static int JobExecuteLogStatus_PAUSED = 1;
-	// final static int JobExecuteLogStatus_COMPLETE = 2;
-	// final static int JobExecuteLogStatus_ERRORL = 3;
-	// final static int JobExecuteLogStatus_BLOCKED = 4;
-	// final static int JobExecuteLogStatus_NONE = -1;
+	// JobExecuteLog Status字段
+	STATUS_NORMAL(0),
 
+	STATUS_PAUSED(1),
+
+	STATUS_COMPLETE(2),
+
+	STATUS_ERROR(3),
+
+	STATUS_BLOCKED(4),
+
+	STATUS_NONE(-1),
+	//JobExecuteLog Type字段
+	TYPE_AUTO(1),
+	
+	TYPE_HAND(2);
+	// 定义私有变量
+	private int value;
+
+	private QuartzEnum(int val) {
+		this.value = val;
+	}
+
+	public final int toInt() {
+		return value;
+	}
+	
 }
