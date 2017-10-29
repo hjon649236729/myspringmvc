@@ -66,7 +66,7 @@
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body table-responsive no-padding "
-		style="width:auto; height:400px; overflow: hidden; ">
+		style="width:auto; height:425px; overflow: hidden; ">
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>

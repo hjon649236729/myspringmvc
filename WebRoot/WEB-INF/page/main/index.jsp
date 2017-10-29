@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'index.jsp' starting page</title>
+<title>我的项目管理系统</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -21,72 +21,124 @@
 <%@include file="../include/admininclude.jsp"%>
 <link rel="shortcut icon " type="images/x-icon"
 	href="${contextPath }/favicon.ico">
-	<script type="text/javascript">
-	$(function(){
+<script type="text/javascript">
+	$(function() {
 		menuInit();
 	});
-		  var menuJson=[{
-      "name": "用户管理",
-      "controller":"#",
-      "child": [{
-          "name": "用户概览",
-          "controller":"user/home.do",
-      },{
-          "name": "添加用户",
-          "controller":"user/add.do",
-      }]
-  },{
-      "name": "文章管理",
-      "controller":"#",
-      "child": [{
-          "name": "文章概览",
-          "controller":"post/home.do",
-      },{
-          "name": "添加文章",
-          "controller":"post/add.do",
-      }]
-  }];
-  function menuInit() {
-      var menu = null;
-      var html = null;
-      var chidLen = null;
-      var child = null;
-      for (var i = 0; i < menuJson.length; i++) {
-          menu = menuJson[i];
-          if(i==0){
-              html = $(' <li menu-id="' + i + '" class="active treeview "><li>');
-          }else{
-              html = $(' <li menu-id="' + i + '" class="treeview "><li>');
-          }
- 
-          $(".sidebar .sidebar-menu").append(html);
- 
-          html = $(' <a href="'+menu.controller+'"> <i class="fa fa-dashboard"></i> <span>'+menu.name+'</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a> <ul menuUl-id="'+i+'" class="treeview-menu"> </ul>');
-          $('[menu-id="'+i+'"]').append(html);
- 
-          chidLen = menu.child.length;
-          for (var j=0;j<chidLen;j++){
-              child = menu.child[j];
-              if(i==0&&j==0){
-                  html = $('<li class="active"><a href="javascript:void(0);" menu-controller="'+child.controller+'"><i class="fa fa-circle-o"></i> '+child.name+'</a></li>');
-              }else{
-                  html = $('<li class=""><a href="javascript:void(0);" menu-controller="'+child.controller+'"><i class="fa fa-circle-o"></i> '+child.name+'</a></li>');
-              }
- 
-              $('[menuUl-id="'+i+'"]').append(html);
-          }
-      }
-      $(Selector.data).each(function () {
-          Plugin.call($(this))
-      });
-      $(".sidebar-menu li:first ul li:first a").click();
-  }
-	</script>
+	//quartz/quartzlist.action" target="contentFrame"
+	var menuJson = [ {
+		"name" : "运营管理",
+		"controller" : "#",
+		"child" : [ {
+			"name" : "用户管理",
+			"controller" : "auth/userlist.action",
+		}, {
+			"name" : "定时任务",
+			"controller" : "quartz/quartzlist.action",
+		} , {
+			"name" : "菜单管理",
+			"controller" : "common/sysmenulist.action",
+		} ]
+	}];
+	function menuInit() {
+		/*
+			 <li class="active treeview">
+		      <a href="#">
+		        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+		        <span class="pull-right-container">
+		          <i class="fa fa-angle-left pull-right"></i>
+		        </span>
+		      </a>
+		      <ul class="treeview-menu">
+		        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+		        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+		      </ul>
+		    </li>
+		 */
+		var menu = null;
+		var html = null;
+		var childLen = null;
+		var child = null;
+		for ( var i = 0; i < menuJson.length; i++) {
+			menu = menuJson[i];
+			if (i == 0) {
+				html = " <li class='active treeview'>";
+			} else {
+				html = " <li class='treeview'>";
+			}
+			html = html
+					+ "<a href='#'><i class='fa fa-dashboard'></i> <span>"
+					+ menu.name
+					+ "</span><span class='pull-right-container'><i class='fa fa-angle-left pull-right'></i></span></a>";
+			html = html + " <ul class='treeview-menu'> ";
+
+			childLen = menu.child.length;
+			for ( var j = 0; j < childLen; j++) {
+				child = menu.child[j];
+				if (i == 0 && j == 0) {
+					html = html
+							+ "<li class='active'><a href='"+child.controller+"' target='contentFrame'><i class='fa fa-circle-o'></i>"
+							+ child.name + "</a></li>";
+				} else {
+					html = html
+							+ "<li><a href='"+child.controller+"' target='contentFrame'><i class='fa fa-circle-o'></i>"
+							+ child.name + "</a></li>";
+				}
+			}
+			html = html + "</ul>";
+			console.log(html);
+			$(".sidebar .sidebar-menu").append(html);
+			
+			//	$(" .sidebar-menu li:first a").click();
+			
+		}
+		/* var menu = null;.
+		var html = null;
+		var chidLen = null;
+		var child = null;
+		for ( var i = 0; i < menuJson.length; i++) {
+			menu = menuJson[i];
+			if (i == 0) {
+				html = $(' <li menu-id="' + i + '" class="active treeview "><li>');
+			} else {
+				html = $(' <li menu-id="' + i + '" class="treeview "><li>');
+			}
+
+			$(".sidebar .sidebar-menu").append(html);
+
+			html = $(' <a href="'+menu.controller+'"> <i class="fa fa-dashboard"></i> <span>'
+					+ menu.name
+					+ '</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a> <ul menuUl-id="'+i+'" class="treeview-menu"> </ul>');
+			$('[menu-id="' + i + '"]').append(html);
+
+			chidLen = menu.child.length;
+			for ( var j = 0; j < chidLen; j++) {
+				child = menu.child[j];
+				if (i == 0 && j == 0) {
+					html = $('<li class="active"><a href="javascript:void(0);" menu-controller="'
+							+ child.controller
+							+ '"><i class="fa fa-circle-o"></i> '
+							+ child.name
+							+ '</a></li>');
+				} else {
+					html = $('<li class=""><a href="javascript:void(0);" menu-controller="'
+							+ child.controller
+							+ '"><i class="fa fa-circle-o"></i> '
+							+ child.name
+							+ '</a></li>');
+				}
+
+				$('[menuUl-id="' + i + '"]').append(html);
+			}
+		}
+		$(".sidebar-menu li:first ul li:first a").click(); */
+	}
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<header class="main-header"> <!-- Logo --> <a
-			href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			href="index.action" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><b>Admin</b>LTE</span> </a> <!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top"> <!-- Sidebar toggle button-->
@@ -343,21 +395,21 @@
 		</form>
 		<!-- /.search form --> <!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
-
-			<li class="active treeview"><a href="#"> <i
+			<!-- <li class="active treeview"><a href="#"> <i
 					class="fa fa-dashboard"></i> <span>用户管理</span> <span
 					class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i> </span> </a>
 				<ul class="treeview-menu">
 					<li class="active"><a href="auth/userlist.action"
-						target="contentFrame"><i class="fa fa-circle-o"></i>用户信息</a></li>
+						target="contentFrame"><i class="fa fa-circle-o"></i>用户信息</a>
+					</li>
 					<li><a href="quartz/quartzlist.action" target="contentFrame"><i
-							class="fa fa-circle-o"></i>定时任务管理</a></li>
+							class="fa fa-circle-o"></i>定时任务管理</a>
+					</li>
 					<li><a href="quartz/jobexecuteloglist.action"
 						target="contentFrame"><i class="fa fa-circle-o"></i>定时任务运行日志管理</a>
 					</li>
-				</ul>
-			</li>
+				</ul></li> -->
 		</ul>
 		</section> <!-- /.sidebar --> </aside>
 
@@ -365,8 +417,8 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header"> <iframe id="contentFrame"
-				frameborder="no" name="contentFrame" src="" scrolling="no"
-				height="520px" width="100%"></iframe> </section>
+				frameborder="0" name="contentFrame" src="" scrolling="no"
+				height="545px" width="100%"></iframe> </section>
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
@@ -377,170 +429,6 @@
 		<strong>Copyright &copy; 2014-2016 <a
 			href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights reserved.
 		</footer>
-		<!-- 
-		Control Sidebar
-		<aside class="control-sidebar control-sidebar-dark"> Create the tabs
-		<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-			<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i
-					class="fa fa-home"></i> </a>
-			</li>
-			<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
-					class="fa fa-gears"></i> </a>
-			</li>
-		</ul>
-		Tab panes
-		<div class="tab-content">
-			Home tab content
-			<div class="tab-pane" id="control-sidebar-home-tab">
-				<h3 class="control-sidebar-heading">Recent Activity</h3>
-				<ul class="control-sidebar-menu">
-					<li><a href="javascript:void(0)"> <i
-							class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-							<div class="menu-info">
-								<h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-								<p>Will be 23 on April 24th</p>
-							</div> </a></li>
-					<li><a href="javascript:void(0)"> <i
-							class="menu-icon fa fa-user bg-yellow"></i>
-
-							<div class="menu-info">
-								<h4 class="control-sidebar-subheading">Frodo Updated His
-									Profile</h4>
-
-								<p>New phone +1(800)555-1234</p>
-							</div> </a></li>
-					<li><a href="javascript:void(0)"> <i
-							class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-							<div class="menu-info">
-								<h4 class="control-sidebar-subheading">Nora Joined Mailing
-									List</h4>
-
-								<p>nora@example.com</p>
-							</div> </a></li>
-					<li><a href="javascript:void(0)"> <i
-							class="menu-icon fa fa-file-code-o bg-green"></i>
-
-							<div class="menu-info">
-								<h4 class="control-sidebar-subheading">Cron Job 254
-									Executed</h4>
-
-								<p>Execution time 5 seconds</p>
-							</div> </a></li>
-				</ul>
-				/.control-sidebar-menu
-
-				<h3 class="control-sidebar-heading">Tasks Progress</h3>
-				<ul class="control-sidebar-menu">
-					<li><a href="javascript:void(0)">
-							<h4 class="control-sidebar-subheading">
-								Custom Template Design <span
-									class="label label-danger pull-right">70%</span>
-							</h4>
-
-							<div class="progress progress-xxs">
-								<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-							</div> </a></li>
-					<li><a href="javascript:void(0)">
-							<h4 class="control-sidebar-subheading">
-								Update Resume <span class="label label-success pull-right">95%</span>
-							</h4>
-
-							<div class="progress progress-xxs">
-								<div class="progress-bar progress-bar-success"
-									style="width: 95%"></div>
-							</div> </a></li>
-					<li><a href="javascript:void(0)">
-							<h4 class="control-sidebar-subheading">
-								Laravel Integration <span class="label label-warning pull-right">50%</span>
-							</h4>
-
-							<div class="progress progress-xxs">
-								<div class="progress-bar progress-bar-warning"
-									style="width: 50%"></div>
-							</div> </a></li>
-					<li><a href="javascript:void(0)">
-							<h4 class="control-sidebar-subheading">
-								Back End Framework <span class="label label-primary pull-right">68%</span>
-							</h4>
-
-							<div class="progress progress-xxs">
-								<div class="progress-bar progress-bar-primary"
-									style="width: 68%"></div>
-							</div> </a></li>
-				</ul>
-				/.control-sidebar-menu
-
-			</div>
-			/.tab-pane
-			Stats tab content
-			<div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab
-				Content</div>
-			/.tab-pane
-			Settings tab content
-			<div class="tab-pane" id="control-sidebar-settings-tab">
-				<form method="post">
-					<h3 class="control-sidebar-heading">General Settings</h3>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Report panel
-							usage <input type="checkbox" class="pull-right" checked>
-						</label>
-
-						<p>Some information about this general settings option</p>
-					</div>
-					/.form-group
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Allow mail
-							redirect <input type="checkbox" class="pull-right" checked>
-						</label>
-
-						<p>Other sets of options are available</p>
-					</div>
-					/.form-group`
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Expose author
-							name in posts <input type="checkbox" class="pull-right" checked>
-						</label>
-
-						<p>Allow the user to show his name in blog posts</p>
-					</div>
-					/.form-group
-
-					<h3 class="control-sidebar-heading">Chat Settings</h3>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Show me as
-							online <input type="checkbox" class="pull-right" checked>
-						</label>
-					</div>
-					/.form-group
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Turn off
-							notifications <input type="checkbox" class="pull-right">
-						</label>
-					</div>
-					/.form-group
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Delete chat
-							history <a href="javascript:void(0)" class="text-red pull-right"><i
-								class="fa fa-trash-o"></i> </a> </label>
-					</div>
-					/.form-group
-				</form>
-			</div>
-			/.tab-pane
-		</div>
-		</aside> -->
-		<!-- /.control-sidebar -->
-		<!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
