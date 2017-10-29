@@ -11,6 +11,13 @@ import com.hjon.modules.auth.controller.UserInfoController;
 @Scope("prototype")
 public class SysMenuController extends BaseController {
 	Logger logger=Logger.getLogger(UserInfoController.class);
+	@RequestMapping("common/sysmenumain")
+	public String sysmenumain(){
+		
+		return "common/sysmenu/sysmenumain";
+		
+	}
+	
 	@RequestMapping("common/sysmenulist")
 	public String sysmenulist(){
 		

@@ -37,7 +37,7 @@
 			"controller" : "quartz/quartzlist.action",
 		} , {
 			"name" : "菜单管理",
-			"controller" : "common/sysmenulist.action",
+			"controller" : "common/sysmenumain.action",
 		} ]
 	}];
 	function menuInit() {
