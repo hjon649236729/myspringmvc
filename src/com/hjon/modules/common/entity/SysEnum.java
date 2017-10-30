@@ -8,13 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "common_setting")
-public class CommonSetting {
-	private Integer id;
+@Table(name = "common_enum")
+public class SysEnum {
+	private String id;
 	private String module;
+	private String type;
 	private String name;
+	private String shortPinYin;
+	private String fullPinYin;
 	private String value;
 	private String remark;
+	private Integer sort;
 	private Date createTime;
 	private String createUser;
 
@@ -22,11 +26,11 @@ public class CommonSetting {
 	@Id
 	// @GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -38,6 +42,14 @@ public class CommonSetting {
 	public void setModule(String module) {
 		this.module = module;
 	}
+	@Column(name = "Type", length = 50)
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Column(name = "Name", length = 50)
 	public String getName() {
@@ -46,6 +58,22 @@ public class CommonSetting {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	@Column(name = "ShortPinYin", length = 50)
+	public String getShortPinYin() {
+		return shortPinYin;
+	}
+
+	public void setShortPinYin(String shortPinYin) {
+		this.shortPinYin = shortPinYin;
+	}
+	@Column(name = "FullPinYin", length = 500)
+	public String getFullPinYin() {
+		return fullPinYin;
+	}
+
+	public void setFullPinYin(String fullPinYin) {
+		this.fullPinYin = fullPinYin;
 	}
 
 	@Column(name = "Value", length = 500)
@@ -72,6 +100,15 @@ public class CommonSetting {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	
+	@Column(name = "sort")
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 	@Column(name = "CreateUser", length = 50)

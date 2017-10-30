@@ -7,17 +7,18 @@
 	var setting = {
 		edit : {
 			enable : false
-		}  ,callback: {
-       // beforeDrag: beforeDrag,
-        //beforeDrop: beforeDrop,
-       // beforeRename:beforeRename,
+		},
+		callback : {
+			// beforeDrag: beforeDrag,
+			//beforeDrop: beforeDrop,
+			// beforeRename:beforeRename,
 
-        onClick: openUrl
-       // onRename: changeNodeName,
-       // onRemove: removeNode,
-       // onDrop: dropNode
-    },
-		
+			onClick : openUrl
+		// onRename: changeNodeName,
+		// onRemove: removeNode,
+		// onDrop: dropNode
+		},
+
 	};
 
 	var zNodes = [ {
@@ -27,7 +28,7 @@
 			name : "父节点11 - 折叠",
 			children : [ {
 				name : "叶子节点111",
-				target:"treeListFrame"
+				unitId : 1
 			}, {
 				name : "叶子节点112"
 			}, {
@@ -37,12 +38,26 @@
 			} ]
 		} ]
 	} ];
-
-	$(document).ready(function() {
-		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-	});
-	function openUrl(event, treeId, treeNode) { 
+	$(document).ready(
+			function() {
+				//$.post("",{}){}
+				$.post("getnodelist.action", {
+					
+				}, function(result) {
+					console.log(result);
+					if (result != "") {
+						var zTree = $.fn.zTree.init($("#treeDemo"), setting,
+								eval(result));
+						zTree.expandAll(true);
+					}
+				});
+			});
+	function openUrl(event, treeId, treeNode) {
+		console.log(event);
+		console.log(treeId);
 		console.log(treeNode);
+		parent.treeListFrame.location.href = "sysmenulist.action?unitId="
+				+ treeNode.unitId;
 	}
 //-->
 </SCRIPT>

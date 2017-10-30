@@ -89,7 +89,9 @@ public class BaseService<T> extends BaseDao<T> {
 	public List<T> queryByProperty(String propertyName, Object value) {
 		return super.queryByProperty(propertyName, value);
 	}
-
+	public List<T> queryByProperty(Map<String,Object> params) {
+		return super.queryByProperty(params);
+	}
 	public List<T> queryByProperty(String propertyName, Object value,
 			Order... orders) {
 		return super.queryByProperty(propertyName, value, orders);

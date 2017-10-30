@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "common_attachment")
-public class CommonAttachment {
+public class Attachment {
 	private String id;
 	private String sourceEntity;
 	private String sourceId;

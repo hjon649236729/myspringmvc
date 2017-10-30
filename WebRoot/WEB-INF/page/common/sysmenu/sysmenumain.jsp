@@ -8,7 +8,7 @@
 		<section class="content">
 			<div class="row">
 				<div class="col-md-3">
-					<iframe id="treeTreeFrame" frameborder="1" name="treeTreeFrame"
+					<iframe id="treeMenuFrame" frameborder="1" name="treeMenuFrame"
 						src="sysmenutree.action" height="500px" width="100%"></iframe>
 				</div>
 				<div class="col-md-9">

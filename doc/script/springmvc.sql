@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-10-29 19:48:29
+Date: 2017-10-30 18:16:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,17 +119,21 @@ DROP TABLE IF EXISTS `common_sysmenu`;
 CREATE TABLE `common_sysmenu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'URL地址',
-  `parrentId` int(11) DEFAULT NULL COMMENT '父节点ID',
+  `parentId` int(11) DEFAULT NULL COMMENT '父节点ID',
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单名称',
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '描述信息',
-  `order` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '排序方式',
+  `order` int(11) DEFAULT NULL COMMENT '排序',
   `syscode` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '系统代码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of common_sysmenu
 -- ----------------------------
+INSERT INTO `common_sysmenu` VALUES ('1', '', '0', '运营管理', '运营管理', '0', 'DEFAULT');
+INSERT INTO `common_sysmenu` VALUES ('2', '/common/sysmenutree.action', '1', '用户管理', '用户管理', '1', 'DEFAULT');
+INSERT INTO `common_sysmenu` VALUES ('3', '/quartz/quartzlist.action', '1', '定时任务', '定时任务', '2', 'DEFAULT');
+INSERT INTO `common_sysmenu` VALUES ('4', '/common/sysmenumain.action', '1', '菜单管理', '菜单管理', '3', 'DEFAULT');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers

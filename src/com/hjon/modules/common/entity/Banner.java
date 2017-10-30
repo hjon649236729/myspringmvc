@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "common_banner")
-public class CommonBanner {
+public class Banner {
 	private String id;
 	private String name;
 	private Integer inUse;

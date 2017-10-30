@@ -1,14 +1,12 @@
 package com.hjon.common.tag;
 
-import com.hjon.config.CommonEnumUtils;
-import com.hjon.modules.common.entity.CommonEnum;
-
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+import com.hjon.config.SysEnumUtils;
 
 public class EnumTextTag extends SimpleTagSupport {
 
@@ -18,7 +16,7 @@ public class EnumTextTag extends SimpleTagSupport {
 
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
-		String name = CommonEnumUtils.getCommonEnumName(module, type, value);
+		String name = SysEnumUtils.getSysEnumName(module, type, value);
 		if (name != null) {
 			out.println(name);
 		} else {

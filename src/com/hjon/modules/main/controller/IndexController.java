@@ -1,15 +1,13 @@
 package com.hjon.modules.main.controller;
 
-import com.hjon.common.controller.BaseController;
-import com.hjon.common.utils.SystemUtils;
-import com.hjon.config.CommonBannerUtils;
-import com.hjon.modules.homepage.service.InformService;
-
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hjon.common.controller.BaseController;
+import com.hjon.modules.homepage.service.InformService;
 
 @Controller
 @Scope("prototype")
@@ -53,10 +51,12 @@ public class IndexController extends BaseController {
 	public String back() {
 		return "back";
 	}
+
 	@RequestMapping("informview")
 	public String informview() {
 		return "informview";
 	}
+
 	@RequestMapping("refreshCache")
 	public void refreshCache() {
 		super.refreshCache();

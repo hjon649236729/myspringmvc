@@ -90,6 +90,15 @@ public class BaseDao<T> extends HibernateDaoSupport {
 				orders).list();
 	}
 
+	public List<T> queryByProperty(Map<String, Object> params, Order... orders) {
+		CriterionCollection collection = new CriterionCollection();
+		
+		for (String key : params.keySet()) {
+			collection.Add(Restrictions.eq(key, params.get(key)));
+		}
+		return (List<T>) createCriteria(collection, orders).list();
+	}
+
 	public Page pagedQuery(String hql, int pageNo, int pageSize,
 			Object... values) {
 		String countQueryString = "select count(*) "

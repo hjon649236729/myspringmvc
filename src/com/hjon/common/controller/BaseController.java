@@ -32,32 +32,32 @@ import org.springframework.stereotype.Controller;
 import com.hjon.common.listener.contextListener;
 import com.hjon.common.utils.SiteKeyUtil;
 import com.hjon.common.utils.StringUtils;
-import com.hjon.config.CommonBannerUtils;
-import com.hjon.config.CommonEnumUtils;
-import com.hjon.config.CommonSettingUtils;
+import com.hjon.config.BannerUtils;
 import com.hjon.config.Constant;
+import com.hjon.config.SettingUtils;
+import com.hjon.config.SysEnumUtils;
 import com.hjon.modules.auth.entity.UserInfo;
-import com.hjon.modules.common.entity.CommonAttachment;
-import com.hjon.modules.common.entity.CommonEnum;
-import com.hjon.modules.common.entity.CommonSetting;
-import com.hjon.modules.common.service.CommonAttachmentService;
-import com.hjon.modules.common.service.CommonBannerService;
-import com.hjon.modules.common.service.CommonEnumService;
-import com.hjon.modules.common.service.CommonSettingService;
+import com.hjon.modules.common.entity.Attachment;
+import com.hjon.modules.common.entity.Setting;
+import com.hjon.modules.common.entity.SysEnum;
+import com.hjon.modules.common.service.AttachmentService;
+import com.hjon.modules.common.service.BannerService;
+import com.hjon.modules.common.service.SettingService;
+import com.hjon.modules.common.service.SysEnumService;
 
 @Controller
 public class BaseController {
 	@Autowired
 	protected HttpServletRequest request;
 
-	@Resource(name = "commonAttachmentService")
-	protected CommonAttachmentService commonAttachmentService;
-	@Resource(name = "commonSettingService")
-	private CommonSettingService commonSettingService;
-	@Resource(name = "commonEnumService")
-	private CommonEnumService commonEnumService;
-	@Resource(name = "commonBannerService")
-	private CommonBannerService commonBannerService;
+	@Resource(name = "attachmentService")
+	protected AttachmentService attachmentService;
+	@Resource(name = "settingService")
+	protected SettingService settingService;
+	@Resource(name = "sysEnumService")
+	protected SysEnumService sysEnumService;
+	@Resource(name = "bannerService")
+	protected BannerService bannerService;
 
 	public HttpServletRequest getRequest() {
 		return this.request;
@@ -77,38 +77,35 @@ public class BaseController {
 	/**
 	 * 全局变量加入缓存设置
 	 */
-	public void refreshCommonSetting() {
-		CommonSettingUtils.commonSetting = new HashMap<Map<String, String>, CommonSetting>();
+	public void refreshSetting() {
+		SettingUtils.Setting = new HashMap<Map<String, String>, Setting>();
 
-		List<CommonSetting> settings = commonSettingService.getAll(Order
-				.asc("module"));
-		for (CommonSetting setting : settings) {
+		List<Setting> settings = settingService.getAll(Order.asc("module"));
+		for (Setting setting : settings) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put(setting.getModule(), setting.getName());
-			CommonSettingUtils.commonSetting.put(map, setting);
+			SettingUtils.Setting.put(map, setting);
 		}
 	}
 
 	/**
 	 * 枚举值加入缓存
 	 */
-	public void refreshCommonEnum() {
-		CommonEnumUtils.commonEnum = new HashMap<Map<String, String>, List<CommonEnum>>();
+	public void refreshSysEnum() {
+		SysEnumUtils.SysEnum = new HashMap<Map<String, String>, List<SysEnum>>();
 
-		List<CommonEnum> commonEnums = commonEnumService.getAll(Order
-				.asc("module"));
-		for (CommonEnum commonEnum : commonEnums) {
+		List<SysEnum> SysEnums = sysEnumService.getAll(Order.asc("module"));
+		for (SysEnum SysEnum : SysEnums) {
 			Map<String, String> param = new HashMap<String, String>();
-			param.put(commonEnum.getModule(), commonEnum.getType());
-			List<CommonEnum> commonEnumTemps = CommonEnumUtils.commonEnum
-					.get(param);
-			if (commonEnumTemps != null) {
-				commonEnumTemps.add(commonEnum);
-				CommonEnumUtils.commonEnum.put(param, commonEnumTemps);
+			param.put(SysEnum.getModule(), SysEnum.getType());
+			List<SysEnum> SysEnumTemps = SysEnumUtils.SysEnum.get(param);
+			if (SysEnumTemps != null) {
+				SysEnumTemps.add(SysEnum);
+				SysEnumUtils.SysEnum.put(param, SysEnumTemps);
 			} else {
-				commonEnumTemps = new ArrayList<CommonEnum>();
-				commonEnumTemps.add(commonEnum);
-				CommonEnumUtils.commonEnum.put(param, commonEnumTemps);
+				SysEnumTemps = new ArrayList<SysEnum>();
+				SysEnumTemps.add(SysEnum);
+				SysEnumUtils.SysEnum.put(param, SysEnumTemps);
 			}
 		}
 
@@ -117,9 +114,9 @@ public class BaseController {
 	/**
 	 * Banner加入缓存
 	 */
-	public void refreshCommonBanner() {
+	public void refreshBanner() {
 
-		CommonBannerUtils.commonBanner = commonBannerService.findCommonBanner();
+		BannerUtils.banner = bannerService.findBanner();
 	}
 
 	/**
@@ -138,15 +135,15 @@ public class BaseController {
 			Constant.FileType = prop.getProperty("FileType").trim();
 
 		} catch (Exception e) {
-//			LogHelper.Error(e);
+			// LogHelper.Error(e);
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 
 	public void refreshCache() {
-		refreshCommonBanner();
-		refreshCommonEnum();
-		refreshCommonSetting();
+		refreshBanner();
+		refreshSysEnum();
+		refreshSetting();
 		refreshConstant();
 	}
 
@@ -203,18 +200,18 @@ public class BaseController {
 	}
 
 	public void deleteAttachment(String sourceEntity, String id) {
-		List<CommonAttachment> attachmentList = commonAttachmentService
-				.findCommonAttachmentList(sourceEntity, id);
-		commonAttachmentService.batchDelete(attachmentList);
+		List<Attachment> attachmentList = attachmentService.findAttachmentList(
+				sourceEntity, id);
+		attachmentService.batchDelete(attachmentList);
 		// this.delete(id);
 	}
 
 	public void batchDeleteAttachment(String sourceEntity, String[] ids) {
 		for (String id : ids) {
 			if (!id.equals("")) {
-				List<CommonAttachment> attachmentList = commonAttachmentService
-						.findCommonAttachmentList(sourceEntity, id);
-				commonAttachmentService.batchDelete(attachmentList);
+				List<Attachment> attachmentList = attachmentService
+						.findAttachmentList(sourceEntity, id);
+				attachmentService.batchDelete(attachmentList);
 				// this.delete(id);
 			}
 		}
@@ -237,7 +234,7 @@ public class BaseController {
 			for (int i = 0; i < fileName.length; i++) {
 				if (!"".equals(fileName[i]) && !"".equals(fileType[i])
 						&& !"".equals(fileSize[i]) && !"".equals(savePath[i])) {
-					CommonAttachment attachment = new CommonAttachment();
+					Attachment attachment = new Attachment();
 					attachment.setId(UUID.randomUUID().toString());
 					attachment.setName(fileName[i]);
 					attachment.setFileType(fileType[i]);
@@ -247,7 +244,7 @@ public class BaseController {
 					attachment.setSourceId(sourceId);
 					attachment.setCreateTime(new java.util.Date());
 					attachment.setType(1);
-					commonAttachmentService.saveOrUpdate(attachment);
+					attachmentService.saveOrUpdate(attachment);
 				}
 			}
 		}
@@ -256,7 +253,7 @@ public class BaseController {
 		if (deleteAttachmentIds != null) {
 			String[] deleteAttachmentId = deleteAttachmentIds.split(":");
 			for (int i = 0; i < deleteAttachmentId.length; i++) {
-				commonAttachmentService.delete(deleteAttachmentId[i]);
+				attachmentService.delete(deleteAttachmentId[i]);
 			}
 		}
 	}
@@ -278,7 +275,7 @@ public class BaseController {
 			for (int i = 0; i < fileName.length; i++) {
 				if (!"".equals(fileName[i]) && !"".equals(fileType[i])
 						&& !"".equals(fileSize[i]) && !"".equals(savePath[i])) {
-					CommonAttachment attachment = new CommonAttachment();
+					Attachment attachment = new Attachment();
 					attachment.setId(UUID.randomUUID().toString());
 					attachment.setName(fileName[i]);
 					attachment.setFileType(fileType[i]);
@@ -288,7 +285,7 @@ public class BaseController {
 					attachment.setSourceId(sourceId);
 					attachment.setCreateTime(new java.util.Date());
 					attachment.setType(type);
-					commonAttachmentService.saveOrUpdate(attachment);
+					attachmentService.saveOrUpdate(attachment);
 				}
 			}
 
@@ -298,7 +295,7 @@ public class BaseController {
 		if (deleteAttachmentIds != null) {
 			String[] deleteAttachmentId = deleteAttachmentIds.split(":");
 			for (int i = 0; i < deleteAttachmentId.length; i++) {
-				commonAttachmentService.delete(deleteAttachmentId[i]);
+				attachmentService.delete(deleteAttachmentId[i]);
 			}
 		}
 	}
