@@ -8,7 +8,19 @@
 		edit : {
 			enable : false
 		},
-		callback : {
+		data:{
+			 key: {
+                title: "name",
+                name: "shortname"
+            },
+            simpleData: {
+                enable: true,
+                idKey: "objid",
+                pIdKey: "parentid",
+                rootPId: 0
+            }
+		}
+		,callback : {
 			// beforeDrag: beforeDrag,
 			//beforeDrop: beforeDrop,
 			// beforeRename:beforeRename,

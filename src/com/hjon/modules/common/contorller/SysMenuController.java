@@ -58,8 +58,10 @@ public class SysMenuController extends BaseController implements INodeAction {
 		List<TreeNode> _res = new LinkedList<TreeNode>();
 
 		_res = this.getChildNodeList("0", "");
+		
 
-		return new JSONArray(sortNodeListBySort(_res)).toString();
+		String result=new JSONArray(sortNodeListBySort(_res)).toString();
+		return  result;
 	}
 
 	private List<TreeNode> sortNodeListBySort(List<TreeNode> list) {
