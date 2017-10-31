@@ -8,6 +8,18 @@
 		edit : {
 			enable : false
 		},
+		data : {
+			key : {
+				title : "name",
+				name : "shortname"
+			},
+			simpleData : {
+				enable : true,
+				idKey : "objid",
+				pIdKey : "parentid",
+				rootPId : 0
+			}
+		},
 		callback : {
 			// beforeDrag: beforeDrag,
 			//beforeDrop: beforeDrop,
@@ -20,32 +32,14 @@
 		},
 
 	};
-
-	var zNodes = [ {
-		name : "父节点1 - 展开",
-		open : true,
-		children : [ {
-			name : "父节点11 - 折叠",
-			children : [ {
-				name : "叶子节点111",
-				unitId : 1
-			}, {
-				name : "叶子节点112"
-			}, {
-				name : "叶子节点113"
-			}, {
-				name : "叶子节点114"
-			} ]
-		} ]
-	} ];
 	$(document).ready(
 			function() {
 				//$.post("",{}){}
 				$.post("getnodelist.action", {
-					
+
 				}, function(result) {
 					console.log(result);
-					if (result != "") {
+					if (result != "[]]") {
 						var zTree = $.fn.zTree.init($("#treeDemo"), setting,
 								eval(result));
 						zTree.expandAll(true);
@@ -53,11 +47,8 @@
 				});
 			});
 	function openUrl(event, treeId, treeNode) {
-		console.log(event);
-		console.log(treeId);
-		console.log(treeNode);
-		parent.treeListFrame.location.href = "sysmenulist.action?unitId="
-				+ treeNode.unitId;
+		parent.treeListFrame.location.href = "sysmenulist.action?id="
+				+ treeNode.objid;
 	}
 //-->
 </SCRIPT>

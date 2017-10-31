@@ -9,17 +9,20 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hjon.common.bean.Node;
+import com.hjon.common.bean.Page;
 import com.hjon.common.bean.TreeNode;
 import com.hjon.common.controller.BaseController;
 import com.hjon.common.controller.INodeAction;
+import com.hjon.common.dao.CriterionCollection;
 import com.hjon.common.utils.NumberUtils;
 import com.hjon.common.utils.StringUtils;
 import com.hjon.modules.common.entity.SysMenu;
@@ -41,7 +44,37 @@ public class SysMenuController extends BaseController implements INodeAction {
 
 	@RequestMapping("common/sysmenulist")
 	public String sysmenulist() {
-
+		int id = NumberUtils.safeToInteger(this.getParameter("id"), -1);
+		SysMenu currentMenu = new SysMenu();
+		// List<SysMenu> childSysMenus = new ArrayList<SysMenu>();
+		int pageNum = NumberUtils
+				.safeToInteger(this.getParameter("pageNum"), 1);
+		int numPerPage = NumberUtils.safeToInteger(
+				this.getParameter("numPerPage"), 10);
+		String orderField = this.getParameter("orderField");
+		String orderDirection = this.getParameter("orderDirection");
+		Order order = Order.desc("order");
+		CriterionCollection search = new CriterionCollection();
+		if (orderField != null && !orderField.equals("")) {
+			if (orderDirection.toLowerCase().equals("asc")) {
+				order = Order.asc(orderField);
+				this.setAttribute("orderDirection", "asc");
+			} else {
+				order = Order.desc(orderField);
+				this.setAttribute("orderDirection", "desc");
+			}
+			this.setAttribute("orderField", orderField);
+		}
+		// Page childSysMenus=new Page();
+		Page data = new Page();
+		if (id != -1) {
+			currentMenu = sysMenuService.get(id);
+			search.Add(Restrictions.eq("parentId", id));
+			data = sysMenuService
+					.pagedQuery(pageNum, numPerPage, search, order);
+		}
+		this.setAttribute("currentSysMenu", currentMenu);
+		this.setAttribute("data", data);
 		return "common/sysmenu/sysmenulist";
 
 	}

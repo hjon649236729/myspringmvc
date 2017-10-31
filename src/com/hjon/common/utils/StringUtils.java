@@ -1181,7 +1181,7 @@ public abstract class StringUtils {
 
 	public static String safeToString(Object o, String dv) {
 		// TODO Auto-generated method stub
-		if (isBlank(o)) {
+		if (!isBlank(o)) {
 			return o.toString();
 		} else {
 			return dv;
