@@ -42,6 +42,13 @@ public class SysMenuController extends BaseController implements INodeAction {
 
 	}
 
+	@RequestMapping("common/sysmenusave")
+	@ResponseBody
+	public String sysmenusave() {
+		
+		return "success";
+	}
+
 	@RequestMapping("common/sysmenulist")
 	public String sysmenulist() {
 		int id = NumberUtils.safeToInteger(this.getParameter("id"), -1);

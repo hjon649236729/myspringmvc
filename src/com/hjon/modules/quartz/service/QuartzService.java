@@ -14,7 +14,7 @@ import com.hjon.modules.quartz.entity.JobInfo;
 
 @Service
 @Transactional
-public class QuartzService extends BaseService<JobInfo> {
+public class QuartzService extends BaseService {
 	public Page searchQuartz(int pageNum, int numberPage,
 			Map<String, Object> params) {
 		StringBuffer sql = new StringBuffer(

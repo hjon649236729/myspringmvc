@@ -1,5 +1,8 @@
 package com.hjon.modules.quartz.entity;
 
+import javax.persistence.Entity;
+
+
 public class JobInfo {
 	private String jobName;
 	private String jobGroupName;
@@ -9,7 +12,6 @@ public class JobInfo {
 	private String TriggerDescription;
 	private Class jobClass;
 	private String cron;
-
 	public String getJobName() {
 		return jobName;
 	}
