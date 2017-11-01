@@ -42,4 +42,8 @@ public class TreeNode extends Node{
         this.setRemoveAble(node.isRemoveable());
         this.setDrag(node.isDrag());
     }
+
+	public TreeNode() {
+		// TODO Auto-generated constructor stub
+	}
 }

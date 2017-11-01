@@ -2,8 +2,7 @@
 <%@include file="../../include/tableinclude.jsp"%>
 <script type="text/javascript">
 	function modify() {
-		//$("#sysMenuModal").modal("show");
-		window.parent.document.getElementById('treeMenuFrame').contentWindow.add(100,"测试","测试添加节点",false);
+		$("#sysMenuModal").modal("show");
 	}
 	$(function() {
 		$("form.required-validate").each(function() {
@@ -16,13 +15,16 @@
 					cache : true,
 					type : "POST",
 					url : "sysmenusave.action",
-					data : $('#sysmenuform').serialize(),// 你的formid
+					data : $('#sysMenuForm').serialize(),// 你的formid
 					async : false,
 					error : function(request) {
 						alert("Connection error");
 					},
 					success : function(data) {
-
+						console.log(data);
+						var json=eval("("+data+")");
+						console.log(json);
+						window.parent.document.getElementById("treeMenuFrame").contentWindow.add(json.objid,json.name,json.name,false);;
 						$("#sysMenuModal").modal("hide");
 					}
 				});
@@ -39,7 +41,7 @@
 		<div class="box-body">
 			<table class="table table-bordered">
 				<tr>
-					<td>菜单名称</td>
+					<td>菜单名称  ${currentSysMenu.id}</td>
 					<td>${currentSysMenu.name}</td>
 				</tr>
 				<tr>
@@ -104,10 +106,10 @@
 				<h4 class="modal-title" id="sysMenuModalLable">添加菜单</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal required-validate" id="quartzform"
+				<form class="form-horizontal required-validate" id="sysMenuForm"
 					method="post" action="sysmenusave.action">
 					<input type="hidden" id="id" name="id"> <input
-						type="hidden" id="parentid" name="parentid"
+						type="text" id="parentId" name="parentId"
 						value="${currentSysMenu.id}">
 					<div class="form-group">
 						<label for="planName" class="col-sm-3 control-label">菜单名称</label>
@@ -127,15 +129,15 @@
 					<div class="form-group">
 						<label for="jobClass" class="col-sm-3 control-label">序号</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="order" name="order"
+							<input type="text" class="form-control" id="sort" name="sort"
 								placeholder="请输入序号">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="time" class="col-sm-3 control-label">说明</label>
 						<div class="col-sm-6">
-							<textarea class="form-control" rows="3" id="descirption"
-								name="descirption"></textarea>
+							<textarea class="form-control" rows="3" id="description"
+								name="description"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -12,11 +12,13 @@ import org.apache.log4j.Logger;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
 import com.hjon.common.bean.Node;
 import com.hjon.common.bean.Page;
 import com.hjon.common.bean.TreeNode;
@@ -45,8 +47,14 @@ public class SysMenuController extends BaseController implements INodeAction {
 	@RequestMapping("common/sysmenusave")
 	@ResponseBody
 	public String sysmenusave() {
-		
-		return "success";
+		String name = this.getParameter("name");
+		String url = this.getParameter("url");
+		String sort = this.getParameter("sort");
+		String description = this.getParameter("description");
+		SysMenu sysMenu = new SysMenu();
+		this.setEntityValueFromPage(sysMenu);
+		sysMenuService.saveOrUpdate(sysMenu);
+		return new JSONObject(SysMenu2Node(sysMenu)).toString();
 	}
 
 	@RequestMapping("common/sysmenulist")
@@ -60,7 +68,7 @@ public class SysMenuController extends BaseController implements INodeAction {
 				this.getParameter("numPerPage"), 10);
 		String orderField = this.getParameter("orderField");
 		String orderDirection = this.getParameter("orderDirection");
-		Order order = Order.desc("order");
+		Order order = Order.desc("sort");
 		CriterionCollection search = new CriterionCollection();
 		if (orderField != null && !orderField.equals("")) {
 			if (orderDirection.toLowerCase().equals("asc")) {
@@ -98,10 +106,9 @@ public class SysMenuController extends BaseController implements INodeAction {
 		List<TreeNode> _res = new LinkedList<TreeNode>();
 
 		_res = this.getChildNodeList("0", "");
-		
 
-		String result=new JSONArray(sortNodeListBySort(_res)).toString();
-		return  result;
+		String result = new JSONArray(sortNodeListBySort(_res)).toString();
+		return result;
 	}
 
 	private List<TreeNode> sortNodeListBySort(List<TreeNode> list) {
@@ -161,12 +168,23 @@ public class SysMenuController extends BaseController implements INodeAction {
 				node.setParentid(StringUtils.safeToString(
 						_sysmenu.getParentId(), ""));
 				node.setName(_sysmenu.getName());
-				node.setSort(_sysmenu.getOrder());
+				node.setSort(_sysmenu.getSort());
 				_res.add(node);
 			}
 		}
 
 		return _res;
+	}
+
+	private TreeNode SysMenu2Node(SysMenu sysMenu) {
+
+		TreeNode node = new TreeNode();
+		node.setObjid(StringUtils.safeToString(sysMenu.getId(), ""));
+		node.setParentid(StringUtils.safeToString(sysMenu.getParentId(), ""));
+		node.setName(sysMenu.getName());
+		node.setSort(sysMenu.getSort());
+		return node;
+
 	}
 
 	@Override

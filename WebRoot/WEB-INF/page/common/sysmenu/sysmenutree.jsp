@@ -50,8 +50,8 @@
 		console.log(event);
 		console.log(treeId);
 		console.log(treeNode);
-		parent.treeListFrame.location.href = "sysmenulist.action?unitId="
-				+ treeNode.unitId;
+		parent.treeListFrame.location.href = "sysmenulist.action?id="
+				+ treeNode.objid;
 	}
 
 	function add(id,shortName, noteName, isParent) {
@@ -77,11 +77,7 @@
 				shortname : shortName
 			});
 		}
-		//if (treeNode) {
-		//	zTree.editName(treeNode[0]);
-		//} else {
-		//	alert("叶子节点被锁定，无法增加子节点");
-		//}
+		
 	};
 </SCRIPT>
 <div class="content_wrap">

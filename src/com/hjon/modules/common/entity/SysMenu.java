@@ -2,6 +2,8 @@ package com.hjon.modules.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,10 +16,11 @@ public class SysMenu {
 	private Integer parentId;
 	private String name;
 	private String description;
-	private Integer order;
+	private Integer sort;
 	private String syscode;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return id;
@@ -63,13 +66,13 @@ public class SysMenu {
 		this.description = description;
 	}
 
-	@Column(name = "order")
-	public Integer getOrder() {
-		return order;
+	@Column(name = "sort")
+	public Integer getSort() {
+		return sort;
 	}
 
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 	@Column(name = "syscode")
