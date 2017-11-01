@@ -2,25 +2,23 @@
 <%@include file="../../include/tableinclude.jsp"%>
 <%@include file="../../include/ztreeinclude.jsp"%>
 
-<SCRIPT type="text/javascript">
-<!--
-	var setting = {
+<SCRIPT type="text/javascript">	var setting = {
 		edit : {
 			enable : false
 		},
-		data:{
-			 key: {
-                title: "name",
-                name: "shortname"
-            },
-            simpleData: {
-                enable: true,
-                idKey: "objid",
-                pIdKey: "parentid",
-                rootPId: 0
-            }
-		}
-		,callback : {
+		data : {
+			key : {
+				title : "name",
+				name : "shortname"
+			},
+			simpleData : {
+				enable : true,
+				idKey : "objid",
+				pIdKey : "parentid",
+				rootPId : 0
+			}
+		},
+		callback : {
 			// beforeDrag: beforeDrag,
 			//beforeDrop: beforeDrop,
 			// beforeRename:beforeRename,
@@ -33,28 +31,12 @@
 
 	};
 
-	var zNodes = [ {
-		name : "父节点1 - 展开",
-		open : true,
-		children : [ {
-			name : "父节点11 - 折叠",
-			children : [ {
-				name : "叶子节点111",
-				unitId : 1
-			}, {
-				name : "叶子节点112"
-			}, {
-				name : "叶子节点113"
-			}, {
-				name : "叶子节点114"
-			} ]
-		} ]
-	} ];
+	
 	$(document).ready(
 			function() {
 				//$.post("",{}){}
 				$.post("getnodelist.action", {
-					
+
 				}, function(result) {
 					console.log(result);
 					if (result != "") {
@@ -71,7 +53,36 @@
 		parent.treeListFrame.location.href = "sysmenulist.action?unitId="
 				+ treeNode.unitId;
 	}
-//-->
+
+	function add(id,shortName, noteName, isParent) {
+		//console.log(noteName);
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		//isParent = e.data.isParent;
+		nodes = zTree.getSelectedNodes();
+		treeNode = nodes[0];
+		if (treeNode) {
+			treeNode = zTree.addNodes(treeNode, {
+				id : id,
+				pId : treeNode.id,
+				isParent : isParent,
+				title:noteName,
+				shortname : shortName
+			});
+		} else {
+			treeNode = zTree.addNodes(null, {
+				id : id,
+				pId : 0,
+				isParent : isParent,
+				title:noteName,
+				shortname : shortName
+			});
+		}
+		//if (treeNode) {
+		//	zTree.editName(treeNode[0]);
+		//} else {
+		//	alert("叶子节点被锁定，无法增加子节点");
+		//}
+	};
 </SCRIPT>
 <div class="content_wrap">
 	<div class="zTreeDemoBackground left">

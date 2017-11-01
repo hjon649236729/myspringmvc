@@ -2,7 +2,8 @@
 <%@include file="../../include/tableinclude.jsp"%>
 <script type="text/javascript">
 	function modify() {
-		$("#sysMenuModal").modal("show");
+		//$("#sysMenuModal").modal("show");
+		window.parent.document.getElementById('treeMenuFrame').contentWindow.add(100,"测试","测试添加节点",false);
 	}
 	$(function() {
 		$("form.required-validate").each(function() {
@@ -21,18 +22,15 @@
 						alert("Connection error");
 					},
 					success : function(data) {
-						//$("#commonLayout_appcreshi").parent().html(data);
-						alert(data);
-						//window.location.href = "userlist.action";
-						//$("#submit").click()
-						
-						$("#sysMenuModal").modal("hidden");
+
+						$("#sysMenuModal").modal("hide");
 					}
 				});
 
 			});
 		});
 	});
+	
 </script>
 <div class="box box-success">
 	<div class="box-header with-border">

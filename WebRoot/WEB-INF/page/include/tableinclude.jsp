@@ -26,6 +26,9 @@
 <!-- Bootstrap 3.3.7 -->
 <script
 	src="${contextPath}/Scripts/AdminLte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- BootstrapValidator 3.3.7 -->
+<script
+	src="${contextPath}/Scripts/AdminLte/bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
 <!-- Slimscroll -->
 <script
 	src="${contextPath}/Scripts/AdminLte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
