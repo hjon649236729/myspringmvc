@@ -2,9 +2,12 @@
 <%@include file="../../include/tableinclude.jsp"%>
 <%@include file="../../include/ztreeinclude.jsp"%>
 
-<SCRIPT type="text/javascript">	var setting = {
+<SCRIPT type="text/javascript">
+	var setting = {
 		edit : {
-			enable : false
+			enable : true,
+			showRemoveBtn : showRemoveBtn,
+			showRenameBtn : showRenameBtn
 		},
 		data : {
 			key : {
@@ -20,24 +23,21 @@
 		},
 		callback : {
 			// beforeDrag: beforeDrag,
-			//beforeDrop: beforeDrop,
+			//beforeDrop : beforeDrop,
 			// beforeRename:beforeRename,
-
-			onClick : openUrl
-		// onRename: changeNodeName,
-		// onRemove: removeNode,
+			beforeRemove : beforeRemove,
+			onClick : openUrl,
+			// onRename: changeNodeName,
+			onRemove : removeNode
 		// onDrop: dropNode
 		},
 
 	};
 
-	
 	$(document).ready(
 			function() {
 				//$.post("",{}){}
-				$.post("getnodelist.action", {
-
-				}, function(result) {
+				$.post("getnodelist.action", {}, function(result) {
 					console.log(result);
 					if (result != "") {
 						var zTree = $.fn.zTree.init($("#treeDemo"), setting,
@@ -53,8 +53,14 @@
 		parent.treeListFrame.location.href = "sysmenulist.action?id="
 				+ treeNode.objid;
 	}
-
-	function add(id,shortName, noteName, isParent) {
+	function beforeRemove(treeId, treeNode) {
+		console.log(treeNode);
+		return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+	}
+	function removeNode(treeId, treeNode) {
+		return alert("删除 节点 -- " + treeNode.name + " 成功");
+	}
+	function add(id, shortName, noteName, isParent) {
 		//console.log(noteName);
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		//isParent = e.data.isParent;
@@ -65,7 +71,7 @@
 				id : id,
 				pId : treeNode.id,
 				isParent : isParent,
-				title:noteName,
+				title : noteName,
 				shortname : shortName
 			});
 		} else {
@@ -73,12 +79,17 @@
 				id : id,
 				pId : 0,
 				isParent : isParent,
-				title:noteName,
+				title : noteName,
 				shortname : shortName
 			});
 		}
-		
 	};
+	function showRemoveBtn(treeId, treeNode) {
+		return !treeNode.isParent;
+	}
+	function showRenameBtn(treeId, treeNode) {
+		return true;
+	}
 </SCRIPT>
 <div class="content_wrap">
 	<div class="zTreeDemoBackground left">
