@@ -38,7 +38,12 @@
 		} , {
 			"name" : "菜单管理",
 			"controller" : "common/sysmenumain.action",
-		} ]
+		},{
+			"name" : "工作流管理",
+			"controller" : "workflow/raphaledemo.action",
+		}
+		
+		 ]
 	}];
 	function menuInit() {
 		/*

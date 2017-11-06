@@ -1,0 +1,120 @@
+
+body {
+    margin: 0;
+    pading: 0;
+    text-align: left;
+    font-family: Arial, sans-serif, Helvetica, Tahoma;
+    font-size: 12px;
+    line-height: 1.5;
+    color: black;
+    /*background-image: url(img/bg2.png);*/
+}
+
+.myflow_bg{
+    background-image: url(img/bg2.png);
+}
+
+#myflow_tools{position: fixed; top: 10; left: 10; background-color: #fff; width: 70px; cursor: default; padding: 3px;z-index: 10001;}
+
+#myflow_tools_handle{text-align: center; cursor: move; }
+
+#myflow_props{position: fixed; top: 30; right: 50; background-color: #fff; width: 400px; cursor: default; padding: 3px;z-index: 10000;}
+
+#myflow_props_handle{cursor: move; text-align: left; background-color: #FFFFFF;}
+
+#pownerlink{}
+#pownerlink a { color: #0000FF; text-decoration: none; }
+#pownerlink a:hover { text-decoration: underline; color: #ff8800; }
+
+.closeicon{
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+    background:url(img/ui-icons_ffffff_256x240.png) no-repeat -96px -128px;
+    display:block;
+    top:4px;
+    width:19px;
+    height:18px;
+    z-index: 9998;
+}
+.closeicon:hover{
+    z-index: 9999;
+    background:#fff url(img/ui-icons_cd0a0a_256x240.png) no-repeat -79px -127px;
+}
+
+.node {
+    width: 70px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #fff;
+}
+
+.node span{
+    margin-left: 5px
+}
+
+.mover {
+    border: 1px solid #ddd;
+    background-color: #ddd;
+}
+
+.selected {
+    background-color: #ddd;
+}
+
+.state {
+
+}
+
+.flow-button {
+    background-repeat:repeat-x;
+    outline: medium none;
+}
+
+.flow-button-st{
+    height:24px;
+    line-height:15px;
+    border:1px solid #666;
+    color:#333;
+    border-radius:3px;
+    -ms-border-radius:3px;
+    background-position:0 -218px;
+    padding:0 8px;
+    white-space:nowrap
+}
+.flow-button-st:hover,.flow-button-st-select{
+    background-position:0 -242px;
+    border-color:#3c7fb1;
+    color:#333
+}
+.flow-button span{
+    font-size:12px;
+    font-family:'宋体'
+}
+
+#myflow_props table {
+
+}
+
+#myflow_props th {
+    /*letter-spacing: 1px;*/
+    text-align: right;
+    padding: 3px;
+    background: #ddd;
+    width: 80px;
+}
+
+#myflow_props td {
+    background: #fff;
+    padding: 3px;
+}
+
+#pointer {background-repeat: no-repeat; background-position: center;}
+
+#path {background-repeat: no-repeat; background-position: center;}
+
+#line {background-repeat: no-repeat; background-position: center;}
+
+#task {background-repeat: no-repeat; background-position: center;}
+
+#state {background-repeat: no-repeat; background-position: center;}
