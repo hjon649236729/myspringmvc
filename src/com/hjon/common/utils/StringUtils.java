@@ -1187,4 +1187,9 @@ public abstract class StringUtils {
 			return dv;
 		}
 	}
+
+	public static boolean isNotBlank(String o) {
+		// TODO Auto-generated method stub
+		return !isBlank(o);
+	}
 }
