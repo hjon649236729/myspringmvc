@@ -55,7 +55,7 @@ public class QuartzController extends BaseController {
 		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
 		this.setAttribute("data", data);
 
-		return "common/quartz/quartzlist";
+		return "quartz/quartzlist";
 
 	}
 

@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-<%@include file="../include/indexinclude.jsp"%>
+<%@include file="../include/editinclude.jsp"%>
 <script type="text/javascript">
 	$(function() {
 		$("form.required-validate").each(function() {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.hjon.modules.common.entity.SysEnum;
+import com.hjon.modules.sysenum.entity.SysEnum;
 
 /**
  * 根据module,type能确定一个SysEnumList 根据module,type,value能确定一个唯一的SysEnum Map<Map<String,

@@ -57,7 +57,7 @@ public class JobExecuteLogController extends BaseController {
 
 		}
 		this.setAttribute("data", data);
-		return "common/quartz/jobexecuteloglist";
+		return "quartz/jobexecuteloglist";
 	}
 
 }

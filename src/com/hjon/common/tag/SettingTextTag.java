@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.hjon.config.SettingUtils;
-import com.hjon.modules.common.entity.Setting;
+import com.hjon.modules.setting.entity.Setting;
 
 public class SettingTextTag extends SimpleTagSupport {
 	private String module;

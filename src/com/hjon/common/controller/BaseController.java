@@ -36,14 +36,13 @@ import com.hjon.config.BannerUtils;
 import com.hjon.config.Constant;
 import com.hjon.config.SettingUtils;
 import com.hjon.config.SysEnumUtils;
+import com.hjon.modules.attachment.entity.Attachment;
+import com.hjon.modules.attachment.service.AttachmentService;
 import com.hjon.modules.auth.entity.UserInfo;
-import com.hjon.modules.common.entity.Attachment;
-import com.hjon.modules.common.entity.Setting;
-import com.hjon.modules.common.entity.SysEnum;
-import com.hjon.modules.common.service.AttachmentService;
-import com.hjon.modules.common.service.BannerService;
-import com.hjon.modules.common.service.SettingService;
-import com.hjon.modules.common.service.SysEnumService;
+import com.hjon.modules.setting.entity.Setting;
+import com.hjon.modules.setting.service.SettingService;
+import com.hjon.modules.sysenum.entity.SysEnum;
+import com.hjon.modules.sysenum.service.SysEnumService;
 
 @Controller
 public class BaseController {
@@ -56,8 +55,6 @@ public class BaseController {
 	protected SettingService settingService;
 	@Resource(name = "sysEnumService")
 	protected SysEnumService sysEnumService;
-	@Resource(name = "bannerService")
-	protected BannerService bannerService;
 
 	public HttpServletRequest getRequest() {
 		return this.request;
@@ -112,14 +109,6 @@ public class BaseController {
 	}
 
 	/**
-	 * Banner加入缓存
-	 */
-	public void refreshBanner() {
-
-		BannerUtils.banner = bannerService.findBanner();
-	}
-
-	/**
 	 * file.properties加入缓存
 	 */
 	public void refreshConstant() {
@@ -141,7 +130,6 @@ public class BaseController {
 	}
 
 	public void refreshCache() {
-		refreshBanner();
 		refreshSysEnum();
 		refreshSetting();
 		refreshConstant();

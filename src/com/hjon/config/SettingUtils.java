@@ -3,7 +3,7 @@ package com.hjon.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hjon.modules.common.entity.Setting;
+import com.hjon.modules.setting.entity.Setting;
 
 public class SettingUtils {
 	// map<map<module,name>,Setting>
