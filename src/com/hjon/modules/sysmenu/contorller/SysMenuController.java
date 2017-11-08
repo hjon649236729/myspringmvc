@@ -36,14 +36,14 @@ public class SysMenuController extends BaseController implements INodeAction {
 	@Resource(name = "sysMenuService")
 	private SysMenuService sysMenuService;
 
-	@RequestMapping("common/sysmenumain")
+	@RequestMapping("sysmenu/sysmenumain")
 	public String sysmenumain() {
 
-		return "common/sysmenu/sysmenumain";
+		return "sysmenu/sysmenumain";
 
 	}
 
-	@RequestMapping("common/sysmenusave")
+	@RequestMapping("sysmenu/sysmenusave")
 	@ResponseBody
 	public String sysmenusave() {
 		String name = this.getParameter("name");

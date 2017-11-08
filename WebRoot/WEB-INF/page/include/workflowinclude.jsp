@@ -1,21 +1,20 @@
 <%@include file="head.jsp"%>
-
-<link type="text/css" href="${contextPath}/Scripts/workflow/myflow.css"
+<link type="text/css" href="${contextPath}/Scripts/workflow/configurate/drawprocess/myflow.css"
 	rel="stylesheet" />
-<link type="text/css" href="${contextPath}/Scripts/css/jquery-ui.css"
+<link type="text/css" href="${contextPath}/Scripts/jquery-ui/jquery-ui.css"
 	rel="stylesheet" />
 <link type="text/css"
-	href="${contextPath}/Scripts/css/jquery-plugin.css" rel="stylesheet" />
+	href="${contextPath}/Scripts/jquery-ui/jquery-plugin.css" rel="stylesheet" />
 
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/lib/raphael-min.js"></script>
+	src="${contextPath}/Scripts/workflow/configurate/drawprocess/lib/raphael-min.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/lib/jquery-ui-1.8.4.custom/js/jquery-1.4.2.min.js"></script>
+	src="${contextPath}/Scripts/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/lib/jquery-ui-1.8.4.custom/js/jquery-ui-1.8.4.custom.min.js"></script>
+	src="${contextPath}/Scripts/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/myflow.js"></script>
+	src="${contextPath}/Scripts/workflow/configurate/drawprocess/myflow.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/myflow.jpdl4.js"></script>
+	src="${contextPath}/Scripts/workflow/configurate/drawprocess/myflow.jpdl4.js"></script>
 <script type="text/javascript"
-	src="${contextPath}/Scripts/workflow/myflow.editors.js"></script>
+	src="${contextPath}/Scripts/workflow/configurate/drawprocess/myflow.editors.js"></script>
