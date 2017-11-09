@@ -30,7 +30,7 @@
 
 //----------------  selectEditor  ----------------
 var _specialtaskList = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/drawprocess/getSpecialTaskList.action?processtype=${processtype}",
     async: false,
@@ -40,9 +40,9 @@ $.ajax({
             _specialtaskList = eval(data);
         }
     }
-});
+}); */
 var _pointtypelist = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/configurate/drawprocess/getPointtypeList.action?processtype=${processtype}",
     async: false,
@@ -52,9 +52,9 @@ $.ajax({
             _pointtypelist = eval(data);
         }
     }
-});
+}); */
 var _processurllist = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/configurate/drawprocess/getProcessUrlList.action?processtype=${processtype}",
     async: false,
@@ -64,9 +64,9 @@ $.ajax({
             _processurllist = eval(data);
         }
     }
-});
+}); */
 var _submitownerlist = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/configurate/drawprocess/getSubmitOwnerList.action?processtype=${processtype}",
     async: false,
@@ -76,9 +76,9 @@ $.ajax({
             _submitownerlist = eval(data);
         }
     }
-});
+}); */
 var _stepdealerlist = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/configurate/drawprocess/getStepDealerList.action?processtype=${processtype}",
     async: false,
@@ -88,9 +88,9 @@ $.ajax({
             _stepdealerlist = eval(data);
         }
     }
-});
+}); */
 var _messageremindlist = "";
-$.ajax({
+/* $.ajax({
     type: "POST",
     url: "${path}/workflow/configurate/drawprocess/getMessageRemindList.action?processtype=${processtype}",
     async: false,
@@ -100,11 +100,11 @@ $.ajax({
             _messageremindlist = eval(data);
         }
     }
-});
+}); */
 
 //------------------------------------------------
         var _stepconditionlist = "";
-        $.ajax({
+     /*    $.ajax({
             type: "POST",
             url: "${path}/workflow/configurate/drawprocess/getStepConditionList.action?processtype=${processtype}",
             async: false,
@@ -114,10 +114,10 @@ $.ajax({
                     _stepconditionlist = eval(data);
                 }
             }
-        });
+        }); */
 
         var _judgetypeList = "";
-        $.ajax({
+       /*  $.ajax({
             type: "POST",
             url: "${path}/workflow/configurate/drawprocess/getJudgeTypeList.action?processtype=${processtype}",
             async: false,
@@ -128,9 +128,9 @@ $.ajax({
                 }
             }
         });
-
+ */
         var _messagenoticelist = "";
-        $.ajax({
+     /*    $.ajax({
             type: "POST",
             url: "${path}/workflow/configurate/drawprocess/getMessageNoticeList.action?processtype=${processtype}",
             async: false,
@@ -140,10 +140,10 @@ $.ajax({
                     _messagenoticelist = eval(data);
                 }
             }
-        });
+        }); */
 
         var _ownerlink = "";
-        $.ajax({
+       /*  $.ajax({
             type: "POST",
             url: "${path}/workflow/configurate/drawprocess/getOwnerLinkOriginListJSON.action",
             async: false,
@@ -153,7 +153,7 @@ $.ajax({
                     _ownerlink = eval(data)[0];
                 }
             }
-        });
+        }); */
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -209,16 +209,16 @@ $.ajax({
 			<div id="myflow_tools_handle" class="ui-widget-header">工具集</div>
 
 			<div class="node" id="myflow_save">
-				<img src="${contextPath}/Scripts/workflow/img/save.gif" /><span>保存</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/save.gif" /><span>保存</span>
 			</div>
 			<div>
 				<hr />
 			</div>
 			<div class="node selectable" id="pointer">
-				<img src="${contextPath}/Scripts/workflow/img/select16.gif" /><span>选择</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/select16.gif" /><span>选择</span>
 			</div>
 			<div class="node selectable" id="path">
-				<img src="${contextPath}/Scripts/workflow/img/16/flow_sequence.png" /><span>指向</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/flow_sequence.png" /><span>指向</span>
 			</div>
 			<%--<div class="node selectable" id="line"><img src="img/16/flow_line.png"/><span>关联</span></div>--%>
 			<div>
@@ -226,22 +226,22 @@ $.ajax({
 			</div>
 			<div class="node state" id="start" type="start">
 				<img
-					src="${contextPath}/Scripts/workflow/img/16/start_event_empty.png" /><span>开始</span>
+					src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/start_event_empty.png" /><span>开始</span>
 			</div>
 			<div class="node state" id="submit" type="submit">
-				<img src="${contextPath}/Scripts/workflow/img/16/task_yellow.png" /><span>提交</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/task_yellow.png" /><span>提交</span>
 			</div>
 			<div class="node state" id="judge" type="judge">
-				<img src="${contextPath}/Scripts/workflow/img/16/task_empty2.png" /><span>处理</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/task_empty2.png" /><span>处理</span>
 			</div>
 			<%--<div class="node state" id="linkif" type="linkif"><img src="${contextPath}/Scripts/workflow/img/16/gateway_parallel.png"/><span>条件</span></div>--%>
 			<div class="node state" id="state" type="state">
-				<img src="${contextPath}/Scripts/workflow/img/16/task_empty.png" /><span>条件</span>
+				<img src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/task_empty.png" /><span>条件</span>
 			</div>
 			<%--<div class="node state" id="task" type="task"><img src="${contextPath}/Scripts/workflow/img/16/task_java.png"/><span>任务</span></div>--%>
 			<div class="node state" id="end" type="end">
 				<img
-					src="${contextPath}/Scripts/workflow/img/16/end_event_terminate.png" /><span>结束</span>
+					src="${contextPath}/Scripts/workflow/configurate/drawprocess/img/16/end_event_terminate.png" /><span>结束</span>
 			</div>
 			<%--<div>--%>
 			<%--<hr/>--%>
