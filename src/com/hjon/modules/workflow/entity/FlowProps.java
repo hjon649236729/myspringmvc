@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +15,7 @@ public class FlowProps implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private String name;
 	private Integer sourceid;
 	private String value;
@@ -23,8 +23,8 @@ public class FlowProps implements java.io.Serializable {
 	private String key;
 	private Integer sort;
 	private String sourcename;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 
@@ -35,9 +35,9 @@ public class FlowProps implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public FlowProps(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public FlowProps(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -45,11 +45,11 @@ public class FlowProps implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public FlowProps(Integer objid, String name, Integer sourceid,
+	public FlowProps(Integer id, String name, Integer sourceid,
 			String value, Integer status, String key, Integer sort,
-			String sourcename, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+			String sourcename, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.name = name;
 		this.sourceid = sourceid;
 		this.value = value;
@@ -65,13 +65,13 @@ public class FlowProps implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "NAME", length = 100)
@@ -138,20 +138,20 @@ public class FlowProps implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

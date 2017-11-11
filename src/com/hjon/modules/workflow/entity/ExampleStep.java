@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,8 +15,8 @@ public class ExampleStep implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
-	private Timestamp endtime;
+	private Integer id;
+	private Date endtime;
 	private Integer processstepid;
 	private Integer processid;
 	private Integer exampleid;
@@ -30,9 +30,9 @@ public class ExampleStep implements java.io.Serializable {
 	private String actionurl;
 	private String showurl;
 	private Integer urlmark;
-	private Timestamp starttime;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date starttime;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 	private Integer branchstepid;
@@ -45,9 +45,9 @@ public class ExampleStep implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ExampleStep(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ExampleStep(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -55,15 +55,15 @@ public class ExampleStep implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ExampleStep(Integer objid, Timestamp endtime, Integer processstepid,
+	public ExampleStep(Integer id, Date endtime, Integer processstepid,
 			Integer processid, Integer exampleid, Integer status,
 			String processstepname, String brief, String stepbeigin,
 			String stepend, Integer stepcondition, Integer steptype,
 			String actionurl, String showurl, Integer urlmark,
-			Timestamp starttime, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname,
+			Date starttime, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname,
 			Integer branchstepid, Integer recoverflag) {
-		this.objid = objid;
+		this.id = id;
 		this.endtime = endtime;
 		this.processstepid = processstepid;
 		this.processid = processid;
@@ -89,21 +89,21 @@ public class ExampleStep implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "ENDTIME", length = 19)
-	public Timestamp getEndtime() {
+	public Date getEndtime() {
 		return this.endtime;
 	}
 
-	public void setEndtime(Timestamp endtime) {
+	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
 	}
 
@@ -225,29 +225,29 @@ public class ExampleStep implements java.io.Serializable {
 	}
 
 	@Column(name = "STARTTIME", length = 19)
-	public Timestamp getStarttime() {
+	public Date getStarttime() {
 		return this.starttime;
 	}
 
-	public void setStarttime(Timestamp starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

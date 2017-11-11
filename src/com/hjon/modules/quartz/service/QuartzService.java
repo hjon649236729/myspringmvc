@@ -10,15 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hjon.common.bean.Page;
 import com.hjon.common.service.BaseService;
 import com.hjon.common.utils.StringUtils;
-import com.hjon.modules.quartz.entity.JobInfo;
 
 @Service
 @Transactional
 public class QuartzService extends BaseService {
 	public Page searchQuartz(int pageNum, int numberPage,
 			Map<String, Object> params) {
-		StringBuffer sql = new StringBuffer(
-				"SELECT T.TRIGGER_NAME,T.TRIGGER_GROUP,T.JOB_NAME,T.DESCRIPTION,T.START_TIME,T.NEXT_FIRE_TIME,T.PREV_FIRE_TIME,T.TRIGGER_STATE,T.TRIGGER_TYPE,  C.CRON_EXPRESSION,D.JOB_CLASS_NAME,D.JOB_CLASS_NAME CLASSNAME,T.JOB_GROUP FROM QRTZ_TRIGGERS T  LEFT JOIN QRTZ_CRON_TRIGGERS C ON T.TRIGGER_NAME = C.TRIGGER_NAME  LEFT JOIN QRTZ_JOB_DETAILS D ON D.JOB_NAME = T.JOB_NAME where 1 = 1");
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT T.TRIGGER_NAME,T.TRIGGER_GROUP,T.JOB_NAME,T.DESCRIPTION,T.START_TIME,T.NEXT_FIRE_TIME,T.PREV_FIRE_TIME,T.TRIGGER_STATE,T.TRIGGER_TYPE,  C.CRON_EXPRESSION,D.JOB_CLASS_NAME,D.JOB_CLASS_NAME CLASSNAME,T.JOB_GROUP ");
+		sql.append(" FROM QRTZ_TRIGGERS T  LEFT JOIN QRTZ_CRON_TRIGGERS C ON T.TRIGGER_NAME = C.TRIGGER_NAME  LEFT JOIN QRTZ_JOB_DETAILS D ON D.JOB_NAME = T.JOB_NAME");
+		sql.append(" where 1 = 1");
 		if (!StringUtils.isBlank(params.get("JOB_NAME"))) {
 			sql.append(" AND T.JOB_NAME LIKE :JOB_NAME");
 		}

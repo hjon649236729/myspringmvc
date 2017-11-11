@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,17 +15,17 @@ public class Agents implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
-	private Timestamp endtime;
+	private Integer id;
+	private Date endtime;
 	private String typesource;
 	private Integer typesourceid;
 	private String typeads;
 	private Integer ownerid;
 	private Integer agentsid;
 	private Integer status;
-	private Timestamp starttime;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date starttime;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 	private Integer processtype;
@@ -39,9 +39,9 @@ public class Agents implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Agents(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public Agents(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -49,13 +49,13 @@ public class Agents implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Agents(Integer objid, Timestamp endtime, String typesource,
+	public Agents(Integer id, Date endtime, String typesource,
 			Integer typesourceid, String typeads, Integer ownerid,
-			Integer agentsid, Integer status, Timestamp starttime,
-			Timestamp createtimestamp, Timestamp updatetimestamp,
+			Integer agentsid, Integer status, Date starttime,
+			Date createtimestamp, Date updatetimestamp,
 			Integer version, String entityname, Integer processtype,
 			Integer processid, Integer processstepid) {
-		this.objid = objid;
+		this.id = id;
 		this.endtime = endtime;
 		this.typesource = typesource;
 		this.typesourceid = typesourceid;
@@ -75,21 +75,21 @@ public class Agents implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "ENDTIME", length = 19)
-	public Timestamp getEndtime() {
+	public Date getEndtime() {
 		return this.endtime;
 	}
 
-	public void setEndtime(Timestamp endtime) {
+	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
 	}
 
@@ -148,29 +148,29 @@ public class Agents implements java.io.Serializable {
 	}
 
 	@Column(name = "STARTTIME", length = 19)
-	public Timestamp getStarttime() {
+	public Date getStarttime() {
 		return this.starttime;
 	}
 
-	public void setStarttime(Timestamp starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,12 +15,12 @@ public class ModelEnum implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private Integer key;
 	private String value;
 	private String name;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 
@@ -31,9 +31,9 @@ public class ModelEnum implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ModelEnum(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ModelEnum(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -41,10 +41,10 @@ public class ModelEnum implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ModelEnum(Integer objid, Integer key, String value, String name,
-			Timestamp createtimestamp, Timestamp updatetimestamp,
+	public ModelEnum(Integer id, Integer key, String value, String name,
+			Date createtimestamp, Date updatetimestamp,
 			Integer version, String entityname) {
-		this.objid = objid;
+		this.id = id;
 		this.key = key;
 		this.value = value;
 		this.name = name;
@@ -56,13 +56,13 @@ public class ModelEnum implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "KEY", precision = 65, scale = 30)
@@ -93,20 +93,20 @@ public class ModelEnum implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

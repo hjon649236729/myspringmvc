@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,19 +15,19 @@ public class ExampleAskfor implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private Integer askerid;
 	private Integer parentid;
 	private Integer exampleownerid;
 	private Integer ownerid;
 	private Integer status;
-	private Timestamp starttime;
-	private Timestamp approvetime;
+	private Date starttime;
+	private Date approvetime;
 	private Integer approvestatus;
 	private String opinion;
 	private String brief;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 
@@ -38,9 +38,9 @@ public class ExampleAskfor implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ExampleAskfor(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ExampleAskfor(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -48,12 +48,12 @@ public class ExampleAskfor implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ExampleAskfor(Integer objid, Integer askerid, Integer parentid,
+	public ExampleAskfor(Integer id, Integer askerid, Integer parentid,
 			Integer exampleownerid, Integer ownerid, Integer status,
-			Timestamp starttime, Timestamp approvetime, Integer approvestatus,
-			String opinion, String brief, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+			Date starttime, Date approvetime, Integer approvestatus,
+			String opinion, String brief, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.askerid = askerid;
 		this.parentid = parentid;
 		this.exampleownerid = exampleownerid;
@@ -72,13 +72,13 @@ public class ExampleAskfor implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "ASKERID", precision = 65, scale = 30)
@@ -127,20 +127,20 @@ public class ExampleAskfor implements java.io.Serializable {
 	}
 
 	@Column(name = "STARTTIME", length = 19)
-	public Timestamp getStarttime() {
+	public Date getStarttime() {
 		return this.starttime;
 	}
 
-	public void setStarttime(Timestamp starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 
 	@Column(name = "APPROVETIME", length = 19)
-	public Timestamp getApprovetime() {
+	public Date getApprovetime() {
 		return this.approvetime;
 	}
 
-	public void setApprovetime(Timestamp approvetime) {
+	public void setApprovetime(Date approvetime) {
 		this.approvetime = approvetime;
 	}
 
@@ -172,20 +172,20 @@ public class ExampleAskfor implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

@@ -1188,7 +1188,7 @@ public abstract class StringUtils {
 		}
 	}
 
-	public static boolean isNotBlank(String o) {
+	public static boolean isNotBlank(Object o) {
 		// TODO Auto-generated method stub
 		return !isBlank(o);
 	}

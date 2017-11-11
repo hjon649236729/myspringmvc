@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +50,7 @@ public class UserInfoController extends BaseController {
 		}
 		String userName = this.getParameter("userName");
 		if (userName != null && !"".equals(userName)) {
-			search.Add(Expression.like("userName", "%" + userName + "%"));
+			search.Add(Restrictions.like("userName", "%" + userName + "%"));
 			this.setAttribute("userName", userName);
 		}
 		Page data = userInfoService.pagedQuery(pageNum, numPerPage, search,

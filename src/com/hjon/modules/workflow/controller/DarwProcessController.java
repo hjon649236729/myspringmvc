@@ -28,26 +28,17 @@ import com.hjon.modules.workflow.service.FlowNodeService;
 import com.hjon.modules.workflow.service.FlowPathsService;
 import com.hjon.modules.workflow.service.FlowPropsService;
 import com.hjon.modules.workflow.service.ProcessListService;
+import com.hjon.modules.workflow.service.ProcessService;
 
 @Controller
 @Scope("prototype")
 public class DarwProcessController extends BaseController {
 	Logger logger = Logger.getLogger(DarwProcessController.class);
-	@Resource(name = "flowDotsService")
-	private FlowDotsService flowDotsService;
-
-	@Resource(name = "flowNodeService")
-	private FlowNodeService flowNodeService;
-
-	@Resource(name = "flowPathsService")
-	private FlowPathsService flowPathsService;
-
-	@Resource(name = "flowPropsService")
-	private FlowPropsService flowPropsService;
-
+	
 	@Resource(name = "processListService")
 	private ProcessListService processListService;
 
+	
 	/**
 	 * ajax，通过processtype获得名称
 	 * 
@@ -57,17 +48,23 @@ public class DarwProcessController extends BaseController {
 	@ResponseBody
 	public String getProcessTypeName() {
 		int _processtype = NumberUtils.safeToInteger(
-				this.getParameter("processtype"), 0);
+				this.getParameter("processtype"), 1);
 		String _processtypename = "";
 
 		if (_processtype > 0) {
-			Map _map = new HashMap();
-			_map = processListService.findParaByNameAndKey("ProcessType",
-					_processtype);
+			// Map _map = new HashMap();
+			/*
+			 * _map = processListService.findParaByNameAndKey("ProcessType",
+			 * _processtype);
+			 */
 			// Map _map = WorkflowServiceFactory.getWorkflowBaseService()
 			// .findParaByNameAndKey("ProcessType", _processtype);
-			_processtypename = MapUtils.getString(_map, "value", "");
-
+			List<Map<String, Object>> mapList = processListService
+					.findParaByNameAndKey("ProcessType", _processtype);
+			if (mapList != null && mapList.size() > 0) {
+				_processtypename = MapUtils.getString(mapList.get(0), "value",
+						"");
+			}
 			// try {
 			return _processtypename;
 			// } catch (IOException e) {
@@ -411,7 +408,7 @@ public class DarwProcessController extends BaseController {
 	@ResponseBody
 	public Object getSpecialTaskList() {
 		int _processtype = NumberUtils.safeToInteger(
-				request.getParameter("processtype"), 0);
+				request.getParameter("processtype"), 1);
 		if (_processtype > 0) {
 			List<Map> _res = this.findProcessListWithHeader("SpecialTask",
 					_processtype);
@@ -429,10 +426,12 @@ public class DarwProcessController extends BaseController {
 		// List<Map> _processlist = WorkflowServiceFactory
 		// .getWorkflowBaseService().findParaListByNameAndType(name,
 		// processtype);
-		Map _map = new HashMap();
-		_map.put("name", "无");
-		_map.put("value", 0);
-		_res.add(_map);
+		List<Map<String, Object>> __processlist = processListService
+				.findParaByNameAndKey(name, processtype);
+		// Map _map = new HashMap();
+		// _map.put("name", "无");
+		// _map.put("value", 0);
+		// _res.add(_map);
 
 		// for (Map map : _processlist) {
 		// _map = new HashMap();

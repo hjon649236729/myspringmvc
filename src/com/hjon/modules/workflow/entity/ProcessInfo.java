@@ -1,6 +1,8 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,19 +12,19 @@ import javax.persistence.Table;
  * WfProcess entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "wf_process", catalog = "springmvc")
-public class Process implements java.io.Serializable {
-
+@Table(name = "wf_processinfo", catalog = "springmvc")
+public class ProcessInfo implements java.io.Serializable {
+	public static String ENTITY_NAME = "ProcessInfo";
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private Integer status;
 	private String name;
 	private Integer sort;
 	private Integer processversion;
 	private String processcode;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 	private String syscode;
@@ -36,13 +38,15 @@ public class Process implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Process() {
+	public ProcessInfo() {
+		this.createtimestamp = new Date();
+		this.updatetimestamp = new Date();
 	}
 
 	/** minimal constructor */
-	public Process(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ProcessInfo(Integer id, Date createtimestamp, Date updatetimestamp,
+			Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -50,13 +54,13 @@ public class Process implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Process(Integer objid, Integer status, String name, Integer sort,
-			Integer processversion, String processcode,
-			Timestamp createtimestamp, Timestamp updatetimestamp,
-			Integer version, String entityname, String syscode,
-			Integer sysversion, Integer processtype, String processbrief,
-			String specialmark, Integer phoneshow, Integer claimtype) {
-		this.objid = objid;
+	public ProcessInfo(Integer id, Integer status, String name, Integer sort,
+			Integer processversion, String processcode, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname,
+			String syscode, Integer sysversion, Integer processtype,
+			String processbrief, String specialmark, Integer phoneshow,
+			Integer claimtype) {
+		this.id = id;
 		this.status = status;
 		this.name = name;
 		this.sort = sort;
@@ -77,13 +81,13 @@ public class Process implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "STATUS", precision = 65, scale = 30)
@@ -132,20 +136,20 @@ public class Process implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

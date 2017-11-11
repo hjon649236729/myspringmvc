@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,13 +15,13 @@ public class ApproveRela implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private Integer callerid;
 	private Integer workflowtype;
 	private Integer inputid;
 	private Integer type;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 
@@ -32,9 +32,9 @@ public class ApproveRela implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ApproveRela(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ApproveRela(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -42,10 +42,10 @@ public class ApproveRela implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ApproveRela(Integer objid, Integer callerid, Integer workflowtype,
-			Integer inputid, Integer type, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ApproveRela(Integer id, Integer callerid, Integer workflowtype,
+			Integer inputid, Integer type, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.callerid = callerid;
 		this.workflowtype = workflowtype;
 		this.inputid = inputid;
@@ -58,13 +58,13 @@ public class ApproveRela implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "CALLERID", precision = 65, scale = 30)
@@ -104,20 +104,20 @@ public class ApproveRela implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

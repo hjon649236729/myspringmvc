@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,20 +15,20 @@ public class ExampleStepOwner implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private Integer exampleid;
 	private Integer examplestepid;
 	private Integer ownerid;
 	private Integer preownerid;
 	private Integer status;
-	private Timestamp approvetime;
+	private Date approvetime;
 	private String approveopinion;
 	private Integer approvestatus;
 	private String approvebrief;
-	private Timestamp starttime;
+	private Date starttime;
 	private Integer value;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 
@@ -39,9 +39,9 @@ public class ExampleStepOwner implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ExampleStepOwner(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ExampleStepOwner(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -49,13 +49,13 @@ public class ExampleStepOwner implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ExampleStepOwner(Integer objid, Integer exampleid,
+	public ExampleStepOwner(Integer id, Integer exampleid,
 			Integer examplestepid, Integer ownerid, Integer preownerid,
-			Integer status, Timestamp approvetime, String approveopinion,
-			Integer approvestatus, String approvebrief, Timestamp starttime,
-			Integer value, Timestamp createtimestamp, Timestamp updatetimestamp,
+			Integer status, Date approvetime, String approveopinion,
+			Integer approvestatus, String approvebrief, Date starttime,
+			Integer value, Date createtimestamp, Date updatetimestamp,
 			Integer version, String entityname) {
-		this.objid = objid;
+		this.id = id;
 		this.exampleid = exampleid;
 		this.examplestepid = examplestepid;
 		this.ownerid = ownerid;
@@ -75,13 +75,13 @@ public class ExampleStepOwner implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "EXAMPLEID", precision = 65, scale = 30)
@@ -130,11 +130,11 @@ public class ExampleStepOwner implements java.io.Serializable {
 	}
 
 	@Column(name = "APPROVETIME", length = 19)
-	public Timestamp getApprovetime() {
+	public Date getApprovetime() {
 		return this.approvetime;
 	}
 
-	public void setApprovetime(Timestamp approvetime) {
+	public void setApprovetime(Date approvetime) {
 		this.approvetime = approvetime;
 	}
 
@@ -166,11 +166,11 @@ public class ExampleStepOwner implements java.io.Serializable {
 	}
 
 	@Column(name = "STARTTIME", length = 19)
-	public Timestamp getStarttime() {
+	public Date getStarttime() {
 		return this.starttime;
 	}
 
-	public void setStarttime(Timestamp starttime) {
+	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
 
@@ -184,20 +184,20 @@ public class ExampleStepOwner implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

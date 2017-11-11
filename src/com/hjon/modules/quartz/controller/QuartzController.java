@@ -44,7 +44,7 @@ public class QuartzController extends BaseController {
 
 		int pageNum = NumberUtils
 				.safeToInteger(this.getParameter("pageNum"), 1);
-		int numPerPage = NumberUtils.safeToInteger(
+		int numberPage = NumberUtils.safeToInteger(
 				this.getParameter("numPerPage"), 10);
 		Map<String, Object> params = new HashMap<String, Object>();
 		String jobName = this.getParameter("jobName");
@@ -52,7 +52,7 @@ public class QuartzController extends BaseController {
 			params.put("JOB_NAME", "%" + jobName + "%");
 			this.setAttribute("jobName", jobName);
 		}
-		Page data = quartzService.searchQuartz(pageNum, numPerPage, params);
+		Page data = quartzService.searchQuartz(pageNum, numberPage, params);
 		this.setAttribute("data", data);
 
 		return "quartz/quartzlist";
@@ -124,7 +124,7 @@ public class QuartzController extends BaseController {
 		String jobName = this.getParameter("jobName");
 		try {
 			LocalQuartzManager.pauseJob(new JobKey(jobName, jobName));
-			
+
 			return "success";
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block

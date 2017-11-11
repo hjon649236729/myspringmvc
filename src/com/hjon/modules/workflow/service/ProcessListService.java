@@ -17,20 +17,17 @@ import com.hjon.modules.workflow.entity.ProcessList;
 @Transactional
 public class ProcessListService extends BaseService<ProcessList> {
 
-	public Map<String, Object> findParaByNameAndKey(String name, int key) {
+	public List<Map<String, Object>> findParaByNameAndKey(String name, int key) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("select pl.key,pl.value,pl.name,pl.valueads ");
 		sql.append("from WF_PROCESSLIST pl ");
 		sql.append("where pl.name=:name and pl.key=:key");
-		params.put(name, name);
+		params.put("name", name);
 		params.put("key", key);
 		List<Map<String, Object>> list = this.createSqlQueryToMapList(
 				sql.toString(), params);
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		} else {
-			return null;
-		}
+		return list;
+		
 	}
 }

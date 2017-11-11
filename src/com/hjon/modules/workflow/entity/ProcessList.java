@@ -1,6 +1,6 @@
 package com.hjon.modules.workflow.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,14 +15,14 @@ public class ProcessList implements java.io.Serializable {
 
 	// Fields
 
-	private Integer objid;
+	private Integer id;
 	private String value;
 	private Integer status;
 	private Integer sort;
 	private String name;
 	private Integer key;
-	private Timestamp createtimestamp;
-	private Timestamp updatetimestamp;
+	private Date createtimestamp;
+	private Date updatetimestamp;
 	private Integer version;
 	private String entityname;
 	private String valueads;
@@ -35,9 +35,9 @@ public class ProcessList implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ProcessList(Integer objid, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname) {
-		this.objid = objid;
+	public ProcessList(Integer id, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname) {
+		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
 		this.version = version;
@@ -45,11 +45,11 @@ public class ProcessList implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProcessList(Integer objid, String value, Integer status,
-			Integer sort, String name, Integer key, Timestamp createtimestamp,
-			Timestamp updatetimestamp, Integer version, String entityname,
+	public ProcessList(Integer id, String value, Integer status,
+			Integer sort, String name, Integer key, Date createtimestamp,
+			Date updatetimestamp, Integer version, String entityname,
 			String valueads, Integer type) {
-		this.objid = objid;
+		this.id = id;
 		this.value = value;
 		this.status = status;
 		this.sort = sort;
@@ -65,13 +65,13 @@ public class ProcessList implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "OBJID", unique = true, nullable = false, precision = 65, scale = 30)
-	public Integer getObjid() {
-		return this.objid;
+	@Column(name = "Id", unique = true, nullable = false, precision = 65, scale = 30)
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setObjid(Integer objid) {
-		this.objid = objid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Column(name = "VALUE", length = 200)
@@ -120,20 +120,20 @@ public class ProcessList implements java.io.Serializable {
 	}
 
 	@Column(name = "CREATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getCreatetimestamp() {
+	public Date getCreatetimestamp() {
 		return this.createtimestamp;
 	}
 
-	public void setCreatetimestamp(Timestamp createtimestamp) {
+	public void setCreatetimestamp(Date createtimestamp) {
 		this.createtimestamp = createtimestamp;
 	}
 
 	@Column(name = "UPDATETIMESTAMP", nullable = false, length = 19)
-	public Timestamp getUpdatetimestamp() {
+	public Date getUpdatetimestamp() {
 		return this.updatetimestamp;
 	}
 
-	public void setUpdatetimestamp(Timestamp updatetimestamp) {
+	public void setUpdatetimestamp(Date updatetimestamp) {
 		this.updatetimestamp = updatetimestamp;
 	}
 

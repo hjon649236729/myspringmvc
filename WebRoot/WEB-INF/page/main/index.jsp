@@ -40,7 +40,8 @@
 			"controller" : "sysmenu/sysmenumain.action",
 		},{
 			"name" : "工作流管理",
-			"controller" : "workflow/raphaledemo.action",
+			//"controller" : "workflow/raphaledemo.action",
+			"controller": "workflow/processlist.action"
 		}
 		
 		 ]
