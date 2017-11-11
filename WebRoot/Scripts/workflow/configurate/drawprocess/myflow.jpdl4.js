@@ -33,7 +33,7 @@
             type: 'start',
             name: {text: '<<start>>'},
             text: {text: '开始步骤'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/start_event_empty.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/start_event_empty.png', width: 48, height: 48},
 //            attr: {width: 50, heigth: 50 , r: 25, fill: "#7fd924", stroke: "#AAA", "stroke-width": 1},
             attr: {width: 50, heigth: 50 },
             props: {
@@ -50,7 +50,7 @@
             type: 'end',
             name: {text: '<<end>>'},
             text: {text: '结束步骤'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/end_event_terminate.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/end_event_terminate.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 stepname: {name: 'stepname', label: '步骤名称', value: '', editor: function () {
@@ -69,7 +69,7 @@
             type: 'submit',
             name: {text: '<<submit>>'},
             text: {text: '提交步骤'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/task_yellow.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/task_yellow.png', width: 48, height: 48},
             attr: {x: 10, y: 10, width: 100, height: 50, r: 5, fill: "90-#fff-#F7E9BC", stroke: "#000", "stroke-width": 1},
             props: {
                 stepname: {name: 'stepname', label: '步骤名称', value: '', editor: function () {
@@ -118,7 +118,7 @@
             type: 'judge',
             name: {text: '<<judge>>'},
             text: {text: '处理步骤'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/task_empty.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/task_empty.png', width: 48, height: 48},
             props: {
                 stepname: {name: 'stepname', label: '步骤名称', value: '', editor: function () {
                     return new myflow.editors.stepnameEditor();
@@ -169,7 +169,7 @@
             type: 'state',
             name: {text: '<<state>>'},
             text: {text: '条件'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/task_empty.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/task_empty.png', width: 48, height: 48},
             attr: {x: 10, y: 10, width: 50, height: 50, r: 5, fill: "#b1c9ed", stroke: "#000", "stroke-width": 0},
             props: {
                 stepcondition: {name: 'stepcondition', label: '步骤条件', value: '', editor: function () {
@@ -186,7 +186,7 @@
             type: 'task',
             name: {text: '<<task>>'},
             text: {text: '任务'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/task_java.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/task_java.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 text: {name: 'text', label: '显示', value: '', editor: function () {
@@ -208,7 +208,7 @@
             type: 'end-cancel',
             name: {text: '<<end-cancel>>'},
             text: {text: '取消'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/end_event_cancel.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/end_event_cancel.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 text: {name: 'text', label: '显示', value: '', editor: function () {
@@ -229,7 +229,7 @@
             type: 'end-error',
             name: {text: '<<end-error>>'},
             text: {text: '错误1'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/end_event_error.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/end_event_error.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 text: {name: 'text', label: '显示', value: '错误2', editor: function () {
@@ -241,7 +241,7 @@
             type: 'fork',
             name: {text: '<<fork>>'},
             text: {text: '分支'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 text: {name: 'text', label: '显示', value: '', editor: function () {
@@ -259,7 +259,7 @@
             type: 'join',
             name: {text: '<<join>>'},
             text: {text: '合并'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 text: {name: 'text', label: '显示', value: '', editor: function () {
@@ -277,7 +277,7 @@
             type: 'linkif',
             name: {text: '<<linkif>>'},
             text: {text: '条件'},
-            img: {src: '/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
+            img: {src: '/Scripts/workflow/configurate/drawprocess/img/48/gateway_parallel.png', width: 48, height: 48},
             attr: {width: 50, heigth: 50 },
             props: {
                 brief: {name: 'brief', label: '说明', value: '用于指向两个状态', editor: function () {

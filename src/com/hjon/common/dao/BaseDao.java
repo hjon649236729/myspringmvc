@@ -105,7 +105,15 @@ public class BaseDao<T> extends HibernateDaoSupport {
 				.list();
 		return new Page(pageNo, totalCount, pageSize, list);
 	}
-
+	
+	public List<Map<String,Object>> createSqlQueryToMapList(String sql,Map<String,Object> params){
+		Query  query = createSqlQuery(sql, params);
+		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		List<Map<String,Object>> result= query.list();
+		
+		return result;
+	}
+	
 	public Page pagedQuery(String sql, int pageNo, int pageSize,
 			Map<String, Object> params) {
 		String countQueryString = "select count(*) "
