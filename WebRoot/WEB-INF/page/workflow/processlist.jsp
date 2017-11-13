@@ -53,7 +53,7 @@
 						<td>${process.statusname }</td>
 						<td>${process.processtypename }</td>
 						<td>${process.processbrief }</td>
-						<td><a href="workflow/drawprocess.action?processid=${process.id}">绘制流程</a></td>
+						<td><a href="drawprocess.action?processid=${process.id}">绘制流程</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

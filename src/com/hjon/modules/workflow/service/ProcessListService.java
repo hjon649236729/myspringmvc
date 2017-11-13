@@ -28,6 +28,18 @@ public class ProcessListService extends BaseService<ProcessList> {
 		List<Map<String, Object>> list = this.createSqlQueryToMapList(
 				sql.toString(), params);
 		return list;
-		
+	}
+
+	public List<Map<String, Object>> findParaListByName(String name) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("select pl.key,pl.value,pl.name,pl.valueads ");
+		sql.append("from WF_PROCESSLIST pl ");
+		sql.append("where pl.status=1 and pl.name=:name");
+		sql.append(" order by pl.sort");
+		params.put("name", name);
+		List<Map<String, Object>> list = this.createSqlQueryToMapList(
+				sql.toString(), params);
+		return list;
 	}
 }

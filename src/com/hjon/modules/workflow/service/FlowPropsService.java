@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hjon.common.dao.CriterionCollection;
 import com.hjon.common.service.BaseService;
 import com.hjon.common.utils.StringUtils;
 import com.hjon.modules.workflow.entity.FlowProps;
@@ -24,11 +27,11 @@ public class FlowPropsService extends BaseService<FlowProps> {
 			String sourcename) {
 		StringBuilder sql = new StringBuilder();
 		Map<String, Object> params = new HashMap<String, Object>();
-		sql.append("select name, key, value");
-		sql.append(" from WF_FLOWPROPS");
-		sql.append(" where 1=1 and status=0");
+		sql.append("select t.name, t.key, t.value");
+		sql.append(" from WF_FLOWPROPS t");
+		sql.append(" where 1=1 and t.status=0");
 		if (sourceid > 0 && StringUtils.isNotBlank(sourcename)) {
-			sql.append(" and sourceid=:sourceid and sourcename=:sourcename \n");
+			sql.append(" and t.sourceid=:sourceid and t.sourcename=:sourcename ");
 			params.put("sourceid", Integer.valueOf(sourceid));
 			params.put("sourcename", sourcename);
 		} else {
@@ -165,4 +168,55 @@ public class FlowPropsService extends BaseService<FlowProps> {
 
 		return _res;
 	}
+
+	public List<FlowProps> findFlowProps(int sourceid, String sourcename) {
+		// TODO Auto-generated method stub
+		CriterionCollection search = new CriterionCollection();
+		if (sourceid > 0 && StringUtils.isNotBlank(sourcename)) {
+			search.Add(Restrictions.eq("sourceid", sourceid));
+			search.Add(Restrictions.eq("sourcename", sourcename));
+		} else {
+			return null;
+		}
+		Order orders = Order.asc("sort");
+		return this.getAll(search, orders);
+	}
+
+	public List<FlowProps> findFlowProps(int sourceid, String sourcename,
+			String name) {
+		// TODO Auto-generated method stub
+		CriterionCollection search = new CriterionCollection();
+		if (sourceid > 0 && StringUtils.isNotBlank(sourcename)) {
+			search.Add(Restrictions.eq("sourceid", sourceid));
+			search.Add(Restrictions.eq("sourcename", sourcename));
+		} else {
+			return null;
+		}
+		if (StringUtils.isNotBlank(name)) {
+			search.Add(Restrictions.eq("name", name));
+		}
+		Order orders = Order.asc("sort");
+		return this.getAll(search, orders);
+	}
+
+	public void saveFlowProps(FlowProps flowProps) {
+		// TODO Auto-generated method stub
+		if (flowProps != null) {
+			this.saveOrUpdate(flowProps);
+		}
+	}
+
+	public void addFlowProp(String name, String key, String value,
+			int sourceid, String sourcename) {
+		FlowProps _prop = new FlowProps();
+		_prop.setName(name);
+		_prop.setKey(key);
+		_prop.setValue(value);
+		_prop.setSort(Integer.valueOf(0));
+		_prop.setStatus(Integer.valueOf(0));
+		_prop.setSourceid(Integer.valueOf(sourceid));
+		_prop.setSourcename(sourcename);
+		this.saveOrUpdate(_prop);
+	}
+	
 }

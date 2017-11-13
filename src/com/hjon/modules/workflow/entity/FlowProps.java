@@ -15,6 +15,7 @@ public class FlowProps implements java.io.Serializable {
 
 	// Fields
 
+	public static String ENTITY_NAME = "FlowProps";
 	private Integer id;
 	private String name;
 	private Integer sourceid;
@@ -35,8 +36,8 @@ public class FlowProps implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public FlowProps(Integer id, Date createtimestamp,
-			Date updatetimestamp, Integer version, String entityname) {
+	public FlowProps(Integer id, Date createtimestamp, Date updatetimestamp,
+			Integer version, String entityname) {
 		this.id = id;
 		this.createtimestamp = createtimestamp;
 		this.updatetimestamp = updatetimestamp;
@@ -45,10 +46,10 @@ public class FlowProps implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public FlowProps(Integer id, String name, Integer sourceid,
-			String value, Integer status, String key, Integer sort,
-			String sourcename, Date createtimestamp,
-			Date updatetimestamp, Integer version, String entityname) {
+	public FlowProps(Integer id, String name, Integer sourceid, String value,
+			Integer status, String key, Integer sort, String sourcename,
+			Date createtimestamp, Date updatetimestamp, Integer version,
+			String entityname) {
 		this.id = id;
 		this.name = name;
 		this.sourceid = sourceid;

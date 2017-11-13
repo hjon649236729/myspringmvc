@@ -15,7 +15,8 @@
 
 	//----------------  selectEditor  ----------------
 	var _specialtaskList = "";
-	$.ajax({
+	$
+			.ajax({
 				type : "POST",
 				url : "${path}/drawprocess/getSpecialTaskList.action?processtype=${processtype}",
 				async : false,
@@ -28,133 +29,144 @@
 				}
 			});
 	var _pointtypelist = "";
-	/* $.ajax({
-	 type: "POST",
-	 url: "${path}/workflow/configurate/drawprocess/getPointtypeList.action?processtype=${processtype}",
-	 async: false,
-	 success: function (data) {
-	 var _opts = eval(data);
-	 if(_opts && _opts.length) {
-	 _pointtypelist = eval(data);
-	 }
-	 }
-	 }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getPointtypeList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_pointtypelist = eval(data);
+					}
+				}
+			});
 	var _processurllist = "";
-	/* $.ajax({
-	 type: "POST",
-	 url: "${path}/workflow/configurate/drawprocess/getProcessUrlList.action?processtype=${processtype}",
-	 async: false,
-	 success: function (data) {
-	 var _opts = eval(data);
-	 if(_opts && _opts.length) {
-	 _processurllist = eval(data);
-	 }
-	 }
-	 }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getProcessUrlList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_processurllist = eval(data);
+					}
+				}
+			});
 	var _submitownerlist = "";
-	/* $.ajax({
-	 type: "POST",
-	 url: "${path}/workflow/configurate/drawprocess/getSubmitOwnerList.action?processtype=${processtype}",
-	 async: false,
-	 success: function (data) {
-	 var _opts = eval(data);
-	 if(_opts && _opts.length) {
-	 _submitownerlist = eval(data);
-	 }
-	 }
-	 }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getSubmitOwnerList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_submitownerlist = eval(data);
+					}
+				}
+			});
 	var _stepdealerlist = "";
-	/* $.ajax({
-	 type: "POST",
-	 url: "${path}/workflow/configurate/drawprocess/getStepDealerList.action?processtype=${processtype}",
-	 async: false,
-	 success: function (data) {
-	 var _opts = eval(data);
-	 if(_opts && _opts.length) {
-	 _stepdealerlist = eval(data);
-	 }
-	 }
-	 }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getStepDealerList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_stepdealerlist = eval(data);
+					}
+				}
+			});
 	var _messageremindlist = "";
-	/* $.ajax({
-	 type: "POST",
-	 url: "${path}/workflow/configurate/drawprocess/getMessageRemindList.action?processtype=${processtype}",
-	 async: false,
-	 success: function (data) {
-	 var _opts = eval(data);
-	 if(_opts && _opts.length) {
-	 _messageremindlist = eval(data);
-	 }
-	 }
-	 }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getMessageRemindList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_messageremindlist = eval(data);
+					}
+				}
+			});
 
 	//------------------------------------------------
 	var _stepconditionlist = "";
-	/*    $.ajax({
-	       type: "POST",
-	       url: "${path}/workflow/configurate/drawprocess/getStepConditionList.action?processtype=${processtype}",
-	       async: false,
-	       success: function (data) {
-	           var _opts = eval(data);
-	           if(_opts && _opts.length) {
-	               _stepconditionlist = eval(data);
-	           }
-	       }
-	   }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getStepConditionList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_stepconditionlist = eval(data);
+					}
+				}
+			});
 
 	var _judgetypeList = "";
-	/*  $.ajax({
-	     type: "POST",
-	     url: "${path}/workflow/configurate/drawprocess/getJudgeTypeList.action?processtype=${processtype}",
-	     async: false,
-	     success: function (data) {
-	         var _opts = eval(data);
-	         if(_opts && _opts.length) {
-	             _judgetypeList = eval(data);
-	         }
-	     }
-	 });
-	 */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getJudgeTypeList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_judgetypeList = eval(data);
+					}
+				}
+			});
 	var _messagenoticelist = "";
-	/*    $.ajax({
-	       type: "POST",
-	       url: "${path}/workflow/configurate/drawprocess/getMessageNoticeList.action?processtype=${processtype}",
-	       async: false,
-	       success: function (data) {
-	           var _opts = eval(data);
-	           if(_opts && _opts.length) {
-	               _messagenoticelist = eval(data);
-	           }
-	       }
-	   }); */
+	$
+			.ajax({
+				type : "POST",
+				url : "${path}/drawprocess/getMessageNoticeList.action?processtype=${processtype}",
+				async : false,
+				success : function(data) {
+					var _opts = eval(data);
+					if (_opts && _opts.length) {
+						_messagenoticelist = eval(data);
+					}
+				}
+			});
 
 	var _ownerlink = "";
-	/*  $.ajax({
-	     type: "POST",
-	     url: "${path}/workflow/configurate/drawprocess/getOwnerLinkOriginListJSON.action",
-	     async: false,
-	     success: function (data) {
-	         var _opts = eval(data);
-	         if(_opts && _opts.length) {
-	             _ownerlink = eval(data)[0];
-	         }
-	     }
-	 }); */
+	$.ajax({
+		type : "POST",
+		url : "${path}/drawprocess/getOwnerLinkOriginListJSON.action",
+		async : false,
+		success : function(data) {
+			var _opts = eval(data);
+			if (_opts && _opts.length) {
+				_ownerlink = eval(data)[0];
+			}
+		}
+	});
 </script>
 <script type="text/javascript">
 	$(function() {
+		//console.log('${flowdata}');
+		console.log('${path}');
+		var json = eval('(' + '${flowdata}' + ')');
+		console.log(json);
 		$('#myflow').myflow({
 			processtype : "${processtype}",
 			showtype : false,
 			editable : true,
 			basePath : "${path}",
-			restore : eval(""),//${flowdata}
+			restore : json,//
 			iscancel : false,
 			tools : {
 				save : {
 					onclick : function(data) {
-						console.log(data);
-						//saveMyflow(data);
+						//console.log(data);
+						saveMyflow(data);
 					}
 				},
 				showorg : {
@@ -164,9 +176,27 @@
 				}
 			}
 		});
-		stretchHeight($("#showdrawflowdiv"), 40);
 
+		if ('${not empty svgwidth && not empty svgheight}' == 'true') {
+			$("#myflow").children().first().width(Number('${svgwidth}'))
+					.height(Number('${svgheight}'));
+			$("#setSvgSizeForm").find("input[name='svgwidth']").val(
+					Number('${svgwidth}'));
+			$("#setSvgSizeForm").find("input[name='svgheight']").val(
+					Number('${svgheight}'));
+		}
+		$("#pointer").click();
+
+		$("#myflow").click(function() {
+			$("#pointer").click();
+		});
+		stretchHeight($("#showdrawflowdiv"), 30);
+
+		$('#myflow_props').show();
+		stretchHeight($("#myflow_props_table"), 100);
+		$('#myflow_props').hide();
 	});
+
 	var stretchHeight = function(targetobj, delta) {
 		var sf = function() {
 			var tableWrap = $(targetobj);
@@ -181,6 +211,8 @@
 			sf();
 		});
 	};
+	function saveMyflow(_flowData) {
+	}
 </script>
 
 

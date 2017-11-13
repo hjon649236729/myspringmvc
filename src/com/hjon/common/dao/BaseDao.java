@@ -109,6 +109,7 @@ public class BaseDao<T> extends HibernateDaoSupport {
 	public List<Map<String,Object>> createSqlQueryToMapList(String sql,Map<String,Object> params){
 		Query  query = createSqlQuery(sql, params);
 		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		
 		List<Map<String,Object>> result= query.list();
 		
 		return result;
