@@ -22,10 +22,10 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						console.log(data);
 						_specialtaskList = eval(data);
-					}
+					//}
 				}
 			});
 	var _pointtypelist = "";
@@ -36,9 +36,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_pointtypelist = eval(data);
-					}
+					//}
 				}
 			});
 	var _processurllist = "";
@@ -49,9 +49,12 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
-						_processurllist = eval(data);
-					}
+					//console.log( _opts && _opts.length);
+					//if (_opts && _opts.length) {
+					console.log("processurllist" + _processurllist);
+					_processurllist = eval(data);
+					console.log("processurllist" + _processurllist);
+					//}
 				}
 			});
 	var _submitownerlist = "";
@@ -62,9 +65,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_submitownerlist = eval(data);
-					}
+					//}
 				}
 			});
 	var _stepdealerlist = "";
@@ -75,9 +78,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_stepdealerlist = eval(data);
-					}
+					//}
 				}
 			});
 	var _messageremindlist = "";
@@ -88,9 +91,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_messageremindlist = eval(data);
-					}
+					//}
 				}
 			});
 
@@ -103,9 +106,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_stepconditionlist = eval(data);
-					}
+					//}
 				}
 			});
 
@@ -117,9 +120,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_judgetypeList = eval(data);
-					}
+					//}
 				}
 			});
 	var _messagenoticelist = "";
@@ -130,9 +133,9 @@
 				async : false,
 				success : function(data) {
 					var _opts = eval(data);
-					if (_opts && _opts.length) {
+					//if (_opts && _opts.length) {
 						_messagenoticelist = eval(data);
-					}
+					//}
 				}
 			});
 
@@ -143,9 +146,9 @@
 		async : false,
 		success : function(data) {
 			var _opts = eval(data);
-			if (_opts && _opts.length) {
+			//if (_opts && _opts.length) {
 				_ownerlink = eval(data)[0];
-			}
+			//}
 		}
 	});
 </script>
@@ -165,13 +168,13 @@
 			tools : {
 				save : {
 					onclick : function(data) {
-						//console.log(data);
+						console.log(data);
 						saveMyflow(data);
 					}
 				},
 				showorg : {
 					onclick : function(relationDiv, hiddenname) {
-						show("user", relationDiv, hiddenname, "wwww", "");
+						//show("user", relationDiv, hiddenname, "wwww", "");
 					}
 				}
 			}
@@ -212,6 +215,7 @@
 		});
 	};
 	function saveMyflow(_flowData) {
+		console.log("save MYflow");
 	}
 </script>
 

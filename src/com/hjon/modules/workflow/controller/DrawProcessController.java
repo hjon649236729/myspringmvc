@@ -30,9 +30,9 @@ import com.hjon.modules.workflow.service.ProcessUrlService;
 
 @Controller
 @Scope("prototype")
-public class DarwProcessController extends BaseController {
-	Logger logger = Logger.getLogger(DarwProcessController.class);
-
+public class DrawProcessController extends BaseController {
+	Logger logger = Logger.getLogger(DrawProcessController.class);
+	
 	@Resource(name = "processListService")
 	private ProcessListService processListService;
 
@@ -151,7 +151,8 @@ public class DarwProcessController extends BaseController {
 		_map.put("ownerlinkoriginlist", _ownerlinkoriginlist);
 		_map.put("autoskiplist", _autoskiplist);
 		_res.add(_map);
-		return new JSONArray(_res);
+		JSONArray result=new JSONArray(_res);
+		return new JSONArray(_res).toString();
 		// try {
 		// response.getWriter().println(new JSONArray(_res));
 		// } catch (IOException e) {
@@ -188,7 +189,8 @@ public class DarwProcessController extends BaseController {
 			 * try { response.getWriter().println(new JSONArray(_res)); } catch
 			 * (IOException e) { logger.info("返回结果时异常", e); }
 			 */
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 		}
 		return null;
 	}
@@ -216,7 +218,8 @@ public class DarwProcessController extends BaseController {
 				_map.put("value", MapUtils.getIntValue(map, "keyvalue", 0));
 				_res.add(_map);
 			}
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 			// try {
 			// response.getWriter().println(new JSONArray(_res));
 			// } catch (IOException e) {
@@ -234,7 +237,8 @@ public class DarwProcessController extends BaseController {
 		if (_processtype > 0) {
 			List<Map<String, Object>> _res = findProcessListNoHeader(
 					"SubmitOwner", _processtype);
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 			// try {
 			// response.getWriter().println(new JSONArray(_res));
 			// } catch (IOException e) {
@@ -270,7 +274,8 @@ public class DarwProcessController extends BaseController {
 					_processtype));
 			_map.put("ResultDeal", _resultdeal);
 		}
-		return new JSONArray(_res);
+		JSONArray result=new JSONArray(_res);
+		return new JSONArray(_res).toString();
 		// try {
 		// _res.add(_map);
 		// response.getWriter().println(new JSONArray(_res));
@@ -287,7 +292,8 @@ public class DarwProcessController extends BaseController {
 		if (_processtype > 0) {
 			List<Map<String, Object>> _res = findProcessListWithHeader(
 					"StepDealer", _processtype);
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 			// try {
 			// response.getWriter().println(new JSONArray(_res));
 			// } catch (IOException e) {
@@ -321,7 +327,8 @@ public class DarwProcessController extends BaseController {
 			List<Map<String, Object>> _judgeresultlist = findProcessListNoHeader(
 					"JudgeResult", 0);
 			_map.put("JudgeResult", _judgeresultlist);
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 			// try {
 			// _res.add(_map);
 			// response.getWriter().println(new JSONArray(_res));
@@ -353,7 +360,8 @@ public class DarwProcessController extends BaseController {
 				_map.put("value", _key);
 				_res.add(_map);
 			}
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 			// try {
 			//
 			// response.getWriter().println(new JSONArray(_res));
@@ -399,7 +407,8 @@ public class DarwProcessController extends BaseController {
 			// } catch (IOException e) {
 			// logger.info("返回结果时异常", e);
 			// }
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 		}
 		return null;
 	}
@@ -416,8 +425,8 @@ public class DarwProcessController extends BaseController {
 			// response.getWriter().println(new JSONArray(_res));
 			// } catch (IOException e) { logger.info("返回结果时异常", e);
 			// }
-
-			return new JSONArray(_res);
+			JSONArray result=new JSONArray(_res);
+			return new JSONArray(_res).toString();
 		}
 		return null;
 	}

@@ -97,6 +97,7 @@ $.extend(true, myflow.editors, {
 			_props=props; _k=k; _div=div; _src=src; _r=r;
 
             var options = "", _label = "";
+            console.log(arg);
             if (typeof arg === 'string') {
                 $.ajax({
                     type: "POST",
@@ -178,7 +179,7 @@ $.extend(true, myflow.editors, {
             $("<input id=\"" + _k + "\" type=\"hidden\"/>").val(props[_k].value).appendTo('#'+_div);
 
             if(!props[_k].showdiv && props[_k].value)
-                showframe("user", "_showorgdiv", _k, "www", props[_k].value);           //用于初始化
+               // showframe("user", "_showorgdiv", _k, "www", props[_k].value);           //用于初始化
 
             $('#'+_div).data('editor', this);
         }
@@ -662,7 +663,7 @@ $.extend(true, myflow.editors, {
             _props=props; _k=k; _div=div; _src=src; _r=r;
 
 
-            var specialTaskOptions;
+            var specialTaskOptions='';
             var _specialTaskLaber = {};
 //            if(typeof arg === 'string'){
 //                $.ajax({
@@ -731,7 +732,6 @@ $.extend(true, myflow.editors, {
                 $("<a href='javascript:void(0)' title='删除'><b class='icon-del'></b></a>").click(function(){
                     $(this).parent().parent().stk_remove();
                 }).appendTo(td1);
-
                 var select0 = $("<select id=\"" + _div + "stepdomain"+num +"\" style=\"width:150px;margin-left: 5px;display:none;\"></select>");
                 option = $(specialTaskOptions);
                 option.appendTo(select0);
@@ -908,7 +908,7 @@ $.extend(true, myflow.editors, {
             $("<input id=\"noticeowners\" type=\"hidden\"/>").val(_props[_k].noticeowners).appendTo('#'+_div);
 
             if(!props[_k].showdiv && _props[_k].noticeowners)
-                showframe("user", "_shownoticeownersdiv", "noticeowners", "www", _props[_k].noticeowners);           //用于初始化
+               // showframe("user", "_shownoticeownersdiv", "noticeowners", "www", _props[_k].noticeowners);           //用于初始化
 
             $('#'+_div).data('editor', this);
         }
