@@ -35,17 +35,18 @@
 		}, {
 			"name" : "定时任务",
 			"controller" : "quartz/quartzlist.action",
-		} , {
+		}, {
 			"name" : "菜单管理",
 			"controller" : "sysmenu/sysmenumain.action",
-		},{
+		}, {
 			"name" : "工作流管理",
 			//"controller" : "workflow/raphaledemo.action",
-			"controller": "workflow/processlist.action"
-		}
-		
-		 ]
-	}];
+			"controller" : "workflow/processlist.action"
+		} , {
+			"name" : "工作流参数配置",
+			"controller" : "workflow/processparameterlist.action"
+		} ]
+	} ];
 	function menuInit() {
 		/*
 			 <li class="active treeview">
@@ -94,7 +95,7 @@
 			html = html + "</ul>";
 			console.log(html);
 			$(".sidebar .sidebar-menu").append(html);
-			
+
 		}
 	}
 </script>
