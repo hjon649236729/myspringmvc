@@ -37,6 +37,8 @@
 			</div>
 		</form>
 	</div>
+	
+	<a href="${path }/auth/useredit.action">添加</a>
 	<!-- /.box-header -->
 	<div class="box-body table-responsive no-padding "
 		style="width:auto; height:425px; overflow: hidden; ">
@@ -53,8 +55,7 @@
 			<tbody>
 				<c:forEach var="user" items="${data.result }">
 					<tr>
-						<td><a href="javascript:showExecuteLog('${user.userName }')">${user.userName
-								}</a></td>
+						<td> ${user.userName}</td>
 						<td>${user.empName }</td>
 						<td><a href="javascript:del('${user.id}')">暂停</a>
 						</td>
