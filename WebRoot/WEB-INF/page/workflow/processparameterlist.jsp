@@ -25,7 +25,7 @@
 		<div role="tabpanel" class="tab-pane active" id="processType">
 			<div class="box">
 				<div class="box-header">
-					<form id="pageForm" method="post" action="processlist.action">
+					<form id="pageForm" method="post" action="processlist.action">						
 						<input type="hidden" name="pageNum" id="pageNum"
 							value="${data.currentPageIndex}" /> <input type="hidden"
 							name="pageCount" id="pageCount" value="${data.totalPageCount}" />
@@ -47,7 +47,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body table-responsive no-padding "
-					style="width:auto; height:425px; overflow: hidden; ">
+					style="width:auto; height:385px; overflow: hidden; ">
 					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
